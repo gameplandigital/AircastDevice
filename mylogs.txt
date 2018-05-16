@@ -1,0 +1,73 @@
+ ASDASD ASDASD 
+success
+Example app listening on port: 3000
+get files success
+get files success
+done
+rpiCheckTempFile Error
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+done
+rpiCheckTempFile Error
+get files success
+get files success
+get files success
+done
+rpiCheckTempFile Error
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+done
+rpiCheckTempFile Error
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+rpiCheckTempFile Error
+done
+get files success
+get files success
+get files success
+done
+rpiCheckTempFile Error
+get files success
