@@ -7,7 +7,7 @@ var aircast = require('./aircastServer.js')
 
 var Twit = require('twit');
 
-console.log(' ASDASD ASDASD ');
+console.log('blabla ');
 
 
 // const testFolder = path.join(__dirname, '/Aircast');
