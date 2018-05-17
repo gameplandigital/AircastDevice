@@ -37,16 +37,16 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
 
-  $scope.refresh = Date.now();
-  console.log($scope.refresh);
-  console.log('time');
+  // $scope.refresh = Date.now();
+  // console.log($scope.refresh);
+  // console.log('time');
   // $window.alert('W: '+$window.innerWidth+' H: '+$window.innerHeight);
 
   $scope.demoState = 0;
   
 
-  var yesterday = new Date((Date.now()) - 86400000);
-  console.log('yesterday: '+Date.now());
+  // var yesterday = new Date((Date.now()) - 86400000);
+  // console.log('yesterday: '+Date.now());
 
   $scope.mainDiv = {
     "position": "absolute",
@@ -86,7 +86,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   var isStart = true;
   $scope.templatePosition = 0;
   $scope.templateShuffle = function(){
-    $scope.refresh = Date.now();
+    // $scope.refresh = Date.now();
 
 
     if($scope.templates.length == 0){
