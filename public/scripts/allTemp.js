@@ -11,17 +11,39 @@ function UpdateWallet($http, CampaignID, Width, Height){
         Width: Width,
         Height: Height
       }
-      $http.post(RpiServer+'/PingBrowser', data).then(function(response){
-        // console.log(response);
-        // console.log('update wallet success');
-      }, function(err){
-        // console.log('wallet update failed');
+      // $http.post(RpiServer+'/PingBrowser', data).then(function(response){
+      //   // console.log(response);
+      //   // console.log('update wallet success');
+      // }, function(err){
+      //   // console.log('wallet update failed');
+      //   console.log(err);
+      // });
+
+
+      $http({
+          url: RpiServer+'/PingBrowser',
+          method: "POST",
+          data: data,
+          headers: {
+                      'Content-Type': 'application/json'
+          },
+          timeout: 3000
+      })
+
+      .then(function(response){
+        
+      },function(err){
         console.log(err);
-      });
+      })
+
+
 
     }, function(error){
       // console.log('get config failed');
     });
+
+
+
 }
 
 

@@ -166,7 +166,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           data: data,
           headers: {
                       'Content-Type': 'application/json'
-          }
+          },
+          timeout: 3000
       })
 
       .then(function(response){
@@ -365,7 +366,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           data: data,
           headers: {
                       'Content-Type': 'application/json'
-          }
+          },
+          timeout: 3000
       })
 
       .then(function(response){
