@@ -7,7 +7,7 @@ var aircast = require('./aircastServer.js')
 
 var Twit = require('twit');
 
-console.log(' RRRR ');
+console.log(' FFF ');
 
 
 
