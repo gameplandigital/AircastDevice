@@ -195,6 +195,7 @@ function removeContentFile(FileID){
 }
 
 var getRpiFiles = function(){
+	console.log('getRpiFiles')
 	var opt = {
 	   headers: { 'Content-Type': 'application/json' }
 	  }
@@ -384,6 +385,8 @@ function updateSource(ARTID){
 
 
 var getSourceFiles = function(){
+	console.log('getSourceFiles')
+	
 	var opt = {
 	   headers: { 'Content-Type': 'application/json' }
 	  }
@@ -439,6 +442,7 @@ var getSourceFiles = function(){
 
 
 var nodeAlive = function(){
+	console.log('nodeAlive')
 	// var opt = {
 	//    headers: { 'Content-Type': 'application/json' }
 	//   }
