@@ -162,7 +162,7 @@ function processContentFile(Campaign){
 		console.log('Downloading '+RpiConfig.ContentCampaign.Files[0].FileName);
 
 		var source = RpiConfig.ContentServer+RpiConfig.ContentCampaign.Files[0].FileName;
-		var dest = path.join(__dirname+'/Aircast/'+RpiConfig.ContentCampaign.Files[0].FileName);
+		var dest = path.join(__dirname+'/../AircastContent/'+RpiConfig.ContentCampaign.Files[0].FileName);
 
 		// console.log(source);
 		downloadRequest(source, 
