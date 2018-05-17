@@ -492,84 +492,42 @@ var getSourceFiles = function(){
 	});
 }
 
-var getSourceFileUpdates = function(){
-	var opt = {
-	   headers: { 'Content-Type': 'application/json' }
-	  }
-	var data = {
-	    RpiID: RpiConfig.RpiID
-	  }
-
-	needle.post('https://api.aircast.ph'+'/rpiCheckTempFile', data, opt, function(err, resp) {
-		if(!err){
-			console.log('rpiCheckTempFile Success');
-			// console.log(resp.body.value[0].Files);
-
-			var data = resp.body.value;
-			for(var i = 0; i < data.length; i++){
-				// console.log(data);
-				var isDownloading = false;
-				for(var j = 0; j < RpiConfig.RpiTempDownloading.length; j++){
-					if(data[i].ARTID == RpiConfig.RpiTempDownloading[j].ARTID){
-						isDownloading = true;
-						break;
-					}
-				}
-				if(isDownloading == false){
-					var template = {
-						isDownloading: false,
-						ARTID: data[i].ARTID,
-						Files: data[i].Files
-					}
-					RpiConfig.RpiTempDownloading.push(template);
-				}
-				// console.log(JSON.stringify(RpiConfig.RpiTempDownloading));
-			}
-
-
-			RpiConfig.RpiTempDownloading.forEach(function(d, index){
-				if(d.isDownloading == false){
-					d.isDownloading = true;
-					async.eachSeries(d.Files, function(file, callback) {
-						downloadTemplate(d.ARTID, file, callback);
-					}, function(err){
-						// console.log(err);
-						if(!err){
-							console.log('ART: '+d.ARTID+' FULL DOWNLOADED');
-							updateTemplate(d.ARTID);
-
-						}
-						else{
-							console.log('FileFailed');
-							d.isDownloading = false;
-
-						}
-					})
-				}
-
-			})
-
-		}
-		else{
-			console.log('rpiCheckTempFile Error');
-		}
-	});
-
-}
-
 
 
 var nodeAlive = function(){
-	var opt = {
-	   headers: { 'Content-Type': 'application/json' }
-	  }
-	var data = {
-	    RpiID: RpiConfig.RpiID
-	  }
+	// var opt = {
+	//    headers: { 'Content-Type': 'application/json' }
+	//   }
+	// var data = {
+	//     RpiID: RpiConfig.RpiID
+	//   }
 
-	needle.post('https://api.aircast.ph'+'/rpiLastNodeAlive', data, opt, function(err, resp) {
-		console.log('done');
-	})
+	// needle.post('https://api.aircast.ph'+'/rpiLastNodeAlive', data, opt, function(err, resp) {
+	// 	console.log('done');
+	// })
+
+
+	var options = {
+		uri: 'https://api.aircast.ph'+'/rpiLastNodeAlive',
+		method: 'POST',
+		json: {
+			RpiID: RpiConfig.RpiID
+		},
+	  	timeout: 3000
+	};
+
+	request(options, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			console.log('alive done')
+
+			
+		}
+		else{
+			console.log('connection failed last alive');
+		}
+	});
+
+
 }
 
 
