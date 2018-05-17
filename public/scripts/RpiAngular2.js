@@ -347,4 +347,35 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   }, 5000);
 
 
+  $interval(function(){
+    $http.get('/myID').then(function(response){
+
+
+      var RpiID = response.data.RpiID;
+      var RpiServer = response.data.RpiServer;
+
+      var data = {
+        "RpiID": RpiID
+      }
+
+      $http({
+          url: RpiServer+'/CheckBrowser',
+          method: "POST",
+          data: data,
+          headers: {
+                      'Content-Type': 'application/json'
+          }
+      })
+
+      .then(function(response){
+        if(response.data.browserReboot){
+          window.reload();
+        }
+      })
+
+
+    })
+  }, 60000);
+
+
 });
