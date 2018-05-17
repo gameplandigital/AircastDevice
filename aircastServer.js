@@ -581,5 +581,5 @@ module.exports = {
 	getRpiFiles: getRpiFiles,
 	getSourceFiles: getSourceFiles,
 	nodeAlive: nodeAlive,
-	removeFile: removeFile
+	// removeFile: removeFile
 };
