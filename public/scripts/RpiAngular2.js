@@ -348,6 +348,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
   $interval(function(){
+    console.log('check')
     $http.get('/myID').then(function(response){
 
 
@@ -369,7 +370,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
       .then(function(response){
         if(response.data.browserReboot){
-          window.reload();
+          $window.location.reload();
         }
       })
 
