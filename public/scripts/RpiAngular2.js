@@ -67,7 +67,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
     CampaignID: 3,
     tempHtml: 'templates/temp2.html',
     tempSrc: {
-                video: "assets/loading.mp4"
+                video: "Aircast/loading.mp4"
               },
     tempJs: 'scripts/temp2.js',
     tempCss: 'css/temp2.css',
