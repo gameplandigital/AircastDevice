@@ -339,12 +339,12 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
 
-  $interval(function(){
-    var current = Date.now();
-    if(current >= $scope.refresh + 900000){
-      location.reload();
-    }
-  }, 5000);
+  // $interval(function(){
+  //   var current = Date.now();
+  //   if(current >= $scope.refresh + 900000){
+  //     location.reload();
+  //   }
+  // }, 5000);
 
 
   $interval(function(){
