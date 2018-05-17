@@ -247,62 +247,6 @@ var getRpiFiles = function(){
 
 
 
-
-function downloadTemplate(ARTID, file, cb){
-	console.log('Downloading ARTID: '+ARTID+' FileID: '+file.FileName);
-
-	var dest = path.join(__dirname+'/'+file.NodeLocation+'/');
-	var source = 'http://s3-ap-southeast-1.amazonaws.com/rpitv/'+file.S3Location+'/'+file.S3FileName;
-
-	// console.log(source);
-	// console.log(dest);
-
-	var options = {
-	    directory: dest,
-	    filename: file.FileName,
-	    timeout: 20000
-	}
-	 
-	df(source, options, function(err){
-	    // if (err) throw err
-	    if(err){
-	    	console.log(err);
-	    	return cb('error');
-	    }
-	    else{
-	    	console.log("meow")
-			console.log('File Downloaded: '+file.FileName);
-			return cb();
-	    }
-		    
-	}) 
-	
-}
-
-function updateTemplate(ARTID){
-	var options = {
-	  uri: 'https://api.aircast.ph'+'/rpiUpdateTemplateFiles',
-	  method: 'POST',
-	  json: {
-	    ARTID: ARTID
-	  }
-	};
-
-	request(options, function (error, response, body) {
-	  if (!error && response.statusCode == 200) {
-	  	// console.log(body);
-	  	console.log('ARTID: '+ARTID+' UPDATED');
-	  	RpiConfig.RpiTempDownloading.forEach(function(d, index){
-	  		if(d.ARTID == ARTID){
-	  			RpiConfig.RpiTempDownloading.splice(index, 1);
-	  		}
-	  	});
-	  	// console.log(RpiConfig.RpiDownloading);
-	  }
-	});
-}
-
-
 function runSourceDownload(){
 	console.log('runSourceDownload');
 	if(RpiConfig.SourceFileDownloading == false && RpiConfig.SourceFiles.length>0){
@@ -508,7 +452,7 @@ var nodeAlive = function(){
 
 
 	var options = {
-		uri: 'https://api.aircast.ph'+'/rpiLastNodeAlive',
+		uri: RpiConfig.RpiServer+'/LastNodeAlive',
 		method: 'POST',
 		json: {
 			RpiID: RpiConfig.RpiID
