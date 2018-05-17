@@ -208,7 +208,8 @@ var getRpiFiles = function(){
 	  method: 'POST',
 	  json: {
 	    RpiID: RpiConfig.RpiID
-	  }
+	  },
+	  timeout: 3000
 	};
 
 	request(options, function (error, response, body) {
@@ -238,7 +239,7 @@ var getRpiFiles = function(){
 			runContentDownload();
 		}
 		else{
-			console.log('connection failed');
+			console.log('connection failed get content');
 		}
 	});
 }
@@ -451,7 +452,8 @@ var getSourceFiles = function(){
 		method: 'POST',
 		json: {
 			RpiID: RpiConfig.RpiID
-		}
+		},
+	  	timeout: 3000
 	};
 
 	request(options, function (error, response, body) {
@@ -485,7 +487,7 @@ var getSourceFiles = function(){
 			
 		}
 		else{
-			console.log('connection failed');
+			console.log('connection failed get source file');
 		}
 	});
 }
@@ -567,69 +569,6 @@ var nodeAlive = function(){
 
 	needle.post('https://api.aircast.ph'+'/rpiLastNodeAlive', data, opt, function(err, resp) {
 		console.log('done');
-	})
-}
-
-
-var removeFile = function(){
-	var opt = {
-	   headers: { 'Content-Type': 'application/json' }
-	  }
-	var data = {
-	    RpiID: RpiConfig.RpiID
-	  }
-
-	needle.post('https://api.aircast.ph'+'/rpiCheckRemoveFile', data, opt, function(err, resp) {
-		if(!err){
-			// console.log(resp.body);
-			var data = resp.body.value;
-
-			data.forEach(function(d){
-				console.log(d.NodeLocation);
-				var dest = path.join(__dirname+'/'+d.NodeLocation+'/'+d.FileName);
-				// console.log(dest);
-				fs.unlink(dest, function(err) {
-				    if(err && err.code == 'ENOENT') {
-				        // file doens't exist
-				        console.info("File doesn't exist, won't remove it.");
-
-				        var opt = {
-						   headers: { 'Content-Type': 'application/json' }
-						  }
-						var data = {
-						    RpiID: RpiConfig.RpiID,
-						    ARRFID: d.ARRFID
-						  }
-
-						needle.post(RpiConfig.RpiServer+'rpiUpdateRemoveFile', data, opt, function(err, resp) {
-							if(!err){
-								console.log('ARRFID: '+d.ARRFID+' removed')
-							}
-						})
-
-				    } else if (err) {
-				        // other errors, e.g. maybe we don't have enough permission
-				        console.error("Error occurred while trying to remove file");
-				    } else {
-				        
-				    	var opt = {
-						   headers: { 'Content-Type': 'application/json' }
-						  }
-						var data = {
-						    RpiID: RpiConfig.RpiID,
-						    ARRFID: d.ARRFID
-						  }
-
-						needle.post(RpiConfig.RpiServer+'rpiUpdateRemoveFile', data, opt, function(err, resp) {
-							if(!err){
-								console.log('ARRFID: '+d.ARRFID+' removed')
-							}
-						})
-
-				    }
-				});
-			})
-		}
 	})
 }
 
