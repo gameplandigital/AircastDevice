@@ -122,7 +122,7 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 
 		      now = weather_now().then(function(data){
 		        now_w = {}
-		        now_w["temp"] =  data.data.main.temp - 273.15
+		        now_w["temp"] =  Math.floor(data.data.main.temp - 273.15)
 		        now_w["description"] = data.data.weather[0].description
 		        now_w["weather"] = data.data.weather[0].main
 		        now_w["greeting"] = getGreetingTime(moment(data.data.dt*1000))
