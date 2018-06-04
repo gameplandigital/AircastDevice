@@ -1,0 +1,17 @@
+<div class="facebook-post-selected">
+	<div class="facebook-mask"><img src="assets/facebook-mask.png"></div>
+	<div class="facebook-image-background" ng-style="{'background-image': 'linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.8)), url(' + info.full_picture + ')'}"></div>
+	<div class="facebook-post-selected-left">
+		<div class="facebook-image">
+			<img class="animated rotateInUpLeft facebook-image-pic" ng-src="{{info.full_picture}}">
+		</div>	
+	</div>
+	<div class="facebook-post-selected-right">
+		<div class="facebook-post-selected-top animated bounceInDown">
+			<img ng-src="assets/fwd-logo.jpg" style="width: 10em; height: 5em; border-radius: none;">
+<!-- 			<p><span>{{info.page_likes}}</span> page likes</p> -->
+				<p class="facebook-post-selected-caption">{{info.message | cut:true:250:' ...' }}</p>
+		</div>
+	</div>
+
+</div>

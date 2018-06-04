@@ -1,0 +1,39 @@
+<div class="spotify-template">
+	
+	<div class="spotify-background"></div>
+	<div class="spotify-gradient"></div>
+
+	<div class="spotify-container">
+		
+		<div class="spotify-album">
+			<div>
+				<img src="{{album_cover}}">
+			</div>
+			<div>
+				<h2>{{album_title}}</h2>
+				<p>{{artist}}</p>
+			</div>
+			
+		</div>
+
+
+		<div class="spotify-music">
+			<div>
+				<canvas id="waves" width="700" height="300"></canvas>
+			</div>
+			<div class="spotify-music-player" ng-bind-html="audio | unsafe">
+				<!-- <audio ng-src="{{audio}} " controls autoplay=""></audio> -->
+				<img src="assets/spotify-player.png">
+			</div>
+			<div class="spotify-music-name">
+				<h2>{{song_name}}</h2>
+				<p>{{artist}}</p>
+			</div>
+			<div class="spotifyxaircast">
+				<img src="assets/spotifyxaircast_logo.png">
+			</div>
+
+		</div>
+		
+	</div>
+</div>

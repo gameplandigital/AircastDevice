@@ -1,0 +1,43 @@
+<div id="facebook-reactions">
+	<div class="background" ng-style="{'background-image': 'linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,1)), url(' + info.full_picture + ')'}"></div>
+	<div class="facebook-background">
+		<Image ng-src="{{ info.full_picture }}">
+	</div>
+	<img src="assets/aircast-logo.png" id="aircast-logo" />
+	<div class="facebook-bottom-background"></div>
+	<div class="facebook-bottom">
+		<div class="message">
+			<div class="message-content">
+				<div class="page-name">
+					<div>
+						<image src={{info.page_picture}} />
+					</div>
+					<div class="page-name-second">
+						<p class="page-name-name">{{info.page_name}}</p>
+						<p class="page-name-details">{{info.page_likes}} </p>
+					</div>
+				</div>
+				<p class="animated fadeInUp delay-animation-1">{{info.message | cut:true:200:' ...' }}</p>		
+			</div>
+		</div>
+			<div class="reactions animated bounceInUp delay-animation-1">
+				<div class="likes" ng-hide="info.reactions.like == 0">
+					<img src="assets/fb-like-icon.png">
+					<span>{{info.reactions.like}}</span>
+				</div>
+				<div class="heart" ng-hide="info.reactions.love == 0">
+					<img src="assets/fb-love-icon.png">
+					<span>{{info.reactions.love}}</span>
+				</div>
+				<div class="wow" ng-hide="info.reactions.wow == 0">
+					<img src="assets/fb-wow-icon.png">
+					<span>{{info.reactions.wow}}</span>
+				</div>
+				<div class="haha" ng-hide="info.reactions.haha == 0">
+					<img src="assets/fb-haha-icon.png">
+					<span>{{info.reactions.haha}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

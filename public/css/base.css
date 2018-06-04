@@ -174,6 +174,7 @@
   font-size: 3em;
   font-family: 'Lobster';
   margin-bottom: .1em;
+  font-weight: 400;
 }
 .restaurant .restaurant-top-location {
   padding-left: .3em;
@@ -604,16 +605,27 @@
 /*----------------------end of currency----------------*/
 
 /*-------------start of twitter-------------------------------*/
-
 .twitter {
   background: #00aeea;
   background-size: cover;
+  background-position: center;
   height: 100vh;
   width: 100vw;
-  font-family: 'Helvetica',Arial, sans-serif;
+  font-family: 'Helvetica', Arial, sans-serif;
   font-size: 4vh;
   color: #3a3939;
   perspective: 1000;
+}
+.twitter .twitter-bg-overlay {
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  filter: blur(50px);
+  transform: scale(1.2);
 }
 .twitter .twitter-header {
   height: 10vh;
@@ -624,26 +636,26 @@
 .twitter .twitter-header-bg {
   background: white;
   height: 10vh;
-  box-shadow: 0.1em 0.2em 0.5em rgba(0, 0, 0, 0.2);
+  box-shadow: 0.1em 0.2em 0.5em rgba(0, 0, 0, .2);
 }
 .twitter .twitter-header img {
   position: absolute;
   left: 1.5em;
   width: 2em;
-  top: .3em;
+  top: 0.3em;
 }
 .twitter .twitter-header h1 {
   position: absolute;
-  top: .6em;
+  top: 0.6em;
   font-size: 1.2em;
   margin-left: 3.5em;
 }
 .twitter .twitter-header h2 {
   position: absolute;
-  left: 15em;
+  right: 2em;
   font-weight: 700;
   font-size: 1.2em;
-  top: .65em;
+  top: 0.65em;
 }
 .twitter .twitter-body {
   margin-top: 2em;
@@ -660,7 +672,7 @@
   font-weight: bold;
   font-size: 7em;
   text-align: center;
-  opacity: .1;
+  opacity: 0.1;
 }
 .twitter .twitter-body .tweet {
   width: 50vw;
@@ -668,7 +680,7 @@
   margin-top: 8em;
   background: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: .6em;
+  border-radius: 0.6em;
   padding: 1.5em;
   position: relative;
   z-index: 9;
@@ -684,13 +696,13 @@
 }
 .twitter .twitter-body .tweet .tweet-upper h3 {
   margin-left: 3.5em;
-  font-size: .9em;
-  margin-bottom: .2em;
+  font-size: 0.9em;
+  margin-bottom: 0.2em;
 }
 .twitter .twitter-body .tweet .tweet-upper h4 {
   color: grey;
   margin-left: 4.5em;
-  font-size: .7em;
+  font-size: 0.7em;
 }
 .twitter .twitter-body .tweet .tweet-body {
   line-height: 1.28em;
@@ -702,7 +714,7 @@
 }
 .twitter .twitter-body .tweet .tweet-footer {
   color: grey;
-  font-size: .8em;
+  font-size: 0.8em;
   position: relative;
 }
 .twitter .twitter-body .tweet .tweet-footer .float-left {
@@ -723,8 +735,9 @@
 }
 .twitter .twitter-body .tweet-second {
   margin-top: 2em;
-  opacity: .4;
+  opacity: 0.4;
 }
+
 
 /*-----------------end of twitter--------------------*/
 
@@ -1560,6 +1573,7 @@
   font-size: 1.5em;
   margin-bottom: 0.2em;
   font-family: "Lobster";
+  font-weight: 400;
   width: 80%;
 }
 .restaurant-portrait .restaurant-top-location {
@@ -1712,3 +1726,115 @@
 
 
 /*end of video portrait*/
+
+/*start of video portrait*/
+
+.video-template {
+  width: 100vw;
+  height: 100vh;
+  font-size: 4vh;
+}
+.video-template .video-text-top, .video-template .video-text-bottom {
+  background: black;
+  color: white;
+  height: 32.5vh;
+}
+.video-template .video-text-top h2, .video-template .video-text-bottom h2 {
+  text-align: center;
+  font-size: 1em;
+  padding: 1em;
+}
+.video-template .video-middle {
+  background: white;
+  width: 100%;
+  height: 35vh !important;
+  height: auto;
+}
+.video-template .video-middle video {
+  object-fit: contain;
+}
+
+
+/*end of video portrait*/
+
+/*-----------------start of ikomai welcome portrait-------------*/
+
+.ikomai-welcome {
+  width: 100vw;
+  height: 100vh;
+  color: #3c3c3c;
+  font-size: 4vh;
+  font-family: 'Lato',sans-serif;
+}
+.ikomai-welcome .ikomai-background {
+  background: url('/assets/welcome-ikomai.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+}
+.ikomai-welcome .hugot-border1 {
+  border: 0.1em solid white;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  right: 1em;
+  bottom: 1em;
+  z-index: 99;
+}
+.ikomai-welcome .hugot-border2 {
+  border: 0.1em solid white;
+  position: absolute;
+  top: 1.3em;
+  left: 1.3em;
+  right: 1.3em;
+  bottom: 1.3em;
+  z-index: 99;
+}
+.ikomai-welcome .ikomai-ornament-top img {
+  width: 5em;
+  position: absolute;
+  top: 2em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(180deg);
+}
+.ikomai-welcome .ikomai-ornament-bottom img {
+  width: 5em;
+  position: absolute;
+  bottom: 2em;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.ikomai-welcome .ikomai-div {
+  text-align: center;
+}
+.ikomai-welcome .ikomai-div .ikomai-text {
+  position: absolute;
+  top: 5em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ikomai-welcome .ikomai-div .ikomai-text h1 {
+  font-size: 1.7em;
+  text-transform: uppercase;
+}
+.ikomai-welcome .ikomai-div .ikomai-guest {
+  position: relative;
+  top: 12em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ikomai-welcome .ikomai-div .ikomai-guest li {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  list-style: none;
+}
+
+
+/*-----------------end of ikomai welcome portrait-------------*/

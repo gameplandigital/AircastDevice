@@ -317,12 +317,17 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
     window['temp15GetData'].apply(null, payl);
     //movie-landscape
     window['temp16GetData'].apply(null, payl);
-      window['temp26GetData'].apply(null, payl);  //instagram-post
+    window['temp26GetData'].apply(null, payl);  //instagram-post
     window['temp27GetData'].apply(null, payl);  //facebook-post
-    window['temp28GetData'].apply(null, payl);  //facebook-post
+    window['temp28GetData'].apply(null, payl);  //facebook-events
+    window['temp29GetData'].apply(null, payl);  //spotify-music
+    window['temp30GetData'].apply(null, payl);  //facebook-selected-post
+    window['temp31GetData'].apply(null, payl);  //instagram hashtag
+    window['temp32GetData'].apply(null, payl);  //facebook full screen w/o reaction
+    window['temp33GetData'].apply(null, payl);  //facebook full screen w/ reactions
+    window['temp34GetData'].apply(null, payl);  //facebook live
 
     
-
 
     //portrait-content
     // window['temp17GetData'].apply(null, payl);

@@ -1,0 +1,54 @@
+.facebook-post-full {
+  width: 100vw;
+  height: 100vh;
+  font-size: 4vh;
+  position: relative;
+}
+.facebook-post-full .fadeImage {
+  animation: fadeInImage 3s forwards;
+}
+.facebook-post-full .facebook-mask {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  display: none;
+}
+.facebook-post-full .facebook-mask .facebook-image {
+  width: 100%;
+  height: 100%;
+  background: url('https://scontent.xx.fbcdn.net/v/t39.2147-6/26656141_1293937537403809_871894626129149952_n.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.facebook-post-full .facebook-image-background {
+  background-image: url(/assets/facebook-post-full-cover.png);
+  background-position: center;
+  background-size: cover;
+  filter: blur(0.5em);
+  transform: scale(1.1);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+.facebook-post-full .facebook-post-left {
+  height: 100vh;
+  text-align: center;
+}
+.facebook-post-full .facebook-post-left .facebook-image {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 1em;
+}
+.facebook-post-full .facebook-post-left .facebook-image img {
+  object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
+  /* width: 100%; */
+  margin: auto;
+  border: 0.5em solid white;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+}
