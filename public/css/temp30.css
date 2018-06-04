@@ -1,0 +1,175 @@
+.facebook-post-selected-loader {
+  background: url("/assets/facebook-loader.png");
+  background-size: cover;
+  position: relative;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+}
+.facebook-post-loader .loader {
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.facebook-post-selected {
+  width: 100vw;
+  height: 100vh;
+  font-size: 4vh;
+  position: relative;
+}
+.facebook-post-selected-selected .fadeImage {
+  animation: fadeInImage 3s forwards;
+}
+.facebook-post-selected .facebook-mask {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  display: none;
+}
+.facebook-post-selected .facebook-mask .facebook-image {
+  width: 100%;
+  height: 100%;
+  background: url('https://scontent.xx.fbcdn.net/v/t39.2147-6/26656141_1293937537403809_871894626129149952_n.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.facebook-post-selected .facebook-image-background {
+  background-image: url(/assets/facebook-post-cover.png);
+  background-position: center;
+  background-size: cover;
+  filter: blur(35px);
+  transform: scale(1.1);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+.facebook-post-selected .facebook-post-selected-left {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 65vw;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.facebook-post-selected .facebook-post-selected-left .facebook-image {
+  width: 85vw;
+  height: 85vh;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+.facebook-post-selected .facebook-post-selected-left img {
+  width: 95%;
+  height: 100%;
+  object-fit: contain;
+  width: unset;
+  height: unset;
+  object-fit: unset;
+  max-height: 100%;
+  max-width: 100%;
+  border: .4em solid white;
+  box-shadow: 0.3em 0.3em 0.7em rgba(0, 0, 0, 0.4);
+
+}
+.facebook-post-selected .facebook-post-selected-right {
+  width: 35vw;
+  right: 0;
+  position: absolute;
+  z-index: 2;
+  padding-right: 1em;
+  padding-left: 0.5em;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-overlay {
+  width: 8em;
+  text-align: center;
+  margin-top: 2em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top {
+    height: 75vh;
+    position: relative;
+    margin-top: 1.3em;
+    padding-right: .5em;
+    margin-top: 2.5em;
+    overflow: hidden;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top h2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 2.5em;
+  font-weight: 700;
+  z-index: -1;
+  margin-top: -0.8em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top p {
+  font-family: 'Avenir';
+  padding: 0.5em 0.3em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top p span {
+  font-weight: 700;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top img {
+  width: 10em;
+  height: 5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  margin-right: 2.9em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-top h3 {
+  font-family: 'BebasNeue';
+  font-size: 2em;
+  border-bottom: 0.05em solid #a19d7f;
+  padding-bottom: 0.1em;
+  margin-bottom: 0.2em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-caption {
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  font-family: 'Avenir';
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-caption p {
+  padding-right: 1em;
+  padding-left: 0.5em;
+  word-wrap: break-word;
+  width: 100%;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions {
+  display: flex;
+  position: absolute;
+  bottom: 2em;
+  font-size: 0.9em;
+  font-family: 'BebasNeue';
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions .likes, .facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions .heart, .facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions .wow, .facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions .haha {
+  padding-right: 0.5em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions img {
+  position: absolute;
+  width: 1.2em;
+}
+.facebook-post-selected .facebook-post-selected-right .facebook-post-selected-reactions span {
+  margin-left: 1.2em;
+  font-size: 1.2em;
+}
+.facebook-post-selected .facebook-post-selected-right img {
+  width: 2em;
+}

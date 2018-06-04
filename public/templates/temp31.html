@@ -1,0 +1,38 @@
+
+<div class="instagram-hashtag">
+<div class="insta-gradient"></div>
+	<div class="instagram-logo">
+		<img src="assets/instagram-logo.png">
+		<h1>{{info.hashtag}}</h1>
+	</div>
+	<div class="insta-left clearfix">
+		<div class="insta-content">
+			<div class="insta-upper">
+				<p class="animated">{{ info.caption | cut:true:250:' ...' }}</p>
+				<span class="insta-date animated delay-animation-1">{{info.insta_date}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="insta-right clearfix" ng-style="{'background-image': 'url(' + info.photo + ')'}">
+	</div>
+	<div id="instagram_picture">
+		<div>
+			<img src="{{info.photo}}"  id="instagram_full_pic"  class="animated" />
+		</div>
+	</div>
+	<div class="insta-info animated pulse delay-animation-7">
+
+			<img ng-hide="info.likes == 0" src="assets/instagram-heart.png">
+			<p ng-hide="info.likes == 0" odometer="info.likes"></p>
+
+			<img  ng-hide="info.comments == 0" src="assets/instagram-comment.png">
+			<p ng-hide="info.comments == 0" odometer="info.comments"></p>
+
+	</div>
+</div>
+<div id="instagram-hashtag-join">
+	<div id="insta-div">
+		<p>Join the FUN!</p>
+		<p>#<span id="current-hashtag"></span></p>
+	</div>
+</div>

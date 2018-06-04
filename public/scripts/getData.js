@@ -948,3 +948,646 @@ function temp28GetData($http, $scope){
 	
 
 };
+
+
+function temp29GetData($http, $scope){
+
+	$scope.TemplateData.forEach(function(item){
+		if(item.Template=='temp29'&&(!item.hasData||item.lastQuery < (Date.now()-86400000))){
+
+		function get_access_token() {
+
+			$http.get('http://aircast-tool.herokuapp.com/api/spotify-token')
+	          .then(function(response) {
+	              if (response.data) {
+	              	get_result(response.data);
+	              } else {
+	                  console.log("nothing returned on temp 29");
+	              }
+	          })
+	          .catch(function() {
+	              // handle error
+	                  console.log('error in temp 29 - spotify music template');
+	          })
+	          
+		}
+
+		function get_result(access_token) {
+
+			var url = 'https://api.spotify.com/v1/recommendations?seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&seed_artists=4NHQUGzhtTLFvgF5SZesLK&max_popularity=80&limit=100&min_popularity=50&market=PH&access_token='+access_token.access_token;
+
+	    		$http.get(url)
+	              .then(function(response) {
+	                  if (response.data.tracks.length > 0) {
+	                  	sortSpotifyData(response.data);
+	                  } else {
+	                      console.log("nothing returned on temp 29");
+	                  }
+	              })
+	              .catch(function() {
+	                  // handle error
+	                  console.log('error in temp 29 - spotify music template');
+	              })
+		}
+
+
+		function sortSpotifyData(data){
+			var arr = [];
+
+			for (var i = 0; i < data.tracks.length; i++) {
+			
+				if (data.tracks[i].preview_url != null) {
+					arr.push(data.tracks[i]);
+				}
+			}
+
+			for(var i=0; i<$scope.TemplateData.length; i++){
+        		if($scope.TemplateData[i].Template == 'temp29'){
+        			$scope.TemplateData[i].TempData = arr;
+        			$scope.TemplateData[i].currentPosition = 0;
+        			$scope.TemplateData[i].hasData = true;
+        			$scope.TemplateData[i].lastQuery = Date.now();
+        			break;
+        		}
+        	} // end of for loop
+
+		}
+
+		get_access_token();
+
+		} // end of if(item.Template=='temp29'&&(!item.hasData||item.lastQuery < (Date.now()-86400000))){
+	}) // end of $scope.TemplateData.forEach(function(item){
+
+}; // end of the temp29
+
+
+
+
+function temp30GetData($http, $scope){
+
+	$scope.new_source_fb = [];
+
+	var dummyTemp = $scope.TemplateData;
+
+	// dummyTemp.forEach(function(item){
+	// 		if(item.Template=='temp27'){
+	// 			console.log("Getting Facebook Source FROM Database");
+	// 			$scope.new_source_fb = item.tempSrc.source.split('/');
+	// 		}
+	// });
+
+
+	dummyTemp.forEach(function(item){
+
+		if ($scope.new_source_fb.length != 0 || 1) {
+
+			if(item.Template=='temp30'){
+
+				if ((!item.hasData || item.lastQuery < (Date.now()-900000))) {
+
+
+					var url = 'http://aircast-tool.herokuapp.com/api/read-fb-selected-post';
+					$http.get(url)
+		              .then(function(response) {
+		              		console.log("TEMP 30");
+		              		console.log(response);
+		                  if (response.data.length > 0) {
+		                  	console.log(response.data);
+		                  	saveData(response.data)
+		                  } else {
+		                      console.log("nothing returned on temp 30");
+		                  }
+		              })
+		              .catch(function() {
+		                  // handle error
+		                  console.log('error in temp 30 - facebook selected post');
+		              })
+
+						function saveData(data){
+
+							
+
+					    	 for(var i=0; i<$scope.TemplateData.length; i++){
+					        		if($scope.TemplateData[i].Template == 'temp30' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        			console.log('saving');
+					        			// $scope.TemplateData[i].Source = 
+					        			$scope.TemplateData[i].TempData = data;
+					        			$scope.TemplateData[i].currentPosition = 0;
+					        			$scope.TemplateData[i].hasData = true;
+					        			$scope.TemplateData[i].lastQuery = Date.now();
+					        			break;
+					        		}
+					        	}
+
+
+					        	// for(var i=0; i<$scope.TemplateData.length; i++){
+					        	// 	if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        	// 		$scope.TemplateData[i].TempData = response.data;
+					        	// 		$scope.TemplateData[i].hasData = true;
+					        	// 		$scope.TemplateData[i].lastQuery = Date.now();
+					        	// 		// $scope.TemplateData[i].source = source;
+					        	// 		console.log('Get Data Temp Data');
+					        	// 		console.log($scope.TemplateData);
+					        	// 		break;
+					        	// 	}
+
+
+
+						 } // end of function saveData
+
+					} // end of !item.hasData||item.lastQuery < (Date.now()-3600000) || item.Source1 != $scope.new_source_fb[1]
+
+				} // end of (item.Template=='temp27')
+
+		} //end of length if $scope.new_source_fb.length != 0
+
+	}) // enf of dummyTemp.forEach(function(item)
+
+			
+} //end of the temp27GetData($http, $scope)
+
+
+function temp31GetData($http, $scope){
+
+	$scope.new_source_ig = [];
+	var dummyTemp = $scope.TemplateData;
+
+	dummyTemp.forEach(function(item){
+			if(item.Template=='temp31'){
+				$scope.new_source_ig = item.tempSrc.source.split('/');
+			}
+	});
+
+	dummyTemp.forEach(function(item){
+  		if ($scope.new_source_ig.length != 0) {
+
+  			if(item.Template=='temp31'){
+
+  				if ((!item.hasData || item.lastQuery < (Date.now()-600000)) || item.Source != $scope.new_source_ig[1]) {
+
+  					console.log($scope.new_source_ig[1]);
+
+
+					var param = $scope.new_source_ig[1];
+
+					var instagram_post = {
+						hashtag: param.toLowerCase(),
+						currentPosition: 0,
+						count: 30,
+						postList: {}
+					}
+
+					var url = 'http://stark-gorge-93872.herokuapp.com/graphql/query/?tag='+instagram_post.hashtag+'&count='+instagram_post.count;
+
+
+					$http.get(url)
+						 .then(function(response){
+
+						 	if (response.status == 200 && response.data.posts.length > 0) {
+						 		instagram_post.postList = response.data.posts;
+
+						 		console.log(instagram_post.postList);
+						 		saveData(instagram_post.postList);
+						 	}else {
+						 		console.log('Error getting instagram by hashtag');
+						 	}
+
+						 }).catch(function(){
+						 	console.log('Error getting instagram by hashtag. Internal error');
+						 })
+
+
+				          	function saveData(data){
+
+						    	 for(var i=0; i<$scope.TemplateData.length; i++){
+						        		if($scope.TemplateData[i].Template == 'temp31'){
+						        			$scope.TemplateData[i].Source = param;
+						        			$scope.TemplateData[i].TempData = data;
+						        			$scope.TemplateData[i].currentPosition = 0;
+						        			$scope.TemplateData[i].hasData = true;
+						        			$scope.TemplateData[i].lastQuery = Date.now();
+						        			break;
+						        		}
+						        	}
+
+							 } // end of function saveData
+
+
+  				} // end of ((!item.hasData || item.lastQuery < (Date.now()-3600000)) || item.Source != $scope.new_source_fb[1])
+
+			} // end of if (item.Template=='temp27')
+
+  		} // end of if ($scope.new_source_ig.length != 0)
+
+	}) // end of dummyTemp.forEach(function(item)
+
+} // end of temp26GetData($http, $scope)
+
+
+
+
+function temp32GetData($http, $scope){
+
+	$scope.new_source_fb = [];
+
+	var dummyTemp = $scope.TemplateData;
+
+	// dummyTemp.forEach(function(item){
+	// 		if(item.Template=='temp27'){
+	// 			console.log("Getting Facebook Source FROM Database");
+	// 			$scope.new_source_fb = item.tempSrc.source.split('/');
+	// 		}
+	// });
+
+
+	dummyTemp.forEach(function(item){
+
+		if ($scope.new_source_fb.length != 0 || 1) {
+
+			if(item.Template=='temp32'){
+				$scope.new_source_fb = item.tempSrc.source.split('/');
+
+				if ((!item.hasData || item.lastQuery < (Date.now()-900000))) {
+
+					console.log(item);
+					console.log('FB Source 1: ',$scope.new_source_fb[1] );
+					console.log('FB Source 2: ',item.Source1 );
+
+					console.log('FB First Condition: ' ,(item.Template=='temp32' && (!item.hasData||item.lastQuery < (Date.now()-900000))));
+					console.log('FB Second Condition: ' ,item.Source1 != $scope.new_source_fb[1]);
+
+
+						var fb_post = {
+							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
+							page_id: $scope.new_source_fb[1],
+							api_version: 'v2.8',
+							currentPosition: 0,
+							postList: {},
+							post_length: 0,
+							fb_limit: 30,
+							display_limit: 10,
+							has_comment: false,
+							loopInterval: 10000,
+							loop: true,
+						}
+						var page_info = {};
+						var interval35, interval36;
+						var arrOfData = [];
+
+						var url = 'https://graph.facebook.com/'+fb_post.page_id+'?fields=name,fan_count,picture.width(100)&access_token='+fb_post.access_token;
+
+						$http.get(url)
+					      .then(function(response) {
+
+					      		console.log("GETTIN NEW DATA FROM FB API");
+					      		if (response.data) {
+					      			var data = response.data;
+									page_info.name = data.name;
+									page_info.page_likes = data.fan_count;
+									page_info.picture = data.picture.data.url;
+									arrOfData.push(page_info);
+									console.log(url);
+									console.log("getting first fb data");
+
+
+										var url = 'https://graph.facebook.com/'+fb_post.api_version+'/'+fb_post.page_id+'/feed?fields=id,message,full_picture,shares.summary(true).as(reactions_shares).limit(0),comments.summary(true).limit(0).as(reactions_comments),reactions.type(LIKE).limit(0).summary(total_count).as(reactions_like),reactions.type(SAD).limit(0).summary(total_count).as(reactions_sad),reactions.type(ANGRY).limit(0).summary(total_count).as(reactions_angry),reactions.type(LOVE).limit(0).summary(total_count).as(reactions_love),reactions.type(WOW).limit(0).summary(total_count).as(reactions_wow),reactions.type(HAHA).limit(0).summary(total_count).as(reactions_haha)&limit='+fb_post.fb_limit+'&access_token='+fb_post.access_token;
+
+
+							    		$http.get(url)
+							              .then(function(response) {
+							              		if (response.data) {
+													var data = response.data;
+								              		var temp = [];
+													var counter = 0;
+													console.log(url);
+													console.log("getting second fb data");
+
+											   		for (var i=0; i < data.data.length; i++ ) {
+											   			if ('full_picture' in data.data[i]) {
+											   				if (counter < fb_post.display_limit) {
+											   					temp.push(data.data[i]);
+											   					counter++;	
+											   				}
+											   			}
+											   		}
+											   		fb_post.postList = temp;
+											   		fb_post.post_length = temp.length
+
+											   		arrOfData.push(fb_post);
+											   		saveData(arrOfData);
+							              		}else {
+							              			console.log("failed to get facebook data");
+							              		}
+							              		
+							              })
+
+							              .catch(function(err) {
+							                  // handle error
+							                  console.log('error occured getting the facebook post 2', err);
+							              })
+
+
+					      		}else {
+					      			console.log("failed to get facebook data");
+					      		}
+
+					      })
+					      .catch(function(err) {
+					          // handle error
+					          console.log('error occured getting the facebook post 1',err);
+					      })
+
+
+
+						function saveData(data){
+
+							
+
+					    	 for(var i=0; i<$scope.TemplateData.length; i++){
+					        		if($scope.TemplateData[i].Template == 'temp32' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        			console.log('saving');
+					        			console.log($scope.TemplateData[i].CampaignID);
+					        			console.log($scope.new_source_fb[1]);
+					        			$scope.TemplateData[i].Source = $scope.new_source_fb[1];
+					        			// $scope.TemplateData[i].Source = 
+					        			$scope.TemplateData[i].TempData = data;
+					        			$scope.TemplateData[i].currentPosition = 0;
+					        			$scope.TemplateData[i].hasData = true;
+					        			$scope.TemplateData[i].lastQuery = Date.now();
+					        			break;
+					        		}
+					        	}
+
+
+					        	// for(var i=0; i<$scope.TemplateData.length; i++){
+					        	// 	if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        	// 		$scope.TemplateData[i].TempData = response.data;
+					        	// 		$scope.TemplateData[i].hasData = true;
+					        	// 		$scope.TemplateData[i].lastQuery = Date.now();
+					        	// 		// $scope.TemplateData[i].source = source;
+					        	// 		console.log('Get Data Temp Data');
+					        	// 		console.log($scope.TemplateData);
+					        	// 		break;
+					        	// 	}
+
+
+
+						 } // end of function saveData
+
+					} // end of !item.hasData||item.lastQuery < (Date.now()-3600000) || item.Source1 != $scope.new_source_fb[1]
+
+				} // end of (item.Template=='temp32')
+
+		} //end of length if $scope.new_source_fb.length != 0
+
+	}) // enf of dummyTemp.forEach(function(item)
+
+			
+} //end of the temp32GetData($http, $scope)
+
+
+
+function temp33GetData($http, $scope){
+
+	$scope.new_source_fb = [];
+
+	var dummyTemp = $scope.TemplateData;
+
+	// dummyTemp.forEach(function(item){
+	// 		if(item.Template=='temp27'){
+	// 			console.log("Getting Facebook Source FROM Database");
+	// 			$scope.new_source_fb = item.tempSrc.source.split('/');
+	// 		}
+	// });
+
+
+	dummyTemp.forEach(function(item){
+
+		if ($scope.new_source_fb.length != 0 || 1) {
+
+			if(item.Template=='temp33'){
+
+				$scope.new_source_fb = item.tempSrc.source.split('/');
+				console.log($scope.new_source_fb);
+
+				if ((!item.hasData || item.lastQuery < (Date.now()-900000))) {
+
+					console.log(item);
+					console.log('FB Source 1: ',$scope.new_source_fb[1] );
+					console.log('FB Source 2: ',item.Source1 );
+
+					console.log('FB First Condition: ' ,(item.Template=='temp33' && (!item.hasData||item.lastQuery < (Date.now()-900000))));
+					console.log('FB Second Condition: ' ,item.Source1 != $scope.new_source_fb[1]);
+
+
+						var fb_post = {
+							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
+							page_id: $scope.new_source_fb[1],
+							api_version: 'v2.8',
+							currentPosition: 0,
+							postList: {},
+							post_length: 0,
+							fb_limit: 30,
+							display_limit: 10,
+							has_comment: false,
+							loopInterval: 10000,
+							loop: true,
+						}
+						var page_info = {};
+						var interval35, interval36;
+						var arrOfData = [];
+
+						var url = 'https://graph.facebook.com/'+fb_post.page_id+'?fields=name,fan_count,picture.width(100)&access_token='+fb_post.access_token;
+
+						$http.get(url)
+					      .then(function(response) {
+
+					      		console.log("GETTIN NEW DATA FROM FB API");
+					      		if (response.data) {
+					      			var data = response.data;
+									page_info.name = data.name;
+									page_info.page_likes = data.fan_count;
+									page_info.picture = data.picture.data.url;
+									arrOfData.push(page_info);
+									console.log(url);
+									console.log("getting first fb data");
+
+
+										var url = 'https://graph.facebook.com/'+fb_post.api_version+'/'+fb_post.page_id+'/feed?fields=id,message,full_picture,shares.summary(true).as(reactions_shares).limit(0),comments.summary(true).limit(0).as(reactions_comments),reactions.type(LIKE).limit(0).summary(total_count).as(reactions_like),reactions.type(SAD).limit(0).summary(total_count).as(reactions_sad),reactions.type(ANGRY).limit(0).summary(total_count).as(reactions_angry),reactions.type(LOVE).limit(0).summary(total_count).as(reactions_love),reactions.type(WOW).limit(0).summary(total_count).as(reactions_wow),reactions.type(HAHA).limit(0).summary(total_count).as(reactions_haha)&limit='+fb_post.fb_limit+'&access_token='+fb_post.access_token;
+
+
+							    		$http.get(url)
+							              .then(function(response) {
+							              		if (response.data) {
+													var data = response.data;
+								              		var temp = [];
+													var counter = 0;
+													console.log(url);
+													console.log("getting second fb data");
+
+											   		for (var i=0; i < data.data.length; i++ ) {
+											   			if ('full_picture' in data.data[i]) {
+											   				if (counter < fb_post.display_limit) {
+											   					temp.push(data.data[i]);
+											   					counter++;	
+											   				}
+											   			}
+											   		}
+											   		fb_post.postList = temp;
+											   		fb_post.post_length = temp.length
+
+											   		arrOfData.push(fb_post);
+											   		saveData(arrOfData);
+							              		}else {
+							              			console.log("failed to get facebook data");
+							              		}
+							              		
+							              })
+
+							              .catch(function(err) {
+							                  // handle error
+							                  console.log('error occured getting the facebook post 2', err);
+							              })
+
+
+					      		}else {
+					      			console.log("failed to get facebook data");
+					      		}
+
+					      })
+					      .catch(function(err) {
+					          // handle error
+					          console.log('error occured getting the facebook post 1',err);
+					      })
+
+
+
+						function saveData(data){
+
+							
+
+					    	 for(var i=0; i<$scope.TemplateData.length; i++){
+					        		if($scope.TemplateData[i].Template == 'temp33' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        			console.log('saving');
+					        			console.log($scope.TemplateData[i].CampaignID);
+					        			console.log($scope.new_source_fb[1]);
+					        			$scope.TemplateData[i].Source = $scope.new_source_fb[1];
+					        			// $scope.TemplateData[i].Source = 
+					        			$scope.TemplateData[i].TempData = data;
+					        			$scope.TemplateData[i].currentPosition = 0;
+					        			$scope.TemplateData[i].hasData = true;
+					        			$scope.TemplateData[i].background = $scope.new_source_fb[2] || 'white';
+					        			$scope.TemplateData[i].lastQuery = Date.now();
+					        			break;
+					        		}
+					        	}
+
+
+					        	// for(var i=0; i<$scope.TemplateData.length; i++){
+					        	// 	if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        	// 		$scope.TemplateData[i].TempData = response.data;
+					        	// 		$scope.TemplateData[i].hasData = true;
+					        	// 		$scope.TemplateData[i].lastQuery = Date.now();
+					        	// 		// $scope.TemplateData[i].source = source;
+					        	// 		console.log('Get Data Temp Data');
+					        	// 		console.log($scope.TemplateData);
+					        	// 		break;
+					        	// 	}
+
+
+
+						 } // end of function saveData
+
+					} // end of !item.hasData||item.lastQuery < (Date.now()-3600000) || item.Source1 != $scope.new_source_fb[1]
+
+				} // end of (item.Template=='temp27')
+
+		} //end of length if $scope.new_source_fb.length != 0
+
+	}) // enf of dummyTemp.forEach(function(item)
+
+			
+} //end of the temp27GetData($http, $scope)
+
+
+function temp34GetData($http, $scope){
+
+	$scope.TemplateData.forEach(function(item){
+		if(item.Template=='temp34'){
+
+
+		var fb_post = {
+				access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
+			}
+
+			console.log('facebook live query');
+
+			console.log(item);
+			var dum = item.tempSrc.source.split('/');
+			console.log(dum);
+			var source = dum[1].split('*');
+			var page_id = source[0];
+			var video_id = source[1];
+			var status = source[2];
+			var pageInfo = {};
+			console.log('PAGE ID: ', page_id);
+			console.log('STATUS: ', status);
+
+			console.log(item.hasLoaded);
+
+			if (!item.hasData) {
+
+				      	var url = 'https://graph.facebook.com/'+page_id+'?fields=name,fan_count,picture.width(500)&access_token='+fb_post.access_token;
+
+						console.log('LIVE CURRENTLY PLAYING');
+
+				      	$http.get(url)
+				     	 	 .then(function(response) {
+				     	 	 	console.log('PAGE DETAILS')
+				     	 	 	console.log(response.data);
+				     	 	 	pageInfo = response.data;
+
+								for(var i=0; i<$scope.TemplateData.length; i++){
+					        		if($scope.TemplateData[i].Template == 'temp34' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+					        			$scope.TemplateData[i].hasData = true;
+					        			$scope.TemplateData[i].page_id = page_id;
+					        			$scope.TemplateData[i].video_id = video_id;
+					        			$scope.TemplateData[i].status = 1;
+					        			$scope.TemplateData[i].pageInfo = pageInfo;
+					        			$scope.TemplateData[i].hasShownLoader = 0;
+					        			$scope.TemplateData[i].pageName = page_id;
+					        			$scope.TemplateData[i].CampaignID = item.CampaignID;
+
+					        			break;
+					        		}
+					        	}
+
+
+				     	 	 })
+
+
+
+			}
+
+			if (status == '0') {
+
+					console.log('LIVE CURRENTLY STOP');
+
+					for(var i=0; i<$scope.TemplateData.length; i++){
+		        		if($scope.TemplateData[i].Template == 'temp34' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+		        			$scope.TemplateData[i].status = 0;
+		        			console.log('UPDATING STATUS TO ZERO: ', $scope.TemplateData[i])
+		        			break;
+		        		}
+		        	}				
+
+
+			}
+
+		}
+	})
+
+			
+}
+
+
