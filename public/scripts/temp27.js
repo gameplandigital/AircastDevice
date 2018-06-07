@@ -40,6 +40,12 @@ function temp27Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			}
 		}
 
+		if (page_info.name.length >= 20 ) {
+			$('.facebook-post-top h3').css('font-size','1.7em');
+		}else {
+			$('.facebook-post-top h3').css('font-size','2em');
+		}
+
 		console.log(fb_post.currentPosition+'/'+fb_post.post_length);
 
 
