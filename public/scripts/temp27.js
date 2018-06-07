@@ -40,7 +40,7 @@ function temp27Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			}
 		}
 
-		if (page_info.name.length >= 20 ) {
+		if (page_info.name.length >= 15 ) {
 			$('.facebook-post-top h3').css('font-size','1.7em');
 		}else {
 			$('.facebook-post-top h3').css('font-size','2em');
