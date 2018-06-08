@@ -94,7 +94,7 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
       }
 
       else if(greeting == 'evening') {
-        if(x["weather"] == 'Clouds') {
+        if(x["weather"] == 'Clouds') { 
           return 'icon-moon-cloud';
 
         }
@@ -138,26 +138,27 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 
 		        var temp;
 
-		        if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'morning') {
-		          temp = '/assets/weather-landscape-rain-morning.png';
-		          console.log('getting morning-rain background');
-		        }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'afternoon') {
-		          temp = '/asset//weather-landscape-rain-afternoon.png';
-		        }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'night') {
-		          temp = '/assets/weather-landscape-rain-night.png';
-		        }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'midnight') {
-		          temp = '/assets/weather-landscape-rain-night.png';
-		        }else if (status == 'morning') {
-		          temp = '/assets/weather-landscape-sun-morning.png';
-		        }else if (status == 'afternoon') {
-		          temp = '/assets/weather-landscape-sun-afternoon.png';
-		        }else if (status == 'night') {
-		          temp = '/assets/weather-landscape-sun-night.png';
-		        }else if (status == 'midnight') {
-		          temp = '/assets/weather-landscape-sun-night.png';
-		        }else {
-		          temp = '/assets/weather-sun-morning';
-		        }
+            if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'morning') {
+              temp = '/assets/weather-landscape-rain-morning.png';
+              console.log('getting morning-rain background');
+            }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'afternoon') {
+              temp = '/assets/weather-landscape-rain-afternoon.png';
+            }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'night') {
+              temp = '/assets/weather-landscape-rain-night.png';
+            }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'midnight') {
+              temp = '/assets/weather-landscape-rain-night.png';
+            }else if (status == 'morning') {
+              temp = '/assets/weather-landscape-sun-morning.png';
+            }else if (status == 'afternoon') {
+              temp = '/assets/weather-landscape-sun-afternoon.png';
+            }else if (status == 'night') {
+              temp = '/assets/weather-landscape-sun-night.png';
+            }else if (status == 'midnight') {
+              temp = '/assets/weather-landscape-sun-night.png';
+            }else {
+              temp = '/assets/weather-sun-morning.png';
+            }
+
 
 		        $scope.weather_background = temp;
 		        
