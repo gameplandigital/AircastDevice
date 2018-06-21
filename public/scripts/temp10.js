@@ -14,7 +14,7 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
     4. tech
     techcrunch
 
-    5. sports
+    5. sports 
     espn
     */
 
@@ -58,6 +58,7 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
     		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
     			localData = $scope.TemplateData[i].TempData;
           newsSource = $scope.TemplateData[i].source;
+          console.log('Local data: ', localData)
     			insertDataToScope();
     		}
     	}
@@ -118,7 +119,7 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
                     'article1': article1,
                     'article2':article2,
                     'article3':article3,
-                    'sourceIcon': config.image[newsSource]
+                    'sourceIcon': '/assets/news-logo.png'
                 }
               
               $scope.$apply();

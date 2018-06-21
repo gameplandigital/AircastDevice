@@ -5,8 +5,25 @@
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: 'BebasNeue';
+  src: url("fonts/bebasneue-webfont.woff2");
+  font-weight: normal;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url("fonts/AvenirLTStd-Book.otf");
+  font-weight: normal;
+  font-style: normal; 
+}
 
 /*--------------------------------news-------------------------------------------*/
+
+body {
+  font-family: arial, sans-serif;
+}
 
 .news-loader {
   background: url("/assets/news_load.png");

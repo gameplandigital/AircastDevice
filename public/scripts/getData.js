@@ -1,7 +1,7 @@
 function temp10GetData($http, $scope){
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp10'&&(!item.hasData||item.lastQuery < (Date.now()-600000))){
+		if(item.Template=='temp10'&&(!item.hasData||item.lastQuery < (Date.now()-10800000))){
 			console.log('news query');
 
 			console.log(item);
@@ -19,23 +19,50 @@ function temp10GetData($http, $scope){
 			// 	}
 			// }
 
-			$http.get('https://newsapi.org/v1/articles?source='+source+'&sortBy=top&apiKey=44e7bd68b7d74cef902f1d9c7cb96b72')
-				.then(function(response){
-					console.log('temp 10 success');
-					for(var i=0; i<$scope.TemplateData.length; i++){
-		        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
-		        			$scope.TemplateData[i].TempData = response.data;
-		        			$scope.TemplateData[i].hasData = true;
-		        			$scope.TemplateData[i].lastQuery = Date.now();
-		        			// $scope.TemplateData[i].source = source;
-		        			console.log('Get Data Temp Data');
-		        			console.log($scope.TemplateData);
-		        			break;
-		        		}
-		        	}
-				}, function(error){
-					console.log(error);
-				})
+			console.log('LOcal:', source)
+			if (source == 'local') {
+
+				$http.get('https://newsapi.org/v2/top-headlines?country=ph&apiKey=a3aa8dee6c814974b0cd33bd806ef301')
+					.then(function(response){
+						console.log('temp 10 success');
+						for(var i=0; i<$scope.TemplateData.length; i++){
+			        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+			        			$scope.TemplateData[i].TempData = response.data;
+			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].lastQuery = Date.now();
+			        			// $scope.TemplateData[i].source = source;
+			        			console.log('Get Data Temp Data');
+			        			console.log($scope.TemplateData);
+			        			break;
+			        		}
+			        	}
+					}, function(error){
+						console.log(error);
+					})
+
+			}else{
+
+				$http.get('https://newsapi.org/v1/articles?source='+source+'&sortBy=top&apiKey=a3aa8dee6c814974b0cd33bd806ef301')
+					.then(function(response){
+						console.log('temp 10 success');
+						for(var i=0; i<$scope.TemplateData.length; i++){
+			        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+			        			$scope.TemplateData[i].TempData = response.data;
+			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].lastQuery = Date.now();
+			        			// $scope.TemplateData[i].source = source;
+			        			console.log('Get Data Temp Data');
+			        			console.log($scope.TemplateData);
+			        			break;
+			        		}
+			        	}
+					}, function(error){
+						console.log(error);
+					})
+
+			}
+
+
 		}
 	})
 
@@ -46,7 +73,7 @@ function temp10GetData($http, $scope){
 function temp11GetData($http, $scope){
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp11'&&(!item.hasData||item.lastQuery < (Date.now()-3600000))){
+		if(item.Template=='temp11'&&(!item.hasData||item.lastQuery < (Date.now()-10800000))){
 
 	    var restaurantList = [];
 	    var restaurantNameList = [];
@@ -189,7 +216,7 @@ function temp13GetData($http, $scope){
 
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp13'&&(!item.hasData||item.lastQuery < (Date.now()-3600000))){
+		if(item.Template=='temp13'&&(!item.hasData||item.lastQuery < (Date.now()-10800000))){
 			$scope.TemplateData.forEach(function(item){
 				if(item.Template == 'temp13'){
 
@@ -228,7 +255,7 @@ function temp14GetData($http, $scope){
 		if(item.Template=='temp14'&&(!item.hasData||item.lastQuery < (Date.now()-300000))){
 			console.log('GETTING TWITTER DATA');
 
-			var search_keyword = "GetReadyToReinvent";
+			var search_keyword = "";
 			var formatted_keyword = encodeURI('http://palmsolutions-twitter-api.herokuapp.com/'+search_keyword);
 			$http.get(formatted_keyword)
 		              .then(function(response) {
@@ -280,7 +307,7 @@ function temp15GetData($http, $scope){
 function temp16GetData($http, $scope){
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp16'&&(!item.hasData||item.lastQuery < (Date.now()-3600000))){
+		if(item.Template=='temp16'&&(!item.hasData||item.lastQuery < (Date.now()-7200000))){
 			$http.get('https://api.themoviedb.org/3/movie/upcoming?api_key=f2ebc8131c456f6ee2f134ac299aa40f&language=en&US')
 		              .then(function(response) {
 		              		$scope.TemplateData.forEach(function(item){
