@@ -33,7 +33,7 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
         'sort':'top',
         'apiKey': '44e7bd68b7d74cef902f1d9c7cb96b72',
         'loopNews':true,
-        'loopInterval':13000,
+        'loopInterval':10000,
         'image':{
             'buzzfeed': '/assets/logo-buzzfeed.png',
             'cnn': '/assets/logo-cnn.png',
@@ -58,7 +58,6 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
     		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
     			localData = $scope.TemplateData[i].TempData;
           newsSource = $scope.TemplateData[i].source;
-          console.log('Local data: ', localData)
     			insertDataToScope();
     		}
     	}
@@ -238,7 +237,7 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
 		
 	}
 
-    $timeout(removeInterval, 37000);      
-	$timeout(callback, 39000);
+  $timeout(removeInterval, 28000);      
+	$timeout(callback, 30000);
 
 }
