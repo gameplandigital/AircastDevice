@@ -19,7 +19,6 @@ function temp10GetData($http, $scope){
 			// 	}
 			// }
 
-			console.log('LOcal:', source)
 			if (source == 'local') {
 
 				$http.get('https://newsapi.org/v2/top-headlines?country=ph&apiKey=a3aa8dee6c814974b0cd33bd806ef301')
@@ -29,6 +28,7 @@ function temp10GetData($http, $scope){
 			        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
 			        			$scope.TemplateData[i].TempData = response.data;
 			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].currentPosition = 0;
 			        			$scope.TemplateData[i].lastQuery = Date.now();
 			        			// $scope.TemplateData[i].source = source;
 			        			console.log('Get Data Temp Data');
@@ -49,6 +49,7 @@ function temp10GetData($http, $scope){
 			        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
 			        			$scope.TemplateData[i].TempData = response.data;
 			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].currentPosition = 0;
 			        			$scope.TemplateData[i].lastQuery = Date.now();
 			        			// $scope.TemplateData[i].source = source;
 			        			console.log('Get Data Temp Data');

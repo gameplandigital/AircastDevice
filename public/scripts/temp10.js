@@ -1,26 +1,9 @@
 
 function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
- /*
-    1. entertainment
-    buzzfeed and entertainment-weekly
-
-    2. breaking news
-    cnn, al-jazeera-english, google-news
-
-    3. financial and business
-    -bloomberg,business insider uk
-
-    4. tech
-    techcrunch
-
-    5. sports 
-    espn
-    */
-
     var loopCounter = 0;
     var interval1, interval2;
-
+    var cb = false;
     var localData;
 
     var newsSource;
@@ -31,9 +14,11 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
         'sourceList': [ 'buzzfeed','cnn','espn','google-news','entertainment-weekly','al-jazeera-english','bloomberg,','techcrunch','business-insider-uk'],
         'source': 'cnn',
         'sort':'top',
+        'currentPosition': 0,
         'apiKey': '44e7bd68b7d74cef902f1d9c7cb96b72',
-        'loopNews':true,
-        'loopInterval':10000,
+        'loop':true,
+        'newsList': [],
+        'loopInterval':12000,
         'image':{
             'buzzfeed': '/assets/logo-buzzfeed.png',
             'cnn': '/assets/logo-cnn.png',
@@ -48,17 +33,15 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
     }
     
-    config.url = 'https://newsapi.org/v1/articles?source='+config.source+'&sortBy='+config.sort+'&apiKey='+config.apiKey;
-    
-        console.log(config.url);
-        console.log("config source -> " + config.source);
 
         
-        for(var i=0; i< $scope.TemplateData.length; i++){
+    for(var i=0; i< $scope.TemplateData.length; i++){
     		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
     			localData = $scope.TemplateData[i].TempData;
           newsSource = $scope.TemplateData[i].source;
+          config.currentPosition = $scope.TemplateData[i].currentPosition;
     			insertDataToScope();
+
     		}
     	}
 
@@ -66,22 +49,13 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
           //insert all the data to the angular $scope
       function insertDataToScope() {
           console.log('temp 10 data insert');
-          $(".news-loader").fadeOut("slow",function(){
   
-              // var x = localStorage.getItem('news');
-              var x = localData;
-              // var parsedData = JSON.parse(x);
               var parsedData = localData;
+              config.newsList = parsedData.articles;
+              var newsCount = config.newsList.length-1;
+              var article = config.newsList[config.currentPosition];
 
-              // //check if data is empty
-              // if (parsedData == '') {
-              //   getDataFromApi();
-              // }
-
-              var newsList = parsedData.articles;
-              var currentPosition = parseInt(localStorage.getItem("news-position")) || 0;
-              var newsCount = newsList.length-1;
-              var article = newsList[currentPosition];
+              console.log(config.currentPosition + ' / ' + newsCount);
 
               var title = article.title;
               var author = article.author || "";
@@ -95,8 +69,6 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
                     dateCreated = "";
               }
 
-              console.log("News-Position " + currentPosition + "/"+newsCount);
-
               var description = article.description || "";
               var featuredImage = article.urlToImage;
 
@@ -104,10 +76,10 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
                   featuredImage = "assets/news-background.jpeg";
               }
 
-                var articleAside =  returnArticle(currentPosition,newsCount);
-                var article1 = newsList[articleAside[0]];
-                var article2 = newsList[articleAside[1]];
-                var article3 = newsList[articleAside[2]];
+                var articleAside =  returnArticle(config.currentPosition,newsCount);
+                var article1 = config.newsList[articleAside[0]];
+                var article2 = config.newsList[articleAside[1]];
+                var article3 = config.newsList[articleAside[2]];
 
                 $scope.news = {
                     'title': title,
@@ -120,9 +92,6 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
                     'article3':article3,
                     'sourceIcon': '/assets/news-logo.png'
                 }
-              
-              $scope.$apply();
-              changeNews(currentPosition,newsCount);
 
               if(title.length > 50) {
                   $(".news-headline h1").css("font-size","1.2em");
@@ -137,45 +106,24 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
               }
 
               if (loopCounter == 0) {
-              	newsloop();
+              	loop();
+                cb = true;
+                callCallback();
               	loopCounter++;
               }
-
-              
-        });
           
       }; // end of insertDataToScope
-
-      function newsloop(){
-
-        if(config.loopNews){
-            
-                interval1 = setInterval(function () {
-                    removeNewsClass();
-                }, config.loopInterval/2);
-            
-                interval2 = setInterval(function () {
-                  
-                    insertDataToScope();
-                    addNewsClass();
-
-                }, config.loopInterval);
-            
-          }
-
-      }
         
-
 
 
     function removeNewsClass(){
 
-		$(".news .header").delay(2000).removeClass("fadeInLeft");
-        $(".news .news").delay(2000).removeClass("news-animation");
-        $(".news .news-aside-div").delay(2000).removeClass("fadeInRight");
-        $(".news .divider-bottom").delay(2000).removeClass("fadeInUp");
-        $(".news .news-item").delay(2000).removeClass("fadeInRight");
-        $(".news .news-source-div").delay(2000).removeClass("fadeInDown");
+    $(".news .header").removeClass("fadeInLeft");
+        $(".news .news").removeClass("news-animation");
+        $(".news .news-aside-div").removeClass("fadeInRight");
+        $(".news .divider-bottom").removeClass("fadeInUp");
+        $(".news .news-item").removeClass("fadeInRight");
+        $(".news .news-source-div").removeClass("fadeInDown");
     
     }
 
@@ -188,20 +136,44 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
         $(".news .news-item").addClass("fadeInRight");
         $(".news .news-source-div").addClass("fadeInDown");
 
-    }      
-        
-    function changeNews(currentPosition,newsCount) {
+    } 
 
-              //saving data in local storage
-              if (currentPosition >= newsCount) {
-                  currentPosition = 0;
-                  localStorage.setItem('news-position', currentPosition);
-              } else {
-                  currentPosition++;
-                  localStorage.setItem('news-position', currentPosition);
+      function loop(){
+
+          if (config.loop) {
+
+                interval1 = setInterval(function () {
+                  removeNewsClass();
+                }, config.loopInterval/2);
+            
+                interval2 = setInterval(function () {
+
+                    $scope.$apply(function(){
+
+                        if (config.currentPosition >= config.newsList.length-1) {
+                          config.currentPosition = 0;
+                        }else {
+                          config.currentPosition++;  
+                        }
+                          updateValues();
+                          insertDataToScope();
+                          addNewsClass();
+                        
+                      });
+                      
+                  }, config.loopInterval);
+              
+          }
+      }
+
+
+      function updateValues() {
+          $scope.TemplateData.forEach(function(item){
+          if(item.Template == 'temp10'){
+              item.currentPosition = config.currentPosition;
               }
-
-          }  //end of changeNews function
+          })
+      }
         
     function returnArticle(currentPosition,newsCount){
 
@@ -229,15 +201,22 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
 	function removeInterval() {
 
-		if (interval1 != undefined && interval2 != undefined) {
 			clearInterval(interval1);
 			clearInterval(interval2);		
-		} 
 
 		
 	}
 
-  $timeout(removeInterval, 28000);      
-	$timeout(callback, 30000);
+  function callCallback() {
+
+    if (cb) {
+      $timeout(removeInterval, 28000);      
+      $timeout(callback, 30000);      
+    }
+
+
+  }
+
+
 
 }
