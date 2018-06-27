@@ -786,7 +786,7 @@ function temp27GetData($http, $scope){
 
 
 						var fb_post = {
-							access_token: 'EAATucvdn4ZB0BALHvtx618uzweZADhbMRw7DqKumuEzBkdZAWKycBxC2zvmZBY1juOZA4mEExEEcV5hvYIUhzX8TnzIZANWpYunMH7lMiZBJmEU8VntS8yQ8A1u4IsbY4RnjXCnzHfTbvzx7R6LwjupU5aQjyqwZCfRdtIc7Xljyrk2eDtMPBZADx',
+							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
 							page_id: $scope.new_source_fb[1],
 							api_version: 'v2.8',
 							currentPosition: 0,
@@ -1246,7 +1246,7 @@ function temp32GetData($http, $scope){
 
 
 						var fb_post = {
-							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
+							access_token: 'EAAGv4h1UPGQBADee3f7YWEvjJmVqFkuZBMo7MXnfjhPOI9ipVUZBBFxQ1vIfBjiafUnSVZCRT3SL5oeeZBSCBAtWxDOU8SI76Cj85QZC5nXMs31gj02uWUSC5bGJzdvGZAHuvNuLQZAkR2FkoZCtsfzwElaLQZCtFq0A3qyFfiYhTNOAVDiCPetGl',
 							page_id: $scope.new_source_fb[1],
 							api_version: 'v2.8',
 							currentPosition: 0,
