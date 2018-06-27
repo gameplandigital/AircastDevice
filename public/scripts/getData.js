@@ -775,7 +775,7 @@ function temp27GetData($http, $scope){
 			if(item.Template=='temp27'){
 				$scope.new_source_fb = item.tempSrc.source.split('/');
 
-				if ((!item.hasData || item.lastQuery < (Date.now()-1800000))) {
+				if ((!item.hasData || item.lastQuery < (Date.now()-3600000))) {
 
 					console.log(item);
 					console.log('FB Source 1: ',$scope.new_source_fb[1] );
@@ -1235,7 +1235,7 @@ function temp32GetData($http, $scope){
 			if(item.Template=='temp32'){
 				$scope.new_source_fb = item.tempSrc.source.split('/');
 
-				if ((!item.hasData || item.lastQuery < (Date.now()-900000))) {
+				if ((!item.hasData || item.lastQuery < (Date.now()-3600000))) {
 
 					console.log(item);
 					console.log('FB Source 1: ',$scope.new_source_fb[1] );
@@ -1398,7 +1398,7 @@ function temp33GetData($http, $scope){
 				$scope.new_source_fb = item.tempSrc.source.split('/');
 				console.log($scope.new_source_fb);
 
-				if ((!item.hasData || item.lastQuery < (Date.now()-900000))) {
+				if ((!item.hasData || item.lastQuery < (Date.now()-3600000))) {
 
 					console.log(item);
 					console.log('FB Source 1: ',$scope.new_source_fb[1] );
