@@ -74,7 +74,7 @@ function temp10GetData($http, $scope){
 function temp11GetData($http, $scope){
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp11'&&(!item.hasData||item.lastQuery < (Date.now()-10800000))){
+		if(item.Template=='temp11'&&(!item.hasData||item.lastQuery < (Date.now()-86400000))){
 
 	    var restaurantList = [];
 	    var restaurantNameList = [];
