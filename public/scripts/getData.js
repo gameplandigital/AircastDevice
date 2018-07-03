@@ -253,7 +253,7 @@ function temp13GetData($http, $scope){
 
 function temp14GetData($http, $scope){
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp14'&&(!item.hasData||item.lastQuery < (Date.now()-300000))){
+		if(item.Template=='temp14'&&(!item.hasData||item.lastQuery < (Date.now()-3600000))){
 			console.log('GETTING TWITTER DATA');
 
 			var search_keyword = "";
