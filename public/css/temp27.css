@@ -58,16 +58,26 @@
   align-items: center;
 }
 .facebook-post .facebook-post-left .facebook-image {
-  width: 85vw;
-  height: 85vh;
-  text-align: center;
-  margin: 0 auto;
-  padding: 0.5em 1em;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    align-items: center;
 }
 .facebook-post .facebook-post-left img {
-  width: 95%;
-  height: 100%;
-  object-fit: contain;
+    width: 95%;
+    height: 100%;
+    object-fit: contain;
+    width: unset;
+    height: unset;
+    object-fit: unset;
+    max-height: 90% !important;
+    max-width: 90% !important; 
+    border: .4em solid white;
+    box-shadow: 0.3em 0.3em 0.7em rgba(0, 0, 0, 0.4);
 }
 .facebook-post .facebook-post-right {
   width: 35vw;

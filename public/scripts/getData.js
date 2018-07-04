@@ -1409,7 +1409,7 @@ function temp33GetData($http, $scope){
 
 
 						var fb_post = {
-							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
+							access_token: 'EAAb6FB7V7wsBAEpM1BhZBjDiJNyMbAc024EVoPbWe8mgZBBA3UwPIVTHdSlgU020Rvw4tIJKiJnHGtytORyxtlmZAqYERUgwmmX6ITl39ZB9ZBdY1tqtyHHC2CXZCjaelLNwhG6eQOD1vHFmtUWZANJPgvvyObfLYd004zrt54A2uc05VZBHcAVp',
 							page_id: $scope.new_source_fb[1],
 							api_version: 'v2.8',
 							currentPosition: 0,
