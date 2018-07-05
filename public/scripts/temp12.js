@@ -116,7 +116,7 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 
     	// var d = data1;
     	if (d == 'error') {
-    		 $(".weather-loader").fadeOut("slow");
+    		 // $(".weather-loader").fadeOut("slow");
     		callback();   
     	}else {
 
@@ -130,9 +130,9 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 		        now_w["currentDate"] = today
 		        now_w["location"] = data.data.name
 
-		        $(".weather-loader").fadeOut("slow",function(){
-		            $(".weather").fadeIn(); 
-		        });
+		        // $(".weather-loader").fadeOut("slow",function(){
+		        //     $(".weather").fadeIn(); 
+		        // });
 
 		        console.log(now_w.weather);
 
