@@ -29,7 +29,7 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
 
     }
     
-    config.url = 'https://newsapi.org/v1/articles?source='+config.source+'&sortBy='+config.sort+'&apiKey='+config.apiKey;
+    config.url = 'https://newsapi.org/v1/articles?source='+config.source+'&sortBy=top&apiKey=44e7bd68b7d74cef902f1d9c7cb96b72';
     
         console.log(config.url);
         console.log("config source -> " + config.source);
