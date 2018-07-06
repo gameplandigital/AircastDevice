@@ -317,6 +317,12 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
     window['temp15GetData'].apply(null, payl);
     //movie-landscape
     window['temp16GetData'].apply(null, payl);
+    window['temp17GetData'].apply(null, payl);
+    window['temp18GetData'].apply(null, payl);
+    window['temp19GetData'].apply(null, payl);
+    window['temp20GetData'].apply(null, payl);
+    window['temp22GetData'].apply(null, payl);
+    window['temp24GetData'].apply(null, payl);
     window['temp26GetData'].apply(null, payl);  //instagram-post
     window['temp27GetData'].apply(null, payl);  //facebook-post
     window['temp28GetData'].apply(null, payl);  //facebook-events
