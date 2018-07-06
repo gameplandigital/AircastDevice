@@ -223,7 +223,7 @@ function temp13GetData($http, $scope){
 
 					item.TempData = [];
 
-					$http.get('https://openexchangerates.org/api/latest.json?app_id=611c0c2870aa4804a4014db80c91ee2d')
+					$http.get('https://openexchangerates.org/api/latest.json?app_id=d076ca0158a348679fdaee487dff191e')
 						.then(function(response1){
 							item.TempData.push(response1.data.rates);
 
@@ -231,7 +231,7 @@ function temp13GetData($http, $scope){
 
 							var yes = formatDate(yesterday);
 
-							$http.get('https://openexchangerates.org/api/historical/'+ yes +'.json?app_id=611c0c2870aa4804a4014db80c91ee2d')
+							$http.get('https://openexchangerates.org/api/historical/'+ yes +'.json?app_id=d076ca0158a348679fdaee487dff191e')
 								.then(function(response2){
 									item.TempData.push(response2.data.rates);
 				        			item.hasData = true;

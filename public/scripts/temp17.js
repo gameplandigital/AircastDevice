@@ -10,7 +10,7 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
 
         //source -> latest, top, popular
         'sourceList': [ 'buzzfeed','cnn','espn','google-news','entertainment-weekly','al-jazeera-english','bloomberg,','techcrunch','business-insider-uk'],
-        'source': 'cnn',
+        'source': 'business-insider',
         'sort':'top',
         'apiKey': '44e7bd68b7d74cef902f1d9c7cb96b72',
         'loopNews':true,

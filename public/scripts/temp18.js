@@ -123,7 +123,7 @@ function temp18Controller($scope, $window, $timeout, $http, tempSrc, callback, $
             if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'morning') {
               temp = '/assets/weather-rain-morning.png';
             }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'afternoon') {
-              temp = '/asset//weather-rain-afternoon.png';
+              temp = '/assets//weather-rain-afternoon.png';
             }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'night') {
               temp = '/assets/weather-rain-night.png';
             }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'midnight') {
