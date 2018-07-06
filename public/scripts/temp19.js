@@ -65,7 +65,7 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
                 console.log("fetch data from currency api");
 
                 //get the current data today
-                var url = 'https://openexchangerates.org/api/latest.json?app_id=611c0c2870aa4804a4014db80c91ee2d';
+                var url = 'https://openexchangerates.org/api/latest.json?app_id=44e7bd68b7d74cef902f1d9c7cb96b72';
                 var results = [];
                 
 
@@ -80,7 +80,7 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 
                           results.push(response.data.rates);
 
-                          url = 'https://openexchangerates.org/api/historical/'+ config.yesterdayDate +'.json?app_id=611c0c2870aa4804a4014db80c91ee2d';
+                          url = 'https://openexchangerates.org/api/historical/'+ config.yesterdayDate +'.json?app_id=44e7bd68b7d74cef902f1d9c7cb96b72';
 
                           $http.get(url)
                                 .then(function(response) {
