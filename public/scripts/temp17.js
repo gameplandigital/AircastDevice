@@ -1,10 +1,12 @@
 
-function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, $q){
-	var loopCounter = 0;
+function temp17Controller($scope, $window, $timeout, $http, tempSrc, callback, $q){
+	 
+    var loopCounter = 0;
     var cb = false;
-    var interval1, interval2;
+    var interval13, interval14;
 
     var localData;
+    var newsSource;
             
     var config = {
 
@@ -12,8 +14,10 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
         'sourceList': [ 'buzzfeed','cnn','espn','google-news','entertainment-weekly','al-jazeera-english','bloomberg,','techcrunch','business-insider-uk'],
         'source': 'business-insider',
         'sort':'top',
+        'currentPosition': 0,
         'apiKey': '44e7bd68b7d74cef902f1d9c7cb96b72',
-        'loopNews':true,
+        'loop':true,
+        'newsList': [],
         'loopInterval':13000,
         'image':{
             'buzzfeed': '/assets/logo-buzzfeed.png',
@@ -29,122 +33,27 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
 
     }
     
-    config.url = 'https://newsapi.org/v1/articles?source='+config.source+'&sortBy=top&apiKey=44e7bd68b7d74cef902f1d9c7cb96b72';
-    
-        console.log(config.url);
-        console.log("config source -> " + config.source);
-    
-
-        function checkIfNewsDataExpired(){
-
-          var currentDate = moment().format('MM-DD-YYYY');
-
-          if (localStorage.getItem('news-expiration-date') == null) {
-
-              getDataFromApi();
-          	
-          }else{
-
-            if(currentDate == localStorage.getItem('news-expiration-date')) {
-              console.log("News data is still within the same day");
-              console.log("Getting data from the local storage");
-
-              if (localStorage.getItem('news-source') == null) {
-                localStorage.setItem('news-source',config.source);
-                getDataFromApi();
-              }
-
-              if (localStorage.getItem('news-source') != config.source) {
-                console.log("news source is not the same with the config.source, getting data from api");
-                getDataFromApi();
-              }
-
-              insertDataToScope();
-
-            }else{
-
-              getDataFromApi();
-
-
-            }
-
-          }
-
-        } // end of the checkIfNewsDataExpired function
 
         
-    // checkIfNewsDataExpired();
-
     for(var i=0; i< $scope.TemplateData.length; i++){
-    		if($scope.TemplateData[i].Template == 'temp17'){
-    			localData = $scope.TemplateData[i].TempData;
-    			insertDataToScope();
-    		}
-    	}
+        if($scope.TemplateData[i].Template == 'temp17' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
+          localData = $scope.TemplateData[i].TempData;
+          newsSource = $scope.TemplateData[i].source;
+          config.currentPosition = $scope.TemplateData[i].currentPosition;
+          insertDataToScope();
 
-        
-
-      // this function  will get data from the api if the json file is not yet saved in the local storage
-      function getDataFromApi() {
-
-          console.log("fetch data from news api");
-
-
-          $http.get(config.url)
-              .then(function(response) {
-
-                  var currentDate = moment().format('MM-DD-YYYY');
-
-                  if (response.data) {
-                      localStorage.setItem('news-expiration-date',currentDate);
-                      localStorage.setItem('news',JSON.stringify(response.data));
-                      localStorage.setItem('news-position',0);
-                      localStorage.setItem('news-source',config.source);
-                      console.log("fetch data from the local storage");
-                      //location.reload();
-                      insertDataToScope();
-                  } else {
-                      console.log("nothing returned");
-                  }
-              })
-              .catch(function() {
-                  // handle error
-                  console.log('error occurred');
-
-                  if (localStorage.getItem('news') != null && localStorage.getItem('news') != '') {
-                    console.log("fetch data from the local storage");
-                    insertDataToScope();
-                  }else{
-
-                  	if (cb == false) {
-                  		callback();	
-                  	}
-                                        
-                    // $(".news-loader").fadeIn("slow");
-                  }
-              })
-
+        }
       }
 
           //insert all the data to the angular $scope
       function insertDataToScope() {
           
-          $(".news-loader").fadeOut("slow",function(){
-  
-              var x = localStorage.getItem('news');
-              var parsedData = JSON.parse(x);
-
               var parsedData = localData;
+              config.newsList = parsedData.articles;
+              var newsCount = config.newsList.length-1;
+              var article = config.newsList[config.currentPosition];
 
-              //check if data is empty
-              if (parsedData == '') {
-                getDataFromApi();
-              }
-
-              var newsList = parsedData.articles;
-              var currentPosition = parseInt(localStorage.getItem("news-position")) || 0;
-              var newsCount = newsList.length-1;
-              var article = newsList[currentPosition];
+              console.log(config.currentPosition + ' / ' + newsCount);
 
               var title = article.title;
               var author = article.author || "";
@@ -158,8 +67,6 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
                     dateCreated = "";
               }
 
-              console.log("News-Position " + currentPosition + "/"+newsCount);
-
               var description = article.description || "";
               var featuredImage = article.urlToImage;
 
@@ -167,10 +74,10 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
                   featuredImage = "assets/news-background.jpeg";
               }
 
-                var articleAside =  returnArticle(currentPosition,newsCount);
-                var article1 = newsList[articleAside[0]];
-                var article2 = newsList[articleAside[1]];
-                var article3 = newsList[articleAside[2]];
+                var articleAside =  returnArticle(config.currentPosition,newsCount);
+                var article1 = config.newsList[articleAside[0]];
+                var article2 = config.newsList[articleAside[1]];
+                var article3 = config.newsList[articleAside[2]];
 
                 $scope.news = {
                     'title': title,
@@ -181,54 +88,29 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
                     'article1': article1,
                     'article2':article2,
                     'article3':article3,
-                    'sourceIcon': config.image[config.source]
+                    'sourceIcon': '/assets/news-logo.png'
                 }
               
-              $scope.$apply();
-              changeNews(currentPosition,newsCount);
 
               if (loopCounter == 0) {
-              	newsloop();
+              	loop();
               	cb = true;
               	callCallback();
               	loopCounter++;
               }
 
-              
-        });
           
       }; // end of insertDataToScope
-
-      function newsloop(){
-
-        if(config.loopNews){
-            
-                interval13 = setInterval(function () {
-                    removeNewsClass();
-                }, config.loopInterval/2);
-            
-                interval14 = setInterval(function () {
-                  
-                    insertDataToScope();
-                    addNewsClass();
-
-                }, config.loopInterval);
-            
-          }
-
-      }
-        
-
 
 
     function removeNewsClass(){
 
-		$(".news-portrait .header").delay(2000).removeClass("fadeInLeft");
-        $(".news-portrait .news").delay(2000).removeClass("news-animation");
-        $(".news-portrait .news-aside-div").delay(2000).removeClass("fadeInRight");
-        $(".news-portrait .divider-bottom").delay(2000).removeClass("fadeInUp");
-        $(".news-portrait .news-item").delay(2000).removeClass("fadeInRight");
-        $(".news-portrait .news-source-div").delay(2000).removeClass("fadeInDown");
+		    $(".news-portrait .header").removeClass("fadeInLeft");
+        $(".news-portrait .news").removeClass("news-animation");
+        $(".news-portrait .news-aside-div").removeClass("fadeInRight");
+        $(".news-portrait .divider-bottom").removeClass("fadeInUp");
+        $(".news-portrait .news-item").removeClass("fadeInRight");
+        $(".news-portrait .news-source-div").removeClass("fadeInDown");
     
     }
 
@@ -243,18 +125,42 @@ function temp17Controller($scope, $window, $timeout, $http, temp2Src, callback, 
 
     }      
         
-    function changeNews(currentPosition,newsCount) {
+  function loop(){
 
-              //saving data in local storage
-              if (currentPosition >= newsCount) {
-                  currentPosition = 0;
-                  localStorage.setItem('news-position', currentPosition);
-              } else {
-                  currentPosition++;
-                  localStorage.setItem('news-position', currentPosition);
+          if (config.loop) {
+
+                interval13 = setInterval(function () {
+                  removeNewsClass();
+                }, config.loopInterval/2);
+            
+                interval14 = setInterval(function () {
+
+                    $scope.$apply(function(){
+
+                        if (config.currentPosition >= config.newsList.length-1) {
+                          config.currentPosition = 0;
+                        }else {
+                          config.currentPosition++;  
+                        }
+                          updateValues();
+                          insertDataToScope();
+                          addNewsClass();
+                        
+                      });
+                      
+                  }, config.loopInterval);
+              
+          }
+      }
+
+
+      function updateValues() {
+          $scope.TemplateData.forEach(function(item){
+          if(item.Template == 'temp17'){
+              item.currentPosition = config.currentPosition;
               }
-
-          }  //end of changeNews function
+          })
+      }
         
     function returnArticle(currentPosition,newsCount){
 

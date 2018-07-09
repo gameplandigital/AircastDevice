@@ -18,139 +18,16 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
         console.log(config.yesterdayDate);
 
 
-        function checkIfCurrencyDataExpired(){
-
-                var currentTimeStamp = moment().unix();
-
-                if (localStorage.getItem('currency-expiration-date') == null) {
-
-                    getDataFromApi();
-                
-                }else{
-
-                  if(localStorage.getItem('currency-expiration-date') >= currentTimeStamp) {
-                    console.log("currency data is still good and data is still within 2 hours.");
-                    console.log("Getting data from the local storage");
-
-                    if (localStorage.getItem('currency') == null || localStorage.getItem('currency') == '') {
-                      console.log("data is not good, getting data from the api");
-                      getDataFromApi();
-                    }
-
-                    getDataFromStorage();
-
-                  }else{
-
-                    getDataFromApi();
-
-
-                  }
-
-                }
-
-              } // end of the checkIfNewsDataExpired function
-
-
-         function getDataFromApi() {
-
-            errorCounter++;
-
-            if(errorCounter > 10) {
-                //add some error catch here if the internet is not working
-                getDataFromStorage();
-
-            } else {
-
-
-                console.log("fetch data from currency api");
-
-                //get the current data today
-                var url = 'https://openexchangerates.org/api/latest.json?app_id=44e7bd68b7d74cef902f1d9c7cb96b72';
-                var results = [];
-                
-
-              $http.get(url)
-                  .then(function(response) {
-
-                      console.log(response);
-
-                      var currentTimeStamp = moment().unix() + 7200;
-
-                      if (response.data) {
-
-                          results.push(response.data.rates);
-
-                          url = 'https://openexchangerates.org/api/historical/'+ config.yesterdayDate +'.json?app_id=44e7bd68b7d74cef902f1d9c7cb96b72';
-
-                          $http.get(url)
-                                .then(function(response) {
-
-                                    results.push(response.data.rates);
-
-                                    localStorage.setItem('currency-expiration-date',currentTimeStamp);
-                                    localStorage.setItem('currency',JSON.stringify(results));
-                                })
-                                .catch(function(){
-
-                                    console.log('error occured on the 2nd level of currency');
-                                    callback();	
-                                      if (localStorage.getItem('currency') != null && localStorage.getItem('currency') != '') {
-                                        console.log("fetch data from the local storage");
-                                        getDataFromStorage();
-                                      }else{
-                                      	if (cb == false) {
-                                      		callback();	
-                                      	}
-                                      	
-                                        // getDataFromApi();
-                                      }
-                                })
-
-
-
-                          console.log("fetch data from the local storage");
-                          getDataFromStorage();
-                      } else {
-                          console.log("nothing returned");
-                      }
-                  })
-                  .catch(function() {
-                      // handle error
-                      console.log('error occurred on the first level of currency');
-                      callback();	
-                      if (localStorage.getItem('currency') != null && localStorage.getItem('currency') != '') {
-                        console.log("fetch data from the local storage");
-                        getDataFromStorage();
-                      }else{
-                      	if (cb == false) {
-                      		callback();	
-                      	}
-                        
-                      }
-                  })
-
-            }
-
-            
-      }
-
-
-    function getDataFromStorage() {
-
-          
-          temp = localStorage.getItem('currency');
-          currencyData = JSON.parse(temp);
-          if (loopCounter == 0) {
-          	cb = true;
-          	callCallback();
-          	loopCounter++;	
-          }
-          
-          inserDataToScope(currencyData);
+        for(var i=0; i< $scope.TemplateData.length; i++){
+        if($scope.TemplateData[i].Template == 'temp19'){
+          currencyData = $scope.TemplateData[i].TempData;
+          // insertDataToScope();
+          processData(currencyData);
+        }
       }
 
         
-        function inserDataToScope(rates) {
+        function processData(rates) {
             
             var rate_today= rates[0],
                   rate_yesterday = rates[1],
@@ -233,40 +110,32 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
             var usdSign,euroSign,yenSign;
 
             if (result[2].usd == "down") {
-                $scope.signs.usd = signs.up;
+                $scope.signs.usd = signs.down;
             }else if (result[2].usd == "equal") {
                 $scope.signs.usd = signs.equal;
             }else {
-                $scope.signs.usd = signs.down;
+                $scope.signs.usd = signs.up;
             }
 
             if (result[2].yen == "down") {
-                $scope.signs.yen = signs.up;
+                $scope.signs.yen = signs.down;
             }else if (result[2].yen == "equal") {
                 $scope.signs.yen = signs.equal;
             }else {
-                $scope.signs.yen = signs.down;
+                $scope.signs.yen = signs.up;
             }
 
             
             if (result[2].euro == "down") {
-                $scope.signs.euro = signs.up;
+                $scope.signs.euro = signs.down;
             }else if (result[2].euro == "equal") {
                 $scope.signs.euro = signs.equal;
             }else {
-                $scope.signs.euro = signs.down;
+                $scope.signs.euro = signs.up;
             }
             
         }
         
-        for(var i=0; i< $scope.TemplateData.length; i++){
-    		if($scope.TemplateData[i].Template == 'temp19'){
-    			currencyData = $scope.TemplateData[i].TempData;
-    			// insertDataToScope();
-    			inserDataToScope(currencyData);
-    		}
-    	}
-
         
         // checkIfCurrencyDataExpired();
 

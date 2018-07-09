@@ -111,28 +111,28 @@ function temp13Controller($scope, $window, $timeout, $http, tempSrc, callback, $
             var usdSign,euroSign,yenSign;
 
             if (result[2].usd == "down") {
-                $scope.signs.usd = signs.up;
+                $scope.signs.usd = signs.down;
             }else if (result[2].usd == "equal") {
                 $scope.signs.usd = signs.equal;
             }else {
-                $scope.signs.usd = signs.down;
+                $scope.signs.usd = signs.up;
             }
 
             if (result[2].yen == "down") {
-                $scope.signs.yen = signs.up;
+                $scope.signs.yen = signs.down;
             }else if (result[2].yen == "equal") {
                 $scope.signs.yen = signs.equal;
             }else {
-                $scope.signs.yen = signs.down;
+                $scope.signs.yen = signs.up;
             }
 
             
             if (result[2].euro == "down") {
-                $scope.signs.euro = signs.up;
+                $scope.signs.euro = signs.down;
             }else if (result[2].euro == "equal") {
                 $scope.signs.euro = signs.equal;
             }else {
-                $scope.signs.euro = signs.down;
+                $scope.signs.euro = signs.up;
             }
             
         }

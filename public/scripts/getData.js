@@ -355,23 +355,49 @@ function temp17GetData($http, $scope){
 			// 	}
 			// }
 
-			$http.get('https://newsapi.org/v1/articles?source='+source+'&sortBy=top&apiKey=44e7bd68b7d74cef902f1d9c7cb96b72')
-				.then(function(response){
-					console.log('temp 17 success');
-					for(var i=0; i<$scope.TemplateData.length; i++){
-		        		if($scope.TemplateData[i].Template == 'temp10' && $scope.TemplateData[i].CampaignID == item.CampaignID){
-		        			$scope.TemplateData[i].TempData = response.data;
-		        			$scope.TemplateData[i].hasData = true;
-		        			$scope.TemplateData[i].lastQuery = Date.now();
-		        			// $scope.TemplateData[i].source = source;
-		        			console.log('Get Data Temp Data');
-		        			console.log($scope.TemplateData);
-		        			break;
-		        		}
-		        	}
-				}, function(error){
-					console.log(error);
-				})
+			if (source == 'local') {
+
+				$http.get('https://newsapi.org/v2/top-headlines?country=ph&apiKey=a3aa8dee6c814974b0cd33bd806ef301')
+					.then(function(response){
+						console.log('temp 10 success');
+						for(var i=0; i<$scope.TemplateData.length; i++){
+			        		if($scope.TemplateData[i].Template == 'temp17' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+			        			$scope.TemplateData[i].TempData = response.data;
+			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].currentPosition = 0;
+			        			$scope.TemplateData[i].lastQuery = Date.now();
+			        			// $scope.TemplateData[i].source = source;
+			        			console.log('Get Data Temp Data');
+			        			console.log($scope.TemplateData);
+			        			break;
+			        		}
+			        	}
+					}, function(error){
+						console.log(error);
+					})
+
+			}else{
+
+				$http.get('https://newsapi.org/v1/articles?source='+source+'&sortBy=top&apiKey=a3aa8dee6c814974b0cd33bd806ef301')
+					.then(function(response){
+						console.log('temp 10 success');
+						for(var i=0; i<$scope.TemplateData.length; i++){
+			        		if($scope.TemplateData[i].Template == 'temp17' && $scope.TemplateData[i].CampaignID == item.CampaignID){
+			        			$scope.TemplateData[i].TempData = response.data;
+			        			$scope.TemplateData[i].hasData = true;
+			        			$scope.TemplateData[i].currentPosition = 0;
+			        			$scope.TemplateData[i].lastQuery = Date.now();
+			        			// $scope.TemplateData[i].source = source;
+			        			console.log('Get Data Temp Data');
+			        			console.log($scope.TemplateData);
+			        			break;
+			        		}
+			        	}
+					}, function(error){
+						console.log(error);
+					})
+
+			}
 		}
 	})
 	
@@ -578,13 +604,13 @@ function temp19GetData($http, $scope){
 
 
 	$scope.TemplateData.forEach(function(item){
-		if(item.Template=='temp19'&&(!item.hasData||item.lastQuery < (Date.now()-360000))){
+		if(item.Template=='temp19'&&(!item.hasData||item.lastQuery < (Date.now()-3600000))){
 			$scope.TemplateData.forEach(function(item){
 				if(item.Template == 'temp19'){
 
 					item.TempData = [];
 
-					$http.get('https://openexchangerates.org/api/latest.json?app_id=611c0c2870aa4804a4014db80c91ee2d')
+					$http.get('https://openexchangerates.org/api/latest.json?app_id=d076ca0158a348679fdaee487dff191e')
 						.then(function(response1){
 							item.TempData.push(response1.data.rates);
 
@@ -592,7 +618,7 @@ function temp19GetData($http, $scope){
 
 							var yes = formatDate(yesterday);
 
-							$http.get('https://openexchangerates.org/api/historical/'+ yes +'.json?app_id=611c0c2870aa4804a4014db80c91ee2d')
+							$http.get('https://openexchangerates.org/api/historical/'+ yes +'.json?app_id=d076ca0158a348679fdaee487dff191e')
 								.then(function(response2){
 									item.TempData.push(response2.data.rates);
 				        			item.hasData = true;
