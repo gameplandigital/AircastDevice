@@ -3,7 +3,9 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 	var fb_live = {};
 	var playVideo = true;
 	var x;
-	var instance;
+	var instance = {};
+
+	var loaded = false;
 
     for(var i=0; i< $scope.TemplateData.length; i++){
 		if($scope.TemplateData[i].Template == 'temp34' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
@@ -15,13 +17,45 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
     			fb_live.pageInfo = $scope.TemplateData[i].pageInfo;
     			fb_live.pageName = $scope.TemplateData[i].pageName;
     			fb_live.CampaignID  = $scope.TemplateData[i].CampaignID;
+    			fb_live.Loaded = $scope.TemplateData[i].Loaded;
 
     			showLoader();
-    			insertDataToScope();
-
+    			
 
 		}
 	}
+
+	if (!fb_live.Loaded) {
+
+		(function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/all.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+
+		    window.fbAsyncInit = function() {
+		      FB.init({
+		        appId      : '1999469800267021',
+		        xfbml      : true,
+		        version    : 'v2.6'
+		      });
+		    };
+
+        	$scope.TemplateData.forEach(function(item){
+				if(item.Template == 'temp34'){
+						item.Loaded = true;
+		    		}
+			  })
+
+        	setTimeout(function(){ 
+        		insertDataToScope();
+        	},3000)
+        	
+
+	}
+
 
 	function showLoader() {
 		console.log('SHOWING LIVE LOADER')
@@ -107,27 +141,24 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			FB.XFBML.parse()
 		}, 5000);
 
-
-		// (function(d, s, id) {
-		//     var js, fjs = d.getElementsByTagName(s)[0];
-		//     if (d.getElementById(id)) return;
-		//     js = d.createElement(s); js.id = id;
-		//     js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-		//     fjs.parentNode.insertBefore(js, fjs);
-		//   }(document, 'script', 'facebook-jssdk'));
-
 		x = setInterval(function(){
 
 			checkIfLiveStops();
 			if (playVideo == true) {
 				console.log('LIVE IS STILL PLAYING: ', playVideo);
 				
-				console.log('Duration: ', instance.getDuration());
-				console.log('Current Position: ', instance.getCurrentPosition());
+				if (instance.hasOwnProperty('getDuration')) {
 
-				if (Math.floor(instance.getCurrentPosition()) >= Math.floor(instance.getDuration())) {
-					showEndingLoader();
+					console.log('Duration: ', instance.getDuration());
+					console.log('Current Position: ', instance.getCurrentPosition());
+
+					if (Math.floor(instance.getCurrentPosition()) >= Math.floor(instance.getDuration())) {
+						showEndingLoader();
+					}
+
+
 				}
+
 			}else {
 				showEndingLoader();
 
@@ -136,8 +167,6 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 
 		},5000)
-
-
 
 	}
 

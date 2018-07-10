@@ -1611,6 +1611,7 @@ function temp34GetData($http, $scope){
 					        			$scope.TemplateData[i].hasShownLoader = 0;
 					        			$scope.TemplateData[i].pageName = page_id;
 					        			$scope.TemplateData[i].CampaignID = item.CampaignID;
+					        			$scope.TemplateData[i].Loaded = false;
 
 					        			break;
 					        		}
