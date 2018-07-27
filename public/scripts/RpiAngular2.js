@@ -205,19 +205,28 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       }else {
         console.log('OFFLINE CONTENT KICKING IN...')
 
+        var newTemplatesTemp = [];
+        var scopeTemplateTemp = [];
+
         for (var i = 0; i < newTemplates.length; i++) {
-          if (newTemplates[i].Template != 'temp2' && newTemplates[i].Template != 'temp4') {
-            newTemplates.splice(i,1);
+          if (newTemplates[i].Template == 'temp2' || newTemplates[i].Template == 'temp4') {
+            newTemplatesTemp.push(newTemplates[i]);
           }
         }
 
-        for (var i = 0; i < $scope.templates.length; i++) {
-          if ($scope.templates[i].Template != 'temp2' && $scope.templates[i].Template != 'temp4') {
-             $scope.templates.splice(i,1);
-          }
-        }
-
+        // for (var i = 0; i < $scope.templates.length; i++) {
+        //   if ($scope.templates[i].Template == 'temp2' || $scope.templates[i].Template == 'temp4') {
+        //      scopeTemplateTemp.push($scope.templates[i]);
+        //   }
+        // }
+        newTemplates = newTemplatesTemp;
       }
+        
+        // $scope.templates = scopeTemplateTemp;
+
+        console.log('Current Content: ', $scope.templates)
+        console.log('New Upcoming Content: ', newTemplates)
+
         var i=0;
         while(i<$scope.templates.length){
           var wasInside = false;

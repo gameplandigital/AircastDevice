@@ -164,7 +164,7 @@ function temp12GetData($http, $scope){
 				        		if($scope.TemplateData[i].Template == 'temp12'){
 				        			var dummy = [];
 				        			dummy.push(response1);
-				        			dummy.push(response2);ß
+				        			dummy.push(response2);
 				        			$scope.TemplateData[i].TempData = dummy;
 				        			$scope.TemplateData[i].hasData = true;
 		        					$scope.TemplateData[i].lastQuery = Date.now();

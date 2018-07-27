@@ -1,8 +1,6 @@
 
 function temp15Controller($scope, $window, $timeout, $http, tempSrc, callback){ 
 
-    console.log('TEMP 15: ', $scope)
-
      var config = {
         'loop':'true',
         'loopInterval': 10000,
