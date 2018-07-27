@@ -78,8 +78,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
   $scope.templates.push(payload);
 
-  
-
   $scope.currentCampaignID = 0;
 
   
@@ -128,7 +126,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
     LazyLoad.css(playingTemplate.tempCss, function () {
       LazyLoad.js(playingTemplate.tempJs, function () {
-        console.log('playing js');
         window[playingTemplate.tempInit].apply(null, payl2);
       });
     });
@@ -140,14 +137,14 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
   $scope.getTemplates = function(){
-    console.log('getTemplates');
+    //console.log('getTemplates');
     $http.get('/myID').then(function(response){
 
 
       var RpiID = response.data.RpiID;
       var RpiServer = response.data.RpiServer;
 
-      console.log(RpiServer);
+      //console.log(RpiServer);
 
       var data = {
         RpiID: RpiID
@@ -169,21 +166,58 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           },
           timeout: 3000
       })
-
       .then(function(response){
-        console.log(RpiServer+'/GetCampaigns');
-        console.log(response);
-        console.log('Template Data');
-        console.log($scope.TemplateData);
 
-        var newTemplates = response.data;
-        console.log('blabla response');
-        // console.log(response.data);
-        console.log(newTemplates);
-        console.log('temp');
-        console.log($scope.TemplateData);
+        console.info('HAS INTERNET')
+        var newTemplates = response.data;     
+ 
+        localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
+        $scope.insertData(RpiServer,newTemplates,'online');
         // console.log($scope.templates);
+        // $timeout(function(){$scope.getTemplates();}, 5000);
+      }, function(err){
+        console.warn('No Internet Connection');
+        var temp_data = localStorage.getItem('rpi_data');
+        var response = JSON.parse(temp_data);
+
+        $scope.insertData(RpiServer,response,'offline')
+
+        // $timeout(function(){$scope.getTemplates();}, 5000);
+      });
+
+          
+
+    }, function(error){
+      console.warn('error getting the id');
+    });
+
+      
+  }
+
+
+  $scope.insertData = function(RpiServer,newTemplates,status){
         
+      //console.log('TEMPLATES: ', $scope.templates)
+      //console.log('New Templates: ', newTemplates)
+
+      if (status == 'online') {
+        console.log('ONLINE CONTENT KICKING IN...')
+      }else {
+        console.log('OFFLINE CONTENT KICKING IN...')
+
+        for (var i = 0; i < newTemplates.length; i++) {
+          if (newTemplates[i].Template != 'temp2' && newTemplates[i].Template != 'temp4') {
+            newTemplates.splice(i,1);
+          }
+        }
+
+        for (var i = 0; i < $scope.templates.length; i++) {
+          if ($scope.templates[i].Template != 'temp2' && $scope.templates[i].Template != 'temp4') {
+             $scope.templates.splice(i,1);
+          }
+        }
+
+      }
         var i=0;
         while(i<$scope.templates.length){
           var wasInside = false;
@@ -207,8 +241,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           // console.log($scope.templates);
         }
 
-        console.log('CHECKING');
-        console.log($scope.templates);
+        //console.log('CHECKING');
+        //console.log($scope.templates);
 
         for(var i=0; i<newTemplates.length; i++){
           for(var j=0; j < $scope.TemplateData.length; j++){
@@ -218,8 +252,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           }
         }
 
-        console.log('TempData GGG');
-        console.log($scope.TemplateData);
+        //console.log('TempData GGG');
+        //console.log($scope.TemplateData);
 
 
         // console.log('mid temp');
@@ -272,30 +306,13 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           //   console.log('not inserted');
         }
 
-        
-
           
         if(!$scope.$$phase) {
           $scope.$apply();
         }
-        // console.log($scope.templates);
-        // $timeout(function(){$scope.getTemplates();}, 5000);
-      }, function(err){
-        console.log('error');
-        console.log(err);
-        // $timeout(function(){$scope.getTemplates();}, 5000);
-      });
 
-          
 
-    }, function(error){
-      // $timeout(function(){$scope.getTemplates();}, 5000);
-    });
-
-      
   }
-
-
   
 
 
@@ -360,7 +377,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
   $interval(function(){
-    console.log('check')
+    //console.log('check')
     $http.get('/myID').then(function(response){
 
 
@@ -386,10 +403,17 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           $window.location.reload();
         }
       })
+      .catch(function(err){
+        console.warn('Error in calling browser Refresh');
+        console.log(err);
+      })
 
 
     })
-  }, 60000);
+  }, 60000).catch(function(err){
+    console.log('Error in calling browser Refresh');
+    console.log(err);
+  });
 
 
 });

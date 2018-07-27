@@ -33,7 +33,7 @@ function UpdateWallet($http, CampaignID, Width, Height){
       .then(function(response){
         
       },function(err){
-        console.log(err);
+          
       })
 
 
