@@ -102,6 +102,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
     $scope.currentTemp = playingTemplate.tempHtml;
+    console.log('Current Temp: ', playingTemplate.tempHtml);
+
     if(!$scope.$$phase) {
       $scope.$apply();
     }
