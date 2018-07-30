@@ -241,7 +241,7 @@ function temp14GetData($http, $scope){
 		if(item.Template=='temp14'&&(!item.hasData||item.lastQuery < (Date.now()-5400000))){
 
 			var search_keyword = "";
-			var formatted_keyword = encodeURI('http://palmsolutions-twitter-api.herokuapp.com/'+search_keyword);
+			var formatted_keyword = encodeURI('http://13.250.103.104:4600/'+search_keyword);
 			$http.get(formatted_keyword)
 		              .then(function(response) {
 		              		if (response.status == 200 && response.data[0].statuses.length != 0) {
@@ -458,7 +458,7 @@ function temp20GetData($http, $scope){
 		if(item.Template=='temp20'&&(!item.hasData||item.lastQuery < (Date.now()-5400000))){
 
 			var search_keyword = "";
-			var formatted_keyword = encodeURI('http://palmsolutions-twitter-api.herokuapp.com/'+search_keyword);
+			var formatted_keyword = encodeURI('http://13.250.103.104:4600/'+search_keyword);
 			$http.get(formatted_keyword)
 		              .then(function(response) {
 		              		console.log('TEMP 20: Twitter Portrait | Fetching Data Success');
