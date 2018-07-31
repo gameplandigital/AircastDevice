@@ -41,6 +41,7 @@ function temp4Controller($scope, $window, $timeout, $http, tempSrc, callback){
 			console.log(error)
 		})
 
+
 		callback();
 	}
 
