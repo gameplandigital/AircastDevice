@@ -14,7 +14,6 @@ function temp2Controller($scope, $window, $timeout, $http, temp2Src, callback){
 		video: temp2Src.tempSrc.video
 	}
 
-	
 	$timeout(function(){
 		$timeout(function(){
 
