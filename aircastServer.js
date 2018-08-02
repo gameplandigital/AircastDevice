@@ -168,7 +168,12 @@ function processContentFile(Campaign){
 		downloadRequest(source, 
 						dest, 
 						function(){
-								removeContentFile(RpiConfig.ContentCampaign.Files[0].FileID);
+								try {
+									removeContentFile(RpiConfig.ContentCampaign.Files[0].FileID);	
+								} catch(error) {
+									console.log(error);
+								}
+								
 							}, 
 						function(){
 								setTimeout(function(){
