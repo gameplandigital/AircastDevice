@@ -22,6 +22,7 @@ app.use('/scripts', express.static(path.join(__dirname+'/public/scripts')));
 app.use('/templates', express.static(path.join(__dirname+'/public/templates')));
 app.use('/assets', express.static(path.join(__dirname+'/public/assets')));
 app.use('/Aircast', express.static(path.join(__dirname+'/../AircastContent')));
+app.use('/AircastConfig', express.static(path.join(__dirname+'/../AircastConfig')));
 
 app.get('/', function (req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '/public')});
@@ -65,7 +66,6 @@ app.get('/myID', function (req, res) {
 app.post('/localContent',function (req,res) {
   
   var d = req.body;
-  console.log(d);
 
   fs.exists('../AircastConfig/offline-content.txt', (exists) => {
 
