@@ -166,25 +166,61 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           headers: {
                       'Content-Type': 'application/json'
           },
-          timeout: 3000
+          timeout: 5000
       })
       .then(function(response){
 
         console.info('HAS INTERNET')
         var newTemplates = response.data;     
- 
-        localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
-        $scope.insertData(RpiServer,newTemplates,'online');
-        // console.log($scope.templates);
-        // $timeout(function(){$scope.getTemplates();}, 5000);
+        
+        $http({
+          method: "POST",
+          url: '/localContent',
+          data: {
+            content: newTemplates,
+            status: true
+          },
+        }).then(function(data){
+
+            if (data.data.success) {
+              $scope.insertData(RpiServer,newTemplates,'online'); 
+            }else{
+              console.log('ERROR WITH THE ONLINE SECTION')
+            }
+            
+        },function(err){
+          console.warn('error with the internet');
+        })
+
+        //localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
+        //$scope.insertData(RpiServer,newTemplates,'online');
+
       }, function(err){
         console.warn('No Internet Connection');
-        var temp_data = localStorage.getItem('rpi_data');
-        var response = JSON.parse(temp_data);
+        //var temp_data = localStorage.getItem('rpi_data');
+        //var response = JSON.parse(temp_data);
+        //$scope.insertData(RpiServer,response,'offline')
 
-        $scope.insertData(RpiServer,response,'offline')
+        $http({
+          method: "POST",
+          url: '/localContent',
+          data: {
+            status: false,
+            content: null
+          },
+        }).then(function(data){
+            if (data.data.success) {
+              console.log('DATA FROM SERVER: ',data)
+              $scope.insertData(RpiServer,data.data.content,'offline');
+            }else{
+              console.log('ERROR WITH THE OFFLINE SECTION')
+            }
 
-        // $timeout(function(){$scope.getTemplates();}, 5000);
+        },function(err){
+          console.warn('error with the internet');
+        })
+
+
       });
 
           

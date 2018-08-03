@@ -1,6 +1,7 @@
 var async = require('async')
 var needle = require('needle')
 var fs = require('fs')
+var bodyParser  = require('body-parser');
 var express = require('express')
 var path = require('path')
 var aircast = require('./aircastServer.js')
@@ -12,6 +13,8 @@ console.log(' FFF ');
 
 
 var app = express()
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 
 app.set('port', process.env.PORT || 3000);
 app.use('/css', express.static(path.join(__dirname+'/public/css')));
@@ -56,6 +59,62 @@ app.get('/myID', function (req, res) {
       error: 'config failed'
     });
   }
+
+})
+
+app.post('/localContent',function (req,res) {
+  
+  var d = req.body;
+
+  fs.exists('../AircastConfig/offline-content.txt', (exists) => {
+
+    if (exists) {
+      try{
+        if (d.status) {
+          fs.writeFile('../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
+              if (err) {
+                res.json({success: false, content: []});  
+              }else{
+                console.log("Successfully Written to File.");
+                res.json({success: true, content: d.content});  
+              }
+          });
+        } else {
+          fs.readFile('../AircastConfig/offline-content.txt', 'utf-8' ,function(err, buf) {
+            res.json({success: true, content: JSON.parse(buf)})
+          });
+        }
+      }catch(error){
+        console.log(error);
+      }
+
+    } else {
+        try{
+          fs.writeFile('../AircastConfig/offline-content.txt',data.content, (err) => {
+              if (err) {
+                res.json({success: false, content: []});  
+              }else {
+                if (d.status) {
+                  fs.writeFile('../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
+                      if (err) console.log(err);
+                      console.log("Successfully Written to File.");
+                      res.json({success: true, content: d.content});
+                  });
+                } else {
+                  fs.readFile('../AircastConfig/offline-content.txt', 'utf-8' ,function(err, buf) {
+                    res.json({success: true, content: JSON.parse(buf)})
+                  });
+                }
+              }
+
+          });   
+
+        }catch(error){
+          console.log(error)
+        }
+    }
+
+  });
 
 })
 
