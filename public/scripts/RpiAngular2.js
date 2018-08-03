@@ -177,11 +177,11 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           method: "POST",
           url: '/localContent',
           data: {
+            status: true,
             content: newTemplates,
-            status: true
           },
         }).then(function(data){
-
+            console.log(data);
             if (data.data.success) {
               $scope.insertData(RpiServer,newTemplates,'online'); 
             }else{
@@ -197,6 +197,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
       }, function(err){
         console.warn('No Internet Connection');
+
         //var temp_data = localStorage.getItem('rpi_data');
         //var response = JSON.parse(temp_data);
         //$scope.insertData(RpiServer,response,'offline')
@@ -206,9 +207,10 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           url: '/localContent',
           data: {
             status: false,
-            content: null
+            content: 'empty'
           },
         }).then(function(data){
+            console.log(data);
             if (data.data.success) {
               console.log('DATA FROM SERVER: ',data)
               $scope.insertData(RpiServer,data.data.content,'offline');
@@ -236,7 +238,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   $scope.insertData = function(RpiServer,newTemplates,status){
         
       //console.log('TEMPLATES: ', $scope.templates)
-      //console.log('New Templates: ', newTemplates)
+      console.log('New Templates: ', newTemplates)
 
       if (status == 'online') {
         console.log('ONLINE CONTENT KICKING IN...')

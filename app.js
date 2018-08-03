@@ -94,19 +94,13 @@ app.post('/localContent',function (req,res) {
               if (err) {
                 res.json({success: false, content: []});  
               }else {
-                if (d.status) {
                   fs.writeFile('../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
                       if (err) console.log(err);
                       console.log("Successfully Written to File.");
                       res.json({success: true, content: d.content});
                   });
-                } else {
-                  fs.readFile('../AircastConfig/offline-content.txt', 'utf-8' ,function(err, buf) {
-                    res.json({success: true, content: JSON.parse(buf)})
-                  });
-                }
-              }
 
+                }
           });   
 
         }catch(error){
