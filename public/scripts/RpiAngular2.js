@@ -189,7 +189,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
             }
             
         },function(err){
-          console.warn('error with the internet');
+          console.warn('error with the internet',err);
         })
 
         //localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
@@ -207,7 +207,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           url: '/localContent',
           data: {
             status: false,
-            content: 'empty'
+            content: [],
           },
         }).then(function(data){
             console.log(data);
@@ -219,7 +219,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
             }
 
         },function(err){
-          console.warn('error with the internet');
+          console.warn('error with the internet',err);
         })
 
 
