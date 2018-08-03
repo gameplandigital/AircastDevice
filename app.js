@@ -90,7 +90,7 @@ app.post('/localContent',function (req,res) {
 
     } else {
         try{
-          fs.writeFile('../AircastConfig/offline-content.txt',data.content, (err) => {
+          fs.writeFile('../AircastConfig/offline-content.txt',d.content, (err) => {
               if (err) {
                 res.json({success: false, content: []});  
               }else {
