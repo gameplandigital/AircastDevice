@@ -67,12 +67,12 @@ app.post('/localContent',function (req,res) {
   
   var d = req.body;
 
-  fs.exists('../AircastConfig/offline-content.txt', (exists) => {
+  fs.exists('./../AircastConfig/offline-content.txt', (exists) => {
 
     if (exists) {
       try{
         if (d.status) {
-          fs.writeFile('../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
+          fs.writeFile('./../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
               if (err) {
                 res.json({success: false, content: [], err});  
               }else{
@@ -81,7 +81,7 @@ app.post('/localContent',function (req,res) {
               }
           });
         } else {
-          fs.readFile('../AircastConfig/offline-content.txt', 'utf-8' ,function(err, data) {
+          fs.readFile('./../AircastConfig/offline-content.txt', 'utf-8' ,function(err, data) {
             if (err) {
                 res.json({success: false, content: [], err});  
             }else{
@@ -97,7 +97,7 @@ app.post('/localContent',function (req,res) {
         try{
 
           let data_to_write = JSON.stringify(d.content);
-          fs.writeFile('../AircastConfig/offline-content.txt',data_to_write, (err) => {
+          fs.writeFile('./../AircastConfig/offline-content.txt',data_to_write, (err) => {
               if (err) {
                 res.json({success: false, content: [], err});  
               }else {
