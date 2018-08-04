@@ -8,10 +8,6 @@ var aircast = require('./aircastServer.js')
 
 var Twit = require('twit');
 
-console.log(' FFF ');
-
-
-
 var app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
