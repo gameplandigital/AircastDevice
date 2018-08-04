@@ -74,7 +74,7 @@ app.post('/localContent',function (req,res) {
         if (d.status) {
           fs.writeFile('./../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
               //if (err) {
-                res.json({success: false, content: [], err});  
+                //res.json({success: false, content: [], err});  
               //}else{
                 console.log("Successfully Written to File.");
                 res.json({success: true, content: d.content, err});  
@@ -83,7 +83,7 @@ app.post('/localContent',function (req,res) {
         } else {
           fs.readFile('./../AircastConfig/offline-content.txt', 'utf-8' ,function(err, data) {
             //if (err) {
-                res.json({success: false, content: [], err});  
+                //res.json({success: false, content: [], err});  
             //}else{
               res.json({success: true, content: JSON.parse(data), err})
             //}
@@ -99,7 +99,7 @@ app.post('/localContent',function (req,res) {
           let data_to_write = JSON.stringify(d.content);
           fs.writeFile('./../AircastConfig/offline-content.txt',data_to_write, (err) => {
               //if (err) {
-                res.json({success: false, content: [], err});  
+                //res.json({success: false, content: [], err});  
               //}else {
                   console.log("Successfully Written to File.");
                   res.json({success: true, content: JSON.parse(data_to_write), err});
