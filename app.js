@@ -64,29 +64,30 @@ app.get('/myID', function (req, res) {
 })
 
 app.post('/localContent',function (req,res) {
+
   
   var d = req.body;
 
-  fs.exists('./../AircastConfig/offline-content.txt', (exists) => {
+  fs.exists(path.join(__dirname+'/../AircastConfig/offline-content.txt'), (exists) => {
 
     if (exists) {
       try{
         if (d.status) {
-          fs.writeFile('./../AircastConfig/offline-content.txt', JSON.stringify(d.content), function(err, data){
-              //if (err) {
-                //res.json({success: false, content: [], err});  
-              //}else{
+          fs.writeFile(path.join(__dirname+'/../AircastConfig/offline-content.txt'), JSON.stringify(d.content), function(err, data){
+              if (err) {
+                res.json({success: false, content: [], err});  
+              }else{
                 console.log("Successfully Written to File.");
                 res.json({success: true, content: d.content, err});  
-              //}
+              }
           });
         } else {
-          fs.readFile('./../AircastConfig/offline-content.txt', 'utf-8' ,function(err, data) {
-            //if (err) {
-                //res.json({success: false, content: [], err});  
-            //}else{
+          fs.readFile(path.join(__dirname+'/../AircastConfig/offline-content.txt'), 'utf-8' ,function(err, data) {
+            if (err) {
+                res.json({success: false, content: [], err});  
+            }else{
               res.json({success: true, content: JSON.parse(data), err})
-            //}
+            }
           });
         }
       }catch(error){
@@ -97,14 +98,14 @@ app.post('/localContent',function (req,res) {
         try{
 
           let data_to_write = JSON.stringify(d.content);
-          fs.writeFile('./../AircastConfig/offline-content.txt',data_to_write, (err) => {
-              //if (err) {
-                //res.json({success: false, content: [], err});  
-              //}else {
+          fs.writeFile(path.join(__dirname+'/../AircastConfig/offline-content.txt'),data_to_write, (err) => {
+              if (err) {
+                res.json({success: false, content: [], err});  
+              }else {
                   console.log("Successfully Written to File.");
                   res.json({success: true, content: JSON.parse(data_to_write), err});
 
-                //}
+                }
           });   
 
         }catch(error){
