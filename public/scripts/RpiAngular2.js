@@ -173,54 +173,54 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
         console.info('HAS INTERNET')
         var newTemplates = response.data;     
         
-        $http({
-          method: "POST",
-          url: '/localContent',
-          data: {
-            status: true,
-            content: newTemplates,
-          },
-        }).then(function(data){
-            console.log(data);
-            if (data.data.success) {
-              $scope.insertData(RpiServer,newTemplates,'online'); 
-            }else{
-              console.log('ERROR WITH THE ONLINE SECTION')
-            }
+        // $http({
+        //   method: "POST",
+        //   url: '/localContent',
+        //   data: {
+        //     status: true,
+        //     content: newTemplates,
+        //   },
+        // }).then(function(data){
+        //     console.log(data);
+        //     if (data.data.success) {
+        //       $scope.insertData(RpiServer,newTemplates,'online'); 
+        //     }else{
+        //       console.log('ERROR WITH THE ONLINE SECTION')
+        //     }
             
-        },function(err){
-          console.warn('error with the internet',err);
-        })
+        // },function(err){
+        //   console.warn('error with the internet',err);
+        // })
 
-        //localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
-        //$scope.insertData(RpiServer,newTemplates,'online');
+        localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
+        $scope.insertData(RpiServer,newTemplates,'online');
 
       }, function(err){
         console.warn('No Internet Connection');
 
-        //var temp_data = localStorage.getItem('rpi_data');
-        //var response = JSON.parse(temp_data);
-        //$scope.insertData(RpiServer,response,'offline')
+        var temp_data = localStorage.getItem('rpi_data');
+        var response = JSON.parse(temp_data);
+        $scope.insertData(RpiServer,response,'offline')
 
-        $http({
-          method: "POST",
-          url: '/localContent',
-          data: {
-            status: false,
-            content: [],
-          },
-        }).then(function(data){
-            console.log(data);
-            if (data.data.success) {
-              console.log('DATA FROM SERVER: ',data)
-              $scope.insertData(RpiServer,data.data.content,'offline');
-            }else{
-              console.log('ERROR WITH THE OFFLINE SECTION')
-            }
+        // $http({
+        //   method: "POST",
+        //   url: '/localContent',
+        //   data: {
+        //     status: false,
+        //     content: [],
+        //   },
+        // }).then(function(data){
+        //     console.log(data);
+        //     if (data.data.success) {
+        //       console.log('DATA FROM SERVER: ',data)
+        //       $scope.insertData(RpiServer,data.data.content,'offline');
+        //     }else{
+        //       console.log('ERROR WITH THE OFFLINE SECTION')
+        //     }
 
-        },function(err){
-          console.warn('error with the internet',err);
-        })
+        // },function(err){
+        //   console.warn('error with the internet',err);
+        // })
 
 
       });
