@@ -54,53 +54,62 @@ var getConfig = function(){
 
 function downloadRequest(fileUrl, filePath, callsuc, callerr) {
 	console.log('download Request');
-    var timeout = 5000;
 
-    var hasTimedOut = false;
-    
-    var timeout_wrapper = function( req ) {
-        return function() {
-            hasTimedOut = true;
-            req.abort();
-            callerr();
-        };
-    };
+	try {
 
-    var requ = http.get(fileUrl).on('response', function(res) { 
+		    var timeout = 5000;
 
-        var file = fs.createWriteStream(filePath);
+		    var hasTimedOut = false;
+		    
+		    var timeout_wrapper = function( req ) {
+		        return function() {
+		            hasTimedOut = true;
+		            req.abort();
+		            callerr();
+		        };
+		    };
 
-        var downloaded = 0;
-        var len = parseInt(res
-            .headers['content-length'], 10);
+		    var requ = http.get(fileUrl).on('response', function(res) { 
 
-        res.on('data', function(chunk) {
-            file.write(chunk);
-            // downloaded += chunk.length;
-            // console.log('data: '+downloaded+'/'+len);
-            clearTimeout( timeoutId );
-            timeoutId = setTimeout( fn, timeout );
-        }).on('end', function () {
-            file.end();
-            if(!hasTimedOut){
-                clearTimeout( timeoutId );
-                callsuc();
-            }
-                
-        }).on('error', function (err) {
-            clearTimeout( timeoutId );                
-            callback(err.message);
-        });           
-    }).on('error', function(err){
-        clearTimeout( timeoutId ); 
-        callerr();
-    });
-    
-    // generate timeout handler
-    var fn = timeout_wrapper( requ );
+		        var file = fs.createWriteStream(filePath);
 
-    // set initial timeout
-    var timeoutId = setTimeout( fn, timeout );
+		        var downloaded = 0;
+		        var len = parseInt(res
+		            .headers['content-length'], 10);
+
+		        res.on('data', function(chunk) {
+		            file.write(chunk);
+		            // downloaded += chunk.length;
+		            // console.log('data: '+downloaded+'/'+len);
+		            clearTimeout( timeoutId );
+		            timeoutId = setTimeout( fn, timeout );
+		        }).on('end', function () {
+		            file.end();
+		            if(!hasTimedOut){
+		                clearTimeout( timeoutId );
+		                callsuc();
+		            }
+		                
+		        }).on('error', function (err) {
+		            clearTimeout( timeoutId );                
+		            callback(err.message);
+		        });           
+		    }).on('error', function(err){
+		        clearTimeout( timeoutId ); 
+		        callerr();
+		    });
+		    
+		    // generate timeout handler
+		    var fn = timeout_wrapper( requ );
+
+		    // set initial timeout
+		    var timeoutId = setTimeout( fn, timeout );
+
+
+	}catch(error){
+		console.log('ERROR DOWNLOADING FILE: ',error)
+	}
+
 
 }
 
