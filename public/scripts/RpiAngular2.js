@@ -238,7 +238,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   $scope.insertData = function(RpiServer,newTemplates,status){
         
       //console.log('TEMPLATES: ', $scope.templates)
-      console.log('New Templates: ', newTemplates)
+      //console.log('New Templates: ', newTemplates)
 
       if (status == 'online') {
         console.log('ONLINE CONTENT KICKING IN...')
