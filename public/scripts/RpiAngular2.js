@@ -181,7 +181,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
             content: newTemplates,
           },
         }).then(function(data){
-            console.log(data);
             if (data.data.success) {
               $scope.insertData(RpiServer,newTemplates,'online'); 
             }else{
@@ -192,8 +191,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           console.warn('error with the internet',err);
         })
 
-        localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
-        $scope.insertData(RpiServer,newTemplates,'online');
+        //localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
+        //$scope.insertData(RpiServer,newTemplates,'online');
 
       }, function(err){
         console.warn('No Internet Connection');
@@ -210,7 +209,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
             content: [],
           },
         }).then(function(data){
-            console.log(data);
+            //console.log(data);
             if (data.data.success) {
               console.log('DATA FROM SERVER: ',data)
               $scope.insertData(RpiServer,data.data.content,'offline');

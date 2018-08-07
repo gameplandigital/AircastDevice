@@ -74,8 +74,12 @@ app.post('/localContent',function (req,res) {
       }else{
         results = localStorage.getItem('data');
         console.log('Getting Offline Content');
-        res.json({success: true, content: JSON.parse(results)});  
-      }
+        if (results == null) {
+            res.json({success: true, content: []});  
+        }else{
+            res.json({success: true, content: JSON.parse(results)});  
+          }
+        }
   }catch(err){
     console.log(err);
   }
