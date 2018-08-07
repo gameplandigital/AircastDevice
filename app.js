@@ -72,7 +72,7 @@ app.post('/localContent',function (req,res) {
         localStorage.setItem('data',JSON.stringify(d.content));
         res.json({success: true});  
       }else{
-        result = localStorage.getItem('data');
+        results = localStorage.getItem('data');
         console.log('Getting Offline Content');
         res.json({success: true, content: JSON.parse(results)});  
       }
