@@ -5,6 +5,7 @@ var bodyParser  = require('body-parser');
 var express = require('express')
 var path = require('path')
 var aircast = require('./aircastServer.js')
+var LocalStorage = require('node-localstorage').LocalStorage;
 
 var Twit = require('twit');
 
@@ -57,6 +58,32 @@ app.get('/myID', function (req, res) {
   }
 
 })
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  localStorage = new LocalStorage('./scratch');
+}
+ 
+//localStorage.setItem('myFirstKey', 'myFirstValue');
+
+
+app.post('/localContent',function (req,res) {
+
+  let d = req.body;
+  let results;
+
+  if (d.status) {
+    localStorage.setItem('data',JSON.stringify(d.content));
+    res.json({success: true});  
+  }else{
+    result = localStorage.getItem('data');
+    console.log(result);
+    res.json({success: true, content: JSON.parse(result)});  
+  }
+
+})
+
+
+
 
 // app.post('/localContent',function (req,res) {
 
