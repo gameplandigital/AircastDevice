@@ -62,23 +62,24 @@ app.get('/myID', function (req, res) {
 if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage('./scratch');
 }
- 
-//localStorage.setItem('myFirstKey', 'myFirstValue');
-
 
 app.post('/localContent',function (req,res) {
 
   let d = req.body;
   let results;
-
-  if (d.status) {
-    localStorage.setItem('data',JSON.stringify(d.content));
-    res.json({success: true});  
-  }else{
-    result = localStorage.getItem('data');
-    console.log(result);
-    res.json({success: true, content: JSON.parse(result)});  
+  try {
+      if (d.status) {
+        localStorage.setItem('data',JSON.stringify(d.content));
+        res.json({success: true});  
+      }else{
+        result = localStorage.getItem('data');
+        console.log('Getting Offline Content');
+        res.json({success: true, content: JSON.parse(results)});  
+      }
+  }catch(err){
+    console.log(err);
   }
+  
 
 })
 
