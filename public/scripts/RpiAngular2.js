@@ -198,9 +198,9 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       }, function(err){
         console.warn('No Internet Connection');
 
-        var temp_data = localStorage.getItem('rpi_data');
-        var response = JSON.parse(temp_data);
-        $scope.insertData(RpiServer,response,'offline')
+        // var temp_data = localStorage.getItem('rpi_data');
+        // var response = JSON.parse(temp_data);
+        // $scope.insertData(RpiServer,response,'offline')
 
         $http({
           method: "POST",
