@@ -7,8 +7,6 @@ var path = require('path')
 var aircast = require('./aircastServer.js')
 var LocalStorage = require('node-localstorage').LocalStorage;
 
-var Twit = require('twit');
-
 var app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());

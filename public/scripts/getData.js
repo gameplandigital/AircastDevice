@@ -776,6 +776,7 @@ function temp27GetData($http, $scope){
 						var page_info = {};
 						var interval35, interval36;
 						var arrOfData = [];
+						var pos = Math.floor(Math.random() * 6); 
 
 						var url = 'https://graph.facebook.com/'+fb_post.page_id+'?fields=name,fan_count,picture.width(100)&access_token='+fb_post.access_token;
 
@@ -1323,8 +1324,9 @@ function temp33GetData($http, $scope){
 
 				if ((!item.hasData || item.lastQuery < (Date.now()-3600000))) {
 
+
 						var fb_post = {
-							access_token: 'EAAb6FB7V7wsBAEpM1BhZBjDiJNyMbAc024EVoPbWe8mgZBBA3UwPIVTHdSlgU020Rvw4tIJKiJnHGtytORyxtlmZAqYERUgwmmX6ITl39ZB9ZBdY1tqtyHHC2CXZCjaelLNwhG6eQOD1vHFmtUWZANJPgvvyObfLYd004zrt54A2uc05VZBHcAVp',
+							access_token: 'EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD',
 							page_id: $scope.new_source_fb[1],
 							api_version: 'v2.8',
 							currentPosition: 0,
