@@ -51,7 +51,7 @@ function temp33Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 	      	loopCounter++;
 	      }
 
-	      $('#facebook-reactions .facebook-background').css('border','1em solid '+fb_post.background+'')
+	      //$('#facebook-reactions .facebook-background').css('border','1em solid '+fb_post.background+'')
 
 
 	}
@@ -77,7 +77,8 @@ function temp33Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
        function updateValues() {
         	$scope.TemplateData.forEach(function(item){
 					if(item.Template == 'temp33'){
-							item.hasLoaded = true;
+							item.hasLoaded = true; 
+							item.currentPosition = fb_post.currentPosition;
 			    		}
 				  })
         }
