@@ -15,8 +15,8 @@ function temp30Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
     for(var i=0; i< $scope.TemplateData.length; i++){
 		if($scope.TemplateData[i].Template == 'temp30'){
-			console.log("FB SELECTED POST")
-			console.log($scope.TemplateData[i]);
+			//console.log("FB SELECTED POST")
+			//console.log($scope.TemplateData[i]);
 			fb_post.postList = $scope.TemplateData[i].TempData;
 			fb_post.currentPosition = $scope.TemplateData[i].currentPosition;
 			fb_post.post_length = $scope.TemplateData[i].TempData.length;
@@ -26,7 +26,7 @@ function temp30Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 	function insertDataToScope(){
 		var data = fb_post.postList[fb_post.currentPosition];
-		console.log(data);
+		//console.log(data);
 
 		$scope.info = {
 			id: data.id,
@@ -34,7 +34,7 @@ function temp30Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			message: removeEmojis(data.message)
 		}
 
-		console.log(fb_post.currentPosition+'/'+fb_post.post_length);
+		//console.log(fb_post.currentPosition+'/'+fb_post.post_length);
 
 
 	       if (loopCounter == 0) {

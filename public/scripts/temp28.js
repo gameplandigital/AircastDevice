@@ -84,7 +84,7 @@ function temp28Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
                 $(".facebook-events .start-time-div, .facebook-events .end-time-div").css("width","100%");
             }
 
-            console.log('Facebook Events: ' + events.currentPosition + '/'+events.eventListLength);
+            //console.log('Facebook Events: ' + events.currentPosition + '/'+events.eventListLength);
             $scope.calendar_month = moment(data.start_time).format('MMM');
             $scope.calendar_day = moment(data.start_time).format('DD');
             try {
@@ -185,7 +185,7 @@ function temp28Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 
 
-      console.log('callback',callback);
+      //console.log('callback',callback);
 
     function removeInterval2(){
 
@@ -196,10 +196,10 @@ function temp28Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 		function callCallback(){
 
-      console.log('calling callback');
+      //console.log('calling callback');
 
 			if (cb) {
-        console.log('calling callback inside if statement');
+        //console.log('calling callback inside if statement');
 				$timeout(removeInterval2, 38000);      
 				$timeout(callback, 40000);
         cb = false;

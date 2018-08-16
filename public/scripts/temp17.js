@@ -53,7 +53,7 @@ function temp17Controller($scope, $window, $timeout, $http, tempSrc, callback, $
               var newsCount = config.newsList.length-1;
               var article = config.newsList[config.currentPosition];
 
-              console.log(config.currentPosition + ' / ' + newsCount);
+              //console.log(config.currentPosition + ' / ' + newsCount);
 
               var title = article.title;
               var author = article.author || "";

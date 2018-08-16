@@ -28,8 +28,8 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
     			data1 = $scope.TemplateData[i].TempData[0];
     			data2 = $scope.TemplateData[i].TempData[1];
 
-    			console.log('alltemp12data');
-    			console.log($scope.TemplateData[i].TempData);
+    			//console.log('alltemp12data');
+    			//console.log($scope.TemplateData[i].TempData);
     			// insertDataToScope();
     		}
     	}
@@ -134,13 +134,13 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 		        //     $(".weather").fadeIn(); 
 		        // });
 
-		        console.log(now_w.weather);
+		        //console.log(now_w.weather);
 
 		        var temp;
 
             if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'morning') {
               temp = '/assets/weather-landscape-rain-morning.png';
-              console.log('getting morning-rain background');
+              //console.log('getting morning-rain background');
             }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'afternoon') {
               temp = '/assets/weather-landscape-rain-afternoon.png';
             }else if ((now_w["weather"] == 'Rain' || now_w["weather"] == 'thunderstorm' || now_w["weather"] == 'shower rain') && status == 'night') {

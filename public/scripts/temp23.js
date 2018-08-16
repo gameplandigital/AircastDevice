@@ -65,11 +65,11 @@ function temp23Controller($scope, $window, $timeout, $http, tempSrc, callback){
 	          }else{
 
 	            if(localStorage.getItem('restaurant-expiration-date') >= currentTimeStamp) {
-	              console.log("restaurant data is still good and data is still within 1 month.");
-	              console.log("Getting data from the local storage");
+	              //console.log("restaurant data is still good and data is still within 1 month.");
+	              //console.log("Getting data from the local storage");
 
 	              if (localStorage.getItem('restaurant') == null || localStorage.getItem('restaurant') == '') {
-	                console.log("data is not good, getting data from the api");
+	                //console.log("data is not good, getting data from the api");
 	                fetchRestaurantData(config.url);
 	              }
 
@@ -143,7 +143,7 @@ function temp23Controller($scope, $window, $timeout, $http, tempSrc, callback){
 	        function checkIfListReach50(restaurantListLength){
 
 	           var currentTimeStamp = moment().unix() + 2592000;
-	           console.log(restaurantListLength);
+	           //console.log(restaurantListLength);
 
 	            config.lat += .01;
 
@@ -171,11 +171,11 @@ function temp23Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
 	        function getDataFromStorage() {
 
-	          console.log("fetch data from local storage");
+	          //console.log("fetch data from local storage");
 
 	          temp = localStorage.getItem('restaurant');
 	          restaurantData = JSON.parse(temp);
-	          console.log(restaurantData);
+	          //console.log(restaurantData);
 	          // localStorage.setItem('restaurant-position',0);
 
 	          insertDataToScope();
@@ -200,7 +200,7 @@ function temp23Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
 	              //getting the data ready
 	              var storePosition = currentPosition;
-	              console.log("current position: " + storePosition + "/" + storeCount);
+	              //console.log("current position: " + storePosition + "/" + storeCount);
 	              var store = nearbyResto[storePosition].restaurant;
 	              var distanceLatitude = store.location.latitude;
 	              var distanceLongitude = store.location.longitude;

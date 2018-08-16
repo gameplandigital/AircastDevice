@@ -1320,7 +1320,7 @@ function temp33GetData($http, $scope){
 			if(item.Template=='temp33'){
 
 				$scope.new_source_fb = item.tempSrc.source.split('/');
-				console.log($scope.new_source_fb);
+				//console.log($scope.new_source_fb);
 
 				if ((!item.hasData || item.lastQuery < (Date.now()-3600000))) {
 

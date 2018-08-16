@@ -58,14 +58,14 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 
 	function showLoader() {
-		console.log('SHOWING LIVE LOADER')
+		//console.log('SHOWING LIVE LOADER')
 		$scope.name = fb_live.pageInfo.name;
 		$scope.picture = fb_live.pageInfo.picture.data.url;
 		$scope.urlName = fb_live.pageName;
-		console.log('ADDING CLASS')
+		//console.log('ADDING CLASS')
 		setTimeout(function(){ 
 			$(".live-loader").fadeOut(2000);
-			console.log('ADD HIDDEN CLASS');
+			//console.log('ADD HIDDEN CLASS');
 		}, 5000);
 
 		
@@ -78,7 +78,7 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			url: 'http://palmsolutions-tools.herokuapp.com/api/facebook-live-stop',
 			data: {id: fb_live.CampaignID },
 			success: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		})
 
@@ -98,13 +98,13 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
     	$scope.TemplateData.forEach(function(item){
 				if(item.Template == 'temp34'){
-						console.log('CHECK IF LIVE FUNCTION');
-						console.log(item)
+						//console.log('CHECK IF LIVE FUNCTION');
+						//console.log(item)
 						if (item.status == '1') {
-							console.log('returning true');
+							//console.log('returning true');
 							playVideo =  true
 						}else {
-							console.log('returning false')
+							//console.log('returning false')
 							playVideo = false
 						}
 		    		}
@@ -115,17 +115,17 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 	function insertDataToScope() {
 
-		console.log('FB LIVE')
+		//console.log('FB LIVE')
 		$scope.page_id = fb_live.page_id;
 		$scope.video_id = fb_live.video_id;
 
-		console.log(FB)
+		//console.log(FB)
 		// Get Embedded Video Player API Instance
 	      FB.Event.subscribe('xfbml.ready', function(msg) {
-	      	console.log('fbxml ready');
+	      	//console.log('fbxml ready');
 	      	instance = msg.instance;
 	        if (msg.type === 'video') {
-	          console.log('video player');
+	          //console.log('video player');
 	          msg.instance.play();
 	          unmute(msg.instance);
 	          //msg.instance.subscribe('paused', facebookPauseEventHandler);
@@ -137,7 +137,7 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 		    }
 
 		setTimeout(function(){
-			console.log('Calling FB.XFBML.parse after 5 seconds') 
+			//console.log('Calling FB.XFBML.parse after 5 seconds') 
 			FB.XFBML.parse()
 		}, 5000);
 
@@ -145,12 +145,12 @@ function temp34Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 			checkIfLiveStops();
 			if (playVideo == true) {
-				console.log('LIVE IS STILL PLAYING: ', playVideo);
+				//console.log('LIVE IS STILL PLAYING: ', playVideo);
 				
 				if (instance.hasOwnProperty('getDuration')) {
 
-					console.log('Duration: ', instance.getDuration());
-					console.log('Current Position: ', instance.getCurrentPosition());
+					//console.log('Duration: ', instance.getDuration());
+					//console.log('Current Position: ', instance.getCurrentPosition());
 
 					if (Math.floor(instance.getCurrentPosition()) >= Math.floor(instance.getDuration())) {
 						showEndingLoader();

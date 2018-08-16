@@ -28,8 +28,8 @@ function temp18Controller($scope, $window, $timeout, $http, tempSrc, callback, $
           data1 = $scope.TemplateData[i].TempData[0];
           data2 = $scope.TemplateData[i].TempData[1];
 
-          console.log('alltemp18data');
-          console.log($scope.TemplateData[i].TempData);
+          //console.log('alltemp18data');
+          //console.log($scope.TemplateData[i].TempData);
           // insertDataToScope();
         }
       }
@@ -116,7 +116,7 @@ function temp18Controller($scope, $window, $timeout, $http, tempSrc, callback, $
                 $(".weather").fadeIn(); 
             });
 
-            console.log(now_w.weather);
+            //console.log(now_w.weather);
 
             var temp;
 

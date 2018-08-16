@@ -36,7 +36,7 @@ function temp15Controller($scope, $window, $timeout, $http, tempSrc, callback){
             }
         }
         var index = Math.floor(Math.random() * uniqueRandoms.length);
-        console.log('index: '+index);
+        //console.log('index: '+index);
         var val = uniqueRandoms[index];
 
 
@@ -52,7 +52,7 @@ function temp15Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
               // $scope.hugotText = hugotList[0];
 
-              console.log($scope.hugotText);
+              //console.log($scope.hugotText);
 
               if(!$scope.$$phase) {
 						$scope.$apply();

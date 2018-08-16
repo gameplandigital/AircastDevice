@@ -67,7 +67,7 @@ function temp26Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			$(".instagram-post .insta-left .insta-lower h2").css("font-size","2em");
 		}
 
-		console.log(instagram_post.currentPosition+'/'+instagram_post.post_length);
+		//console.log(instagram_post.currentPosition+'/'+instagram_post.post_length);
 
 	       if (loopCounter == 0) {
 	      	loop();

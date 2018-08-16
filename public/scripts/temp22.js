@@ -38,7 +38,7 @@ function temp22Controller($scope, $window, $timeout, $http, temp2Src, callback, 
     for(var i=0; i< $scope.TemplateData.length; i++){
     		if($scope.TemplateData[i].Template == 'temp22'){
     			hugotList = $scope.TemplateData[i].TempData;
-    			console.log(hugotList);
+    			//console.log(hugotList);
     		}
     	}
 

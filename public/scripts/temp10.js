@@ -48,14 +48,14 @@ function temp10Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
           //insert all the data to the angular $scope
       function insertDataToScope() {
-          console.log('temp 10 data insert');
+          //console.log('temp 10 data insert');
   
               var parsedData = localData;
               config.newsList = parsedData.articles;
               var newsCount = config.newsList.length-1;
               var article = config.newsList[config.currentPosition];
 
-              console.log(config.currentPosition + ' / ' + newsCount);
+              //console.log(config.currentPosition + ' / ' + newsCount);
 
               var title = article.title;
               var author = article.author || "";

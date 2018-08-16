@@ -53,7 +53,7 @@ var getConfig = function(){
 
 
 function downloadRequest(fileUrl, filePath, callsuc, callerr) {
-	console.log('download Request');
+	//console.log('download Request');
 
 	try {
 
@@ -152,7 +152,7 @@ function updateContent(CampaignID){
 }
 
 function runContentDownload(){
-	console.log('runContentDownload');
+	//console.log('runContentDownload');
 	if(RpiConfig.ContentFileDownloading == false && RpiConfig.ContentFiles.length>0){
 		console.log("Running Content Download");
 
@@ -209,7 +209,7 @@ function removeContentFile(FileID){
 }
 
 var getRpiFiles = function(){
-	console.log('getRpiFiles')
+	//console.log('getRpiFiles')
 	var opt = {
 	   headers: { 'Content-Type': 'application/json' }
 	  }
@@ -230,10 +230,10 @@ var getRpiFiles = function(){
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			// console.log(JSON.stringify(body));
-			console.log('get files success');
+			//console.log('get files success');
 			var data = body.value;
 
-			console.log('Current Campaign: '+RpiConfig.ContentFiles.length)
+			//console.log('Current Campaign: '+RpiConfig.ContentFiles.length)
 
 			for(var i = 0; i < data.length; i++){
 				var isQueuing = false;
@@ -249,7 +249,7 @@ var getRpiFiles = function(){
 
 			}
 
-			console.log('New Campaign: '+RpiConfig.ContentFiles.length)
+			//console.log('New Campaign: '+RpiConfig.ContentFiles.length)
 
 			runContentDownload();
 		}
@@ -263,7 +263,7 @@ var getRpiFiles = function(){
 
 
 function runSourceDownload(){
-	console.log('runSourceDownload');
+	//console.log('runSourceDownload');
 	if(RpiConfig.SourceFileDownloading == false && RpiConfig.SourceFiles.length>0){
 		console.log("Running Source Download");
 
@@ -399,7 +399,7 @@ function updateSource(ARTID){
 
 
 var getSourceFiles = function(){
-	console.log('getSourceFiles')
+	//console.log('getSourceFiles')
 	
 	var opt = {
 	   headers: { 'Content-Type': 'application/json' }
@@ -419,13 +419,13 @@ var getSourceFiles = function(){
 
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-			console.log('get source success');
+			//console.log('get source success');
 			// console.log('rpiCheckTempFile Success');
 			// console.log(resp.body.value[0].Files);
 
 			var data = body.value;
 
-			console.log('Current Source: '+RpiConfig.SourceFiles.length)
+			//console.log('Current Source: '+RpiConfig.SourceFiles.length)
 
 			for(var i = 0; i < data.length; i++){
 				var isQueuing = false;
@@ -441,7 +441,7 @@ var getSourceFiles = function(){
 
 			}
 
-			console.log('New Source: '+RpiConfig.SourceFiles.length)
+			//console.log('New Source: '+RpiConfig.SourceFiles.length)
 
 			runSourceDownload();
 
@@ -456,7 +456,7 @@ var getSourceFiles = function(){
 
 
 var nodeAlive = function(){
-	console.log('nodeAlive')
+	//console.log('nodeAlive')
 	// var opt = {
 	//    headers: { 'Content-Type': 'application/json' }
 	//   }
@@ -480,7 +480,7 @@ var nodeAlive = function(){
 
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-			console.log('alive done')
+			//console.log('alive done')
 
 			
 		}

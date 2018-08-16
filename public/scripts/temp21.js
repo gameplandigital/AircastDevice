@@ -47,11 +47,11 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
                 }else{
 
                   if(localStorage.getItem('movie-expiration-date') >= currentTimeStamp) {
-                    console.log("Movie data is still good and data is still within 4 hours.");
-                    console.log("Getting data from the local storage");
+                    //console.log("Movie data is still good and data is still within 4 hours.");
+                    //console.log("Getting data from the local storage");
 
                     if (localStorage.getItem('movie') == null || localStorage.getItem('movie') == '') {
-                      console.log("data is not good, getting data from the api");
+                      //console.log("data is not good, getting data from the api");
                       getDataFromApi();
                     }
 
@@ -73,7 +73,7 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
     function getDataFromApi() {
 
-          console.log("fetch data from themoviedb api");
+          //console.log("fetch data from themoviedb api");
 
 
           $http.get(config.url)
@@ -86,7 +86,7 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
                       localStorage.setItem('movie',JSON.stringify(response.data));
                       localStorage.setItem('movie-position',0);
                       //location.reload();
-                      console.log("fetch data from the local storage");
+                      //console.log("fetch data from the local storage");
                       getDataFromStorage();
                   } else {
                       console.log("nothing returned");
@@ -96,7 +96,7 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
                   // handle error
                   console.log('error occurred');
                   if (localStorage.getItem('movie') != null && localStorage.getItem('movie') != '') {
-                    console.log("fetch data from the local storage");
+                    //console.log("fetch data from the local storage");
                     getDataFromStorage();
                   }else{
                   	if (cb == false) {
@@ -130,7 +130,7 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
             $(".movie-description p").css("font-size",".7em");
         }
 
-        console.log("Movie position: " + currentPosition + "/" + moviesLength);
+        //console.log("Movie position: " + currentPosition + "/" + moviesLength);
 
         $scope.title = result.original_title;
         $scope.description = result.overview;
@@ -155,12 +155,12 @@ function temp21Controller($scope, $window, $timeout, $http, tempSrc, callback){
 	       if ((currentPosition+1) >= moviesLength) {
               currentPosition = 0;
               localStorage.setItem('movie-position',currentPosition);
-              console.log('setting data ' , currentPosition);
+              //console.log('setting data ' , currentPosition);
               inserDataToScope();
           } else {
               currentPosition++;
               localStorage.setItem('movie-position',currentPosition);
-              console.log('setting data ' , currentPosition);
+              //console.log('setting data ' , currentPosition);
               inserDataToScope();
           }
 

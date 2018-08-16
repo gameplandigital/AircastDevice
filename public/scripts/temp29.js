@@ -219,7 +219,7 @@ function SineWaveGenerator(options) {
     });
 
 
-    console.log($scope.TemplateData);
+    //console.log($scope.TemplateData);
 
     for(var i=0; i< $scope.TemplateData.length; i++){
   		if($scope.TemplateData[i].Template == 'temp29'){
@@ -242,10 +242,10 @@ function SineWaveGenerator(options) {
         $scope.song_name = data.name;
         $scope.artist = data.artists[0].name;
         $scope.popularity = data.popularity;
-        console.log(data.preview_url);
-        console.log($sce);
+        //console.log(data.preview_url);
+        //console.log($sce);
         $scope.audio = '<audio src="'+data.preview_url+'" controls autoplay=""></audio>';
-        console.log($scope.audio);
+        //console.log($scope.audio);
 
         if ($scope.song_name.length > 20) {
           $(".spotify-template .spotify-music .spotify-music-name h2").css('font-size','1.4em');

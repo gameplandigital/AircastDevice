@@ -39,7 +39,7 @@ function temp14Controller($scope, $window, $timeout, $http, tempSrc, callback){
             var tweetsCount  = tweets.length-1;
             var currentPosition = twitterPosition;
             var nextTweetPosition = (currentPosition < tweetsCount)? currentPosition+1 : 0;
-            console.log("Current Tweet Position: " + currentPosition +"/"+tweetsCount);
+            //console.log("Current Tweet Position: " + currentPosition +"/"+tweetsCount);
                 
             // $scope.topHashtag = removeSpace(hashtagList[twitterCounter]);
             $scope.topHashtag = removeSpace(twitterData[twitterArray].Hashtag);
@@ -142,12 +142,12 @@ function temp14Controller($scope, $window, $timeout, $http, tempSrc, callback){
               if (twitterPosition >= tweetsCount) {
                   twitterPosition = 0;
                   twitterArray = twitterArray+1;
-                  console.log('twitterData: '+twitterData.length);
+                  //console.log('twitterData: '+twitterData.length);
                   if(twitterArray>= twitterData.length){
                   	twitterArray = 0;
                   }
                   updateValues();
-                  console.log('twitterArray: '+twitterArray);
+                  //console.log('twitterArray: '+twitterArray);
               } else {
                   twitterPosition++;
                   updateValues();

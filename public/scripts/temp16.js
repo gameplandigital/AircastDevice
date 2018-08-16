@@ -66,7 +66,7 @@ function temp16Controller($scope, $window, $timeout, $http, tempSrc, callback){
             $(".movie-description p").css("font-size",".7em");
         }
 
-        console.log("Movie position: " + currentPosition + "/" + moviesLength);
+        //console.log("Movie position: " + currentPosition + "/" + moviesLength);
 
         $scope.title = result.original_title;
         $scope.description = result.overview;

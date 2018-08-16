@@ -40,7 +40,7 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 	function insertDataToScope(){
 		var data = instagram_post.postList[instagram_post.currentPosition];
 
-		console.log(data);
+		//console.log(data);
 
 
 

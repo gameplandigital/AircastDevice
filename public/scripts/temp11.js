@@ -75,7 +75,7 @@ function temp11Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
               //getting the data ready
               var storePosition = currentPosition;
-              console.log("current position: " + storePosition + "/" + storeCount);
+              //console.log("current position: " + storePosition + "/" + storeCount);
               var store = nearbyResto[storePosition].restaurant;
               var distanceLatitude = store.location.latitude;
               var distanceLongitude = store.location.longitude;

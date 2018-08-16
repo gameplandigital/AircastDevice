@@ -1,8 +1,8 @@
 function temp33Controller($scope, $window, $timeout, $http, tempSrc, callback,$q){ 
 
-	console.log('tempcc');
-	console.log(tempSrc);
-	console.log('tempcc');
+	//console.log('tempcc');
+	//console.log(tempSrc);
+	//console.log('tempcc');
 
 	var fb_post, page_info;
 	var loopCounter = 0;
@@ -22,7 +22,7 @@ function temp33Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 	function insertDataToScope(){
 		var data = fb_post.postList[fb_post.currentPosition];
 		var shares = 0;
-		console.log(data);
+		//console.log(data);
 
 		$scope.info = {
 			page_name: page_info.name,
@@ -41,7 +41,7 @@ function temp33Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			}
 		}
 
-		console.log(fb_post.currentPosition+'/'+fb_post.post_length);
+		//console.log(fb_post.currentPosition+'/'+fb_post.post_length);
 
 
 	       if (loopCounter == 0) {

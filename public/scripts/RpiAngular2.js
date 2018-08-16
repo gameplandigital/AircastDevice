@@ -102,7 +102,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
     $scope.currentTemp = playingTemplate.tempHtml;
-    console.log('Current Temp: ', playingTemplate.tempHtml);
+    //console.log('Current Temp: ', playingTemplate.tempHtml);
 
     if(!$scope.$$phase) {
       $scope.$apply();
@@ -170,7 +170,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       })
       .then(function(response){
 
-        console.info('HAS INTERNET')
+        //console.info('HAS INTERNET')
         var newTemplates = response.data;     
         
         $http({
@@ -240,9 +240,9 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       //console.log('New Templates: ', newTemplates)
 
       if (status == 'online') {
-        console.log('ONLINE CONTENT KICKING IN...')
+        //console.log('ONLINE CONTENT KICKING IN...')
       }else {
-        console.log('OFFLINE CONTENT KICKING IN...')
+        //console.log('OFFLINE CONTENT KICKING IN...')
 
         var newTemplatesTemp = [];
         var scopeTemplateTemp = [];
@@ -263,8 +263,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
         
         // $scope.templates = scopeTemplateTemp;
 
-        console.log('Current Content: ', $scope.templates)
-        console.log('New Upcoming Content: ', newTemplates)
+        //console.log('Current Content: ', $scope.templates)
+        //console.log('New Upcoming Content: ', newTemplates)
 
         var i=0;
         while(i<$scope.templates.length){

@@ -14,8 +14,8 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
             'yesterdayDate': moment(yesterday).format('YYYY-MM-DD'),
         }
         
-        console.log(config.currentDate);
-        console.log(config.yesterdayDate);
+        //console.log(config.currentDate);
+        //console.log(config.yesterdayDate);
 
 
         for(var i=0; i< $scope.TemplateData.length; i++){
@@ -47,8 +47,8 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
                 'euro': parseFloat(Math.fround(parseFloat(rate_yesterday[currencyToDisplay[0]]/rate_yesterday[currencyToDisplay[2]])).toPrecision(5))
             }
             
-            console.log(ratesToday);
-            console.log(ratesYesterday);
+            //console.log(ratesToday);
+            //console.log(ratesYesterday);
             
             if (ratesToday.usd > ratesYesterday.usd) {
                 signs.usd = "up";
@@ -74,9 +74,9 @@ function temp19Controller($scope, $window, $timeout, $http, tempSrc, callback, $
                 signs.euro = "down";
             }
             
-            console.log(signs);
+            //console.log(signs);
             result.push(ratesToday,ratesYesterday,signs);
-            console.log(result);
+            //console.log(result);
             insertDataToScope(result);
             
             

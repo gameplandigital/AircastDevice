@@ -67,7 +67,7 @@ function temp24Controller($scope, $window, $timeout, $http, tempSrc, callback){
         var result = movieData[currentPosition];
         var temp;
 
-        console.log("Movie position: " + currentPosition + "/" + moviesLength);
+        //console.log("Movie position: " + currentPosition + "/" + moviesLength);
 
         if (result.vote_average == 0) {
             temp = "(No ratings yet)";
@@ -92,7 +92,7 @@ function temp24Controller($scope, $window, $timeout, $http, tempSrc, callback){
         $scope.backdrop_path = "http://image.tmdb.org/t/p/"+config.backgroundSize+"/"+result.backdrop_path;
         $scope.animation = config.animation;
 
-        console.log('vote avarage: ',result.vote_average);
+        //console.log('vote avarage: ',result.vote_average);
         $("#movieRatingStar").rateYo("rating", result.vote_average/2);
 
         if (loopCounter == 0) {
