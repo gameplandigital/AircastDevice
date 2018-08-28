@@ -36,17 +36,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   reloader = 1;
 
 
-
-  // $scope.refresh = Date.now();
-  // console.log($scope.refresh);
-  // console.log('time');
-  // $window.alert('W: '+$window.innerWidth+' H: '+$window.innerHeight);
-
   $scope.demoState = 0;
   
-
-  // var yesterday = new Date((Date.now()) - 86400000);
-  // console.log('yesterday: '+Date.now());
 
   $scope.mainDiv = {
     "position": "absolute",
@@ -62,6 +53,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
 
   $scope.templates = [];
+  $scope.temporary = [];
 
   var payload = {
     CampaignID: 3,
@@ -108,9 +100,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       $scope.$apply();
     }
 
-
-    // $scope.CurrentTemplate = $
-
     var tempNameSpace = {
       '$scope': $scope,
       '$window': $window,
@@ -122,9 +111,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
     };
 
     var payl2 = [tempNameSpace['$scope'], tempNameSpace['$window'], tempNameSpace['$timeout'], tempNameSpace['$http'], tempNameSpace['source'], tempNameSpace['callback'], tempNameSpace['$q']];
-    // var payl = [$scope, $window, $timeout, $http, playingTemplate.tempSrc, $scope.templateShuffle];
 
-    // window[playingTemplate.tempInit].apply(null, payl2);
 
     LazyLoad.css(playingTemplate.tempCss, function () {
       LazyLoad.js(playingTemplate.tempJs, function () {
@@ -138,6 +125,29 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   $scope.templateShuffle();
 
 
+  $scope.saveDataInTheServer = function(RpiServer,newTemplates){
+
+        $http({
+          method: "POST",
+          url: '/localContent',
+          data: {
+            status: true,
+            content: newTemplates,
+          },
+        }).then(function(data){
+            if (data.data.success) {
+             //console.log('Successfully saved in the server.');
+            }else{
+              //console.log('ERROR WITH THE ONLINE SECTION')
+            }
+            
+        },function(err){
+          //console.warn('error with the internet',err);
+        })
+
+  }
+
+
   $scope.getTemplates = function(){
     //console.log('getTemplates');
     $http.get('/myID').then(function(response){
@@ -146,18 +156,11 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       var RpiID = response.data.RpiID;
       var RpiServer = response.data.RpiServer;
 
-      //console.log(RpiServer);
 
       var data = {
         RpiID: RpiID
       }
 
-
-      // $http.post(RpiServer+'/GetCampaigns', data, {headers: {
-
-      // $http.post('https://api.aircast.ph/rpiGetCampaigns', data, {headers: {
-      //               'Content-Type': 'application/json; charset=utf-8'
-      //   }})
 
       $http({
           url: RpiServer+'/GetCampaigns',
@@ -171,56 +174,63 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       .then(function(response){
 
         //console.info('HAS INTERNET')
-        var newTemplates = response.data;     
-        
-        $http({
-          method: "POST",
-          url: '/localContent',
-          data: {
-            status: true,
-            content: newTemplates,
-          },
-        }).then(function(data){
-            if (data.data.success) {
-              $scope.insertData(RpiServer,newTemplates,'online'); 
-            }else{
-              console.log('ERROR WITH THE ONLINE SECTION')
-            }
-            
-        },function(err){
-          console.warn('error with the internet',err);
-        })
+        var newTemplates = response.data;   
 
-        //localStorage.setItem('rpi_data',JSON.stringify(newTemplates));
-        //$scope.insertData(RpiServer,newTemplates,'online');
+        $scope.temporary = newTemplates;
+
+        var campaignList = [];
+
+
+        for (var i = 0 ; i < $scope.templates.length; i++) {
+          if (campaignList.indexOf($scope.templates[i].CampaignID) == -1) {
+              campaignList.push($scope.templates[i].CampaignID);
+            } 
+        } 
+
+
+        for (var i = 0; i < $scope.temporary.length; i++) {
+          if (campaignList.indexOf($scope.temporary[i].CampaignID) == -1) {
+            //console.log('there is a change, saving data in the server');
+            $scope.saveDataInTheServer(RpiServer,newTemplates)
+          }
+        }
+
+        //call function to save the changes in the localstorage
+        
+        $scope.insertData(RpiServer,newTemplates,'online'); 
 
       }, function(err){
-        console.warn('No Internet Connection');
+        //console.warn('No Internet Connection');
 
-        // var temp_data = localStorage.getItem('rpi_data');
-        // var response = JSON.parse(temp_data);
-        // $scope.insertData(RpiServer,response,'offline')
+        var campaignList = [];
 
-        $http({
-          method: "POST",
-          url: '/localContent',
-          data: {
-            status: false,
-            content: [],
-          },
-        }).then(function(data){
-            //console.log(data);
-            if (data.data.success) {
-              console.log('DATA FROM SERVER: ',data)
-              $scope.insertData(RpiServer,data.data.content,'offline');
-            }else{
-              console.log('ERROR WITH THE OFFLINE SECTION')
-            }
+        if ($scope.temporary.length == 0) {
 
-        },function(err){
-          console.warn('error with the internet',err);
-        })
+            //console.log('no content... fetching data in the localstorage');
+            $http({
+            method: "POST",
+            url: '/localContent',
+            data: {
+              status: false,
+              content: [],
+            },
+          }).then(function(data){
+              //console.log(data);
+              if (data.data.success) {
+                //console.log('DATA FROM SERVER: ',data)
+                $scope.insertData(RpiServer,data.data.content,'offline');
+              }else{
+                console.log('ERROR WITH THE OFFLINE SECTION')
+              }
 
+          },function(err){
+            console.warn('error with the internet',err);
+          })        
+        }else{
+          //console.log('Using data in the temporary storage..');
+          $scope.insertData(RpiServer,$scope.temporary,'offline');
+
+        }
 
       });
 
@@ -253,11 +263,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           }
         }
 
-        // for (var i = 0; i < $scope.templates.length; i++) {
-        //   if ($scope.templates[i].Template == 'temp2' || $scope.templates[i].Template == 'temp4') {
-        //      scopeTemplateTemp.push($scope.templates[i]);
-        //   }
-        // }
         newTemplates = newTemplatesTemp;
       }
         
@@ -359,6 +364,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
           $scope.$apply();
         }
 
+        $scope.temporary = $scope.templates;
+
 
   }
   
@@ -410,9 +417,9 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
   }
 
   getTempData();
-  $interval(function(){getTempData();}, 10000);
+  $interval(function(){getTempData();}, 15000);
 
-  $interval(function(){$scope.getTemplates();}, 5000);
+  $interval(function(){$scope.getTemplates();}, 15000);
 
 
 
@@ -452,15 +459,15 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
         }
       })
       .catch(function(err){
-        console.warn('Error in calling browser Refresh');
+        //console.warn('Error in calling browser Refresh');
         console.log(err);
       })
 
 
     })
   }, 60000).catch(function(err){
-    console.log('Error in calling browser Refresh');
-    console.log(err);
+    //console.log('Error in calling browser Refresh');
+    //console.log(err);
   });
 
 
