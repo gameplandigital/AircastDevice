@@ -1,6 +1,6 @@
 function UpdateWallet($http, CampaignID, Width, Height){
 
-	$http.get('/myID').then(function(response){
+  $http.get('/myID').then(function(response){
       var RpiID = response.data.RpiID;
       var RpiServer = response.data.RpiServer;
 
@@ -24,39 +24,45 @@ function UpdateWallet($http, CampaignID, Width, Height){
 
       .then(function(response){
         
-          // var data = {
-          //   CampaignID: CampaignID,
-          //   Status: 'online'
-          // }
-          // $http({
-          //     url: '/logTimestamp',
-          //     method: "POST",
-          //     data: data,
-          //     headers: {
-          //         'Content-Type': 'application/json'
-          //     }
-          // })
+          var data = {
+            CampaignID: CampaignID,
+            Status: 'online'
+          }
+          $http({
+              url: '/logTimestamp',
+              method: "POST",
+              data: data,
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              timeout: 3000
+          }).then(function(){
+            //console.log('updated');
+          },function(err){
+            //console.log('error updating the wallet due to internet problem');
+          })
 
       },function(err){
-          //console.log('error updating the wallet due to internet problem', err);
+          console.log('error updating the wallet due to internet problem');
 
-        // var data = {
-        //   CampaignID: CampaignID,
-        //   Status: 'offline'
-        // }
+        var data = {
+          CampaignID: CampaignID,
+          Status: 'offline'
+        }
 
-        // $http({
-        //     url: '/logTimestamp',
-        //     method: "POST",
-        //     data: data,
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(function(response){
-        //     console.log('saved the details in the timestamp');
-        // },function(err){
-        //     console.log('error updating the wallet due to internet problem');
-        // })
+        $http({
+            url: '/logTimestamp',
+            method: "POST",
+            data: data,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout: 3000
+        }).then(function(response){
+            //console.log('saved the details in the timestamp');
+        },function(err){
+            //console.log('error updating the wallet due to internet problem');
+        })
 
 
       })

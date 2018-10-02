@@ -9,7 +9,7 @@ var moment = require('moment');
 var request = require('request');
 var LocalStorage = require('node-localstorage').LocalStorage;
 
-//var offline = true;
+var offline = true;
 
 var app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -62,75 +62,77 @@ app.get('/myID', function (req, res) {
 })
 
 
-// app.post('/logTimestamp',(req,res) => {
+app.post('/logTimestamp',(req,res) => {
 
-//   console.log('logging timestamp');
-//   let d = req.body;
+  let d = req.body;
 
-//   if (d.Status == 'online') {
-//     console.log('Aircast is online');
+  if (d.Status == 'online') {
 
-//     if (offline){
+    if (offline){
       
-//       let results = [];
+      let results = [];
 
-//       fs.exists(__dirname+"/scratch/logs.txt", function(exists) {
-//           if (exists) {
-//             fs.readFile(__dirname+"/scratch/logs.txt", 'utf8', function(err, data) {  
-//                 if (err) throw err;
+      fs.exists(__dirname+"/scratch/logs.txt", function(exists) {
+          if (exists) {
+            fs.readFile(__dirname+"/scratch/logs.txt", 'utf8', function(err, data) {  
+                if (err) throw err;
 
-//                 let x = data.slice(0,-1);
-//                 let y = data.split('*');
+                let x = data.slice(0,-1);
+                let y = data.split('*');
 
-//                 for (let i = 0; i < y.length-1; i++) {
-//                   let a = y[i].split(',');
-//                   let z = [parseInt(a[0]),parseInt(a[1]),a[2]]
-//                   results.push(z)
-//                 }
+                for (let i = 0; i < y.length-1; i++) {
+                  let a = y[i].split(',');
+                  let z = [parseInt(a[0]),parseInt(a[1]),a[2]]
 
-//                 var options = {
-//                   url: 'http://localhost:3500/api/postTimestamp',
-//                   method: 'POST',
-//                   json: {data: results}
-//                 };
+                  results.push(z)
+                }
 
-//                 //console.log(results)
+                var options = {
+                  url: 'http://13.250.103.104:3500/api/postTimestamp',
+                  method: 'POST',
+                  json: {data: results}
+                };
 
-//                 request(options, function (error, response, body) {
+
+                request(options, function (error, response, body) {
+
+                    if (response.body.success) {
+                      fs.truncate(__dirname+"/scratch/logs.txt", 0,function(){console.log('emptied the logs')})
+                      console.log('updated');
+                      offline = false;
+
+                    }
           
-//                     fs.writeFile(__dirname+"/scratch/logs.txt", function(){console.log('emptied the logs')})
-
-//                     console.log('updated');
-//                     offline = false;
-
-//                 })
-
-//             });
-//           }
-//       });
-//     }
-
-//   }else{
-
-//     console.log('Aircast is offline');
-//     let d = req.body;
-//     var stream = fs.createWriteStream(__dirname+"/scratch/logs.txt", {flags:'a'});
-//     console.log(new Date().toISOString());
-
-//     let t = moment().format('YYYY-MM-DD HH:mm:ss');
-
-//     let data = [aircast.config.RpiID, d.CampaignID, t];
-
-//     stream.write(data.toString()+'*');
-
-//     stream.end();
-
-//     offline = true;
-
-//   }
 
 
-// })
+                })
+
+
+
+            });
+          }
+      });
+    }
+
+  }else{
+
+    let d = req.body;
+    var stream = fs.createWriteStream(__dirname+"/scratch/logs.txt", {flags:'a'});
+
+    let t = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    let data = [aircast.config.RpiID, d.CampaignID, t];
+
+    stream.write(data.toString()+'*');
+
+    stream.end();
+
+    offline = true;
+
+  }
+
+
+})
 
 
 
@@ -148,7 +150,6 @@ app.post('/localContent',function (req,res) {
         res.json({success: true});  
       }else{
         results = localStorage.getItem('data');
-        console.log('Getting Offline Content');
         if (results == null) {
             res.json({success: true, content: []});  
         }else{
