@@ -41,7 +41,9 @@ app.get('/crash', function (req, res) {
   res.sendFile('indexDemoPortrait.html', {root: path.join(__dirname, '/public')});
 })
 
-
+if (typeof localStorage === "undefined" || localStorage === null) {
+  localStorage = new LocalStorage('./scratch');
+}
 
 app.get('/myID', function (req, res) {
   // console.log(aircast);
@@ -135,10 +137,6 @@ app.post('/logTimestamp',(req,res) => {
 })
 
 
-
-if (typeof localStorage === "undefined" || localStorage === null) {
-  localStorage = new LocalStorage('./scratch');
-}
 
 app.post('/localContent',function (req,res) {
 
