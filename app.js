@@ -95,15 +95,26 @@ app.post('/logTimestamp',(req,res) => {
                   json: {data: results}
                 };
 
-
                 request(options, function (error, response, body) {
 
-                    if (response.body.success) {
-                      fs.truncate(__dirname+"/scratch/logs.txt", 0,function(){console.log('emptied the logs')})
-                      console.log('updated');
-                      offline = false;
+                    if (error) {
+                      console.log('error',error)
+                    }else{
+                      try {
+                        if (response.body.success) {
+                          fs.truncate(__dirname+"/scratch/logs.txt", 0,function(){console.log('emptied the logs')})
+                          console.log('updated');
+                          offline = false;
 
+                        }
+                      }catch(e) {
+                        console.log(e);
+                        offline = false;
+                      }
+                      
                     }
+
+
           
 
 
