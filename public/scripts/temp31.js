@@ -38,11 +38,11 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 
 	function insertDataToScope(){
-		var data = instagram_post.postList[instagram_post.currentPosition];
+		var data = instagram_post.postList[instagram_post.currentPosition].node;
 
 		//console.log(data);
 
-
+		console.log(data);
 
 		$scope.info = {
 			hashtag: '#'+param,
@@ -55,6 +55,8 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 			image_height: data.dimensions.height
 
 		}
+
+		console.log($scope.info);
 
 		if (param.length > 12) {
 			$(".instagram-logo h1").css({'font-size':'.9em','left':'5.3em','top':'3em'});

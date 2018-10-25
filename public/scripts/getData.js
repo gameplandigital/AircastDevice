@@ -1116,14 +1116,16 @@ function temp31GetData($http, $scope){
 						postList: {}
 					}
 
-					var url = 'http://stark-gorge-93872.herokuapp.com/graphql/query/?tag='+instagram_post.hashtag+'&count='+instagram_post.count;
+					var url = 'https://www.instagram.com/explore/tags/'+instagram_post.hashtag+'/?__a=1';
 
 
 					$http.get(url)
 						 .then(function(response){
+
+						 	console.log(response);
 						 	console.log('TEMP 31: Instagram Hashtag | Fetching Data Success');
-						 	if (response.status == 200 && response.data.posts.length > 0) {
-						 		instagram_post.postList = response.data.posts;
+						 	if (response.status == 200 && response.data.graphql.hashtag.edge_hashtag_to_media.edges.length > 0) {
+						 		instagram_post.postList = response.data.graphql.hashtag.edge_hashtag_to_media.edges;
 
 						 		console.log(instagram_post.postList);
 						 		saveData(instagram_post.postList);
@@ -1535,5 +1537,40 @@ function temp34GetData($http, $scope){
 
 			
 }
+
+function temp35GetData($http, $scope){
+
+	$scope.TemplateData.forEach(function(item){
+		if(item.Template=='temp35'&&(!item.hasData||item.lastQuery < (Date.now()-21600000))){
+			$http.get('http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php')
+		              .then(function(response) {
+			              		$scope.TemplateData.forEach(function(item){
+									if(item.Template == 'temp35'){
+
+										var dum = item.tempSrc.source.split('/');
+										var source = dum[1];
+										var d = source.split('*');
+										item.site = d[0];
+										item.duration = d[1];
+										console.log('TEMP 35: URL CONTENT | Fetching Data Success');
+										item.TempData = response.data;
+										item.hasData = true;
+			        					item.lastQuery = Date.now();
+									}
+								})
+		              		
+		              },function(err){
+							console.warn('ERROR: TEMP 15 | Hugot');
+					})
+		}
+	})
+
+}
+
+
+
+
+
+
 
 

@@ -32,7 +32,7 @@ app.config(function($httpProvider) {
 });
 
 
-app.controller('MainController', function($scope, $http, $interval, $timeout, $window, $q){
+app.controller('MainController', function($scope, $http, $interval, $timeout, $window, $q, $sce){
   reloader = 1;
 
 
@@ -107,10 +107,11 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
       '$http': $http,
       'source': playingTemplate,
       "callback": $scope.templateShuffle,
-      '$q': $q
+      '$q': $q,
+      '$sce': $sce
     };
 
-    var payl2 = [tempNameSpace['$scope'], tempNameSpace['$window'], tempNameSpace['$timeout'], tempNameSpace['$http'], tempNameSpace['source'], tempNameSpace['callback'], tempNameSpace['$q']];
+    var payl2 = [tempNameSpace['$scope'], tempNameSpace['$window'], tempNameSpace['$timeout'], tempNameSpace['$http'], tempNameSpace['source'], tempNameSpace['callback'], tempNameSpace['$q'],tempNameSpace['$sce']];
 
 
     LazyLoad.css(playingTemplate.tempCss, function () {
@@ -268,8 +269,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
         
         // $scope.templates = scopeTemplateTemp;
 
-        //console.log('Current Content: ', $scope.templates)
-        //console.log('New Upcoming Content: ', newTemplates)
+        console.log('Current Content: ', $scope.templates)
+        console.log('New Upcoming Content: ', newTemplates)
 
         var i=0;
         while(i<$scope.templates.length){
@@ -404,6 +405,7 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
     window['temp32GetData'].apply(null, payl);  //facebook full screen w/o reaction
     window['temp33GetData'].apply(null, payl);  //facebook full screen w/ reactions
     window['temp34GetData'].apply(null, payl);  //facebook live
+    window['temp35GetData'].apply(null, payl);  //Content URL
 
     
 
