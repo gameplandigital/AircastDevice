@@ -10,10 +10,9 @@ function temp35Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 		}
 	}
 
-	$scope.url = '<iframe src="http://'+url+'" width="100%" height="100%" id="url-iframe"></iframe>';
+	$scope.url = '<iframe sandbox="allow-forms allow-same-origin allow-scripts" src="http://'+url+'" width="100%" height="100%" id="url-iframe"></iframe>';
 	$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.url);
 
-	console.log(duration)
 	$timeout(callback, duration);
 
 

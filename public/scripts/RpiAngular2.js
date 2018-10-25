@@ -269,8 +269,8 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
         
         // $scope.templates = scopeTemplateTemp;
 
-        console.log('Current Content: ', $scope.templates)
-        console.log('New Upcoming Content: ', newTemplates)
+        //console.log('Current Content: ', $scope.templates)
+        //console.log('New Upcoming Content: ', newTemplates)
 
         var i=0;
         while(i<$scope.templates.length){
