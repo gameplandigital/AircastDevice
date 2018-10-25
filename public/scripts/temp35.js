@@ -4,7 +4,7 @@ function temp35Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 	var url = '';
 	var duration = 30;
 	for(var i=0; i< $scope.TemplateData.length; i++){
-		if($scope.TemplateData[i].Template == 'temp35'){
+		if($scope.TemplateData[i].Template == 'temp35' && $scope.TemplateData[i].CampaignID == tempSrc.CampaignID){
 			url = $scope.TemplateData[i].site;
 			duration = parseInt($scope.TemplateData[i].duration) * 1000;
 		}
