@@ -1548,10 +1548,12 @@ function temp35GetData($http, $scope){
 									if(item.Template == 'temp35'){
 
 										var dum = item.tempSrc.source.split('/');
-										var source = dum[1];
-										var d = source.split('*');
-										item.site = d[0];
-										item.duration = d[1];
+										console.log(dum)
+										dum.shift();
+										var c = dum.join('/')
+										var a = c.split('*')
+										item.site = a[0];
+										item.duration = a[1];
 										console.log('TEMP 35: URL CONTENT | Fetching Data Success');
 										item.TempData = response.data;
 										item.hasData = true;
