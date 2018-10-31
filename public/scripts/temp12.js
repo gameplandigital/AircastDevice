@@ -38,7 +38,6 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
     }else {
       status = 'midnight';
     }
-
     if(status=="morning"){
       $('#holloweenmaindiv').css({background:'linear-gradient(rgb(104,140,209), rgb(195,215,238))'})
       $('#sunray').attr("src","assets/sunray.png");
