@@ -5,6 +5,24 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
 
     var currentTime = moment().format('HH');
 
+    var hallotoday = moment().format('LL');
+    var halloaraw = moment().format('dddd');
+    var hallocurrentTime = moment().format('h:mm a')
+
+    $scope.hallotoday = hallotoday;
+    $scope.halloaraw = halloaraw;
+    $scope.hallocurrentTime = hallocurrentTime;
+
+    var date_today = moment().format('MM/DD');
+    if (date_today == '10/30' || date_today == '10/31' || date_today == '11/01' || date_today == '11/02') {
+      $('#holloweenmaindiv').show();
+      $('.weather').hide();
+    }else{
+      $('.weather').show();
+      $('#holloweenmaindiv').hide();
+    }
+
+
     var morning = ['05','06','07','08','09','10'];
     var afternoon = ['11','12','13','14','15','16','17'];
     var night = ['18','19','20','21','22','23','24'];
@@ -19,6 +37,20 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
       status = 'night';
     }else {
       status = 'midnight';
+    }
+
+    if(status=="morning"){
+      $('#holloweenmaindiv').css({background:'linear-gradient(rgb(104,140,209), rgb(195,215,238))'})
+      $('#sunray').attr("src","assets/sunray.png");
+      $('#sunface').show();
+    }else if(status=="afternoon"){
+      $('#holloweenmaindiv').css({background:'linear-gradient(#91cefa, #dad87b 75%)'})
+      $('#sunray').attr("src","assets/sunray.png");
+      $('#sunface').show();
+    }else{
+      $('#sunray').attr("src","assets/moon.png");
+      $('#sunface').hide();
+      $('#holloweenmaindiv').css({background:'linear-gradient(#2b5777, #7eb7d280 75%)'})
     }
 
     var data1, data2;

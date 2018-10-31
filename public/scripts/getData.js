@@ -44,8 +44,6 @@ function temp10GetData($http, $scope){
 					})
 
 			}
-
-
 		}
 	})
 

@@ -117,7 +117,7 @@ function updateContent(CampaignID){
 	var options = {
 		uri: RpiConfig.RpiServer+'/UpdateContentFile',
 		method: 'POST',
-		json: {
+		json: { 
 			RpiID: RpiConfig.RpiID,
 			CampaignID: CampaignID
 		}
@@ -183,7 +183,7 @@ function processContentFile(Campaign){
 									console.log(error);
 								}
 								
-							}, 
+							},
 						function(){
 								setTimeout(function(){
 									console.log('INTERVAL TRIGGER');
@@ -388,7 +388,7 @@ function updateSource(ARTID){
 					break;
 				}
 			}
-		}
+		}  
 		else{
 			console.log('ARTID: '+ARTID+' UPDATE Failed');
 			RpiConfig.SourceFileDownloading = false;
