@@ -308,8 +308,6 @@ app.controller('MainController', function($scope, $http, $interval, $timeout, $w
 
         //console.log('TempData GGG');
         //console.log($scope.TemplateData);
-
-
         // console.log('mid temp');
         // console.log($scope.templates);
         for(var i=0; i<newTemplates.length; i++){
