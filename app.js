@@ -98,7 +98,7 @@ app.post('/logTimestamp',(req,res) => {
                 request(options, function (error, response, body) {
 
                     if (error) {
-                      console.log('error',error)
+
                     }else{
                       try {
                         if (response.body.success) {
@@ -108,7 +108,7 @@ app.post('/logTimestamp',(req,res) => {
 
                         }
                       }catch(e) {
-                        console.log(e);
+
                         offline = false;
                       }
                       
@@ -166,7 +166,7 @@ app.post('/localContent',function (req,res) {
           }
         }
   }catch(err){
-    console.log(err);
+
   }
   
 
@@ -180,7 +180,7 @@ app.listen(app.get('port'), function () {
 
 function getRpiConfig(){
   if(aircast.getConfig()){
-    console.log('success');
+    //console.log('success');
     // updateRpi();
     setInterval(aircast.getRpiFiles, 10000);
     setInterval(aircast.getSourceFiles, 30000);
@@ -188,7 +188,7 @@ function getRpiConfig(){
     // setInterval(aircast.removeFile, 5000);
   }
   else{
-    console.log('fail');
+    // console.log('fail');
     setTimeout(getRpiConfig, 1000);
   }
 }
