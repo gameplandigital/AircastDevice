@@ -254,7 +254,7 @@ var getRpiFiles = function(){
 			runContentDownload();
 		}
 		else{
-			console.log('connection failed get content');
+			//console.log('connection failed get content');
 		}
 	});
 }
@@ -448,7 +448,7 @@ var getSourceFiles = function(){
 			
 		}
 		else{
-			console.log('connection failed get source file');
+			//console.log('connection failed get source file');
 		}
 	});
 }
@@ -485,7 +485,7 @@ var nodeAlive = function(){
 			
 		}
 		else{
-			console.log('connection failed last alive');
+			//console.log('connection failed last alive');
 		}
 	});
 
