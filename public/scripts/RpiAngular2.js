@@ -1,4 +1,4 @@
-var app = angular.module('MainModule', ['ui.bootstrap', 'ui.event', 'ngAnimate']);
+var app = angular.module('MainModule', ['ui.bootstrap', 'ui.event']);
 
 
 app.filter('cut', function () {
