@@ -93,13 +93,7 @@ function temp12Controller($scope, $window, $timeout, $http, tempSrc, callback, $
       }
 
       else if(greeting == 'evening') {
-        if(x["weather"] == 'Clouds') { 
-          return 'icon-moon-cloud';
-
-        }
-        else {
           return 'icon-waning-crescent-moon'
-        }
       }
       else {
         if(weather == 'Clouds') {
