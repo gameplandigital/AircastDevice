@@ -23,10 +23,10 @@
 	<div class="insta-info animated pulse delay-animation-7">
 
 			<img ng-hide="info.likes == 0" src="assets/instagram-heart.png">
-			<p ng-hide="info.likes == 0" odometer="info.likes"></p>
+			<p ng-hide="info.likes == 0" odometer="info.likes">{{info.likes}}</p>
 
 			<img  ng-hide="info.comments == 0" src="assets/instagram-comment.png">
-			<p ng-hide="info.comments == 0" odometer="info.comments"></p>
+			<p ng-hide="info.comments == 0" odometer="info.comments">{{info.comments}}</p>
 
 	</div>
 </div>

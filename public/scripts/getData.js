@@ -284,9 +284,12 @@ function temp15GetData($http, $scope){
 			              		$scope.TemplateData.forEach(function(item){
 									if(item.Template == 'temp15'){
 										console.log('TEMP 15: Hugot | Fetching Data Success');
-										item.TempData = response.data;
-										item.hasData = true;
-			        					item.lastQuery = Date.now();
+										if (response.data.length > 0) {
+											item.TempData = response.data;
+											item.hasData = true;
+				        					item.lastQuery = Date.now();
+										}
+										
 									}
 								})
 		              		
@@ -1131,12 +1134,10 @@ function temp31GetData($http, $scope){
 					$http.get(url)
 						 .then(function(response){
 
-						 	console.log(response);
 						 	console.log('TEMP 31: Instagram Hashtag | Fetching Data Success');
 						 	if (response.status == 200 && response.data.graphql.hashtag.edge_hashtag_to_media.edges.length > 0) {
 						 		instagram_post.postList = response.data.graphql.hashtag.edge_hashtag_to_media.edges;
 
-						 		console.log(instagram_post.postList);
 						 		saveData(instagram_post.postList);
 						 	}else {
 						 		console.log('Error getting instagram by hashtag');
