@@ -1,4 +1,4 @@
-function temp20Controller($scope, $window, $timeout, $http, tempSrc, callback){ 
+function temp20Controller($scope, $window, $timeout, $http, tempSrc, callback){
 
    
         var config =  {

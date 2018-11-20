@@ -3,24 +3,16 @@
     <div ng-show="currentTemp == 'templates/temp12.html'">
 
 
-<!--             <div class="weather-loader">
-                <div class="loader"></div>
-            </div> -->
-
             <div class="weather" ng-style="{'background-image': 'url(' + weather_background + ')'}">
                 <div class="head">
 
-            <!--         <audio controls autoplay hidden>
-                      <source src="assets/images/sunny.mp3" type="audio/mpeg">
-                    </audio>
-             -->
+
                     <div class="align-left">
                         <i class="line-icon weather-icon animated" ng-class="now_weather.animation"></i>
                         <h3 class="animated flipInY delay-animation-5">{{now_weather.temp}}°C</h3>
                     </div>
 
                        <div class="align-right animated fadeInUp delay-animation-9">
-            <!--               <p>"Let your smile change the world but don't let the world change your smile."</p>-->
                        </div>   
 
                         <p class="weather-location animated slideInRight delay-animation-1 duration-2">Today, {{ now_weather.location }} </p>
@@ -38,6 +30,28 @@
                     </div>
                 </div>
             </div>
-
-
+            <div id="holloweenmaindiv">
+                <div class="halloween-overlay"></div>
+                <div id="contentdiv">
+                    <div id="textdiv">
+                        <div id="itwillbea">
+                            Aircast
+                        </div>
+                        <div id="lovelyday">
+                            Weather
+                        </div>
+                    </div>
+                    <div id="sundiv">
+                        <img id="sunray" src="assets/sunray.png">
+                        <img id="sunface" src="assets/sunface.png">
+                        <img id="cloud" src="assets/cloud.png">
+                        <p id="degrees">{{now_weather.temp}}&#8451;</p>
+                    </div>
+                </div>
+                <img id="halloweenback" src="assets/weather-halloween-asset-1.png">
+                <div id="dateandtime">
+                    <div id="time"><img id="clock" src="assets/clock.png"> {{hallocurrentTime}}</div>
+                    <div id="date">{{halloaraw}}, {{hallotoday}}</div>
+                </div>
+            </div>
     </div> <!-- end of temp 12 -->

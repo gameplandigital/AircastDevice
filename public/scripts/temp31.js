@@ -38,11 +38,11 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 
 	function insertDataToScope(){
-		var data = instagram_post.postList[instagram_post.currentPosition];
+		var data = instagram_post.postList[instagram_post.currentPosition].node;
 
 		//console.log(data);
 
-
+		console.log(data);
 
 		$scope.info = {
 			hashtag: '#'+param,
@@ -56,32 +56,34 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 		}
 
+		console.log($scope.info);
+
 		if (param.length > 12) {
 			$(".instagram-logo h1").css({'font-size':'.9em','left':'5.3em','top':'3em'});
 		}else{
 			$(".instagram-logo h1").css({'font-size':'1.5em','left':'3.5em','top':'1.5em'});
 		}
 
-		// if (data.edge_media_to_caption.edges[0].node.text == "") {
-		// 	$(".instagram-hashtag .insta-left .insta-upper .insta-date").css("display","none");
-		// }else {
-		// 	$(".instagram-hashtag .insta-left .insta-upper .insta-date").css("display","inline-block");
-		// }
+		if (data.edge_media_to_caption.edges[0].node.text == "") {
+			$(".instagram-hashtag .insta-left .insta-upper .insta-date").css("display","none");
+		}else {
+			$(".instagram-hashtag .insta-left .insta-upper .insta-date").css("display","inline-block");
+		}
 
 
-		// var img = document.createElement('img');
-		// img.setAttribute('src', data.thumbnail_src);
-		// img.setAttribute('crossorigin','anonymous');
+		var img = document.createElement('img');
+		img.setAttribute('src', data.thumbnail_src);
+		img.setAttribute('crossorigin','anonymous');
 
-		// img.addEventListener('load', function() {
-		//     var vibrant = new Vibrant(img);
-		//     var swatches = vibrant.swatches()
-		//     var sidebar_color = swatches.Vibrant.rgb;
-		//     var sidebar_color2 = swatches.Muted.rgb;
-		//     var final_color = 'rgba('+sidebar_color[0]+','+sidebar_color[1]+','+sidebar_color[2]+',.6)';
-		//     var final_color2 = 'rgba('+sidebar_color2[0]+','+sidebar_color2[1]+','+sidebar_color2[2]+',.6)';
-		//     $(".instagram-hashtag .insta-left").css("background",''+final_color+'');
-		// });
+		img.addEventListener('load', function() {
+		    var vibrant = new Vibrant(img);
+		    var swatches = vibrant.swatches()
+		    var sidebar_color = swatches.Vibrant.rgb;
+		    var sidebar_color2 = swatches.Muted.rgb;
+		    var final_color = 'rgba('+sidebar_color[0]+','+sidebar_color[1]+','+sidebar_color[2]+',.6)';
+		    var final_color2 = 'rgba('+sidebar_color2[0]+','+sidebar_color2[1]+','+sidebar_color2[2]+',.6)';
+		    $(".instagram-hashtag .insta-left").css("background",''+final_color+'');
+		});
 
 		$("#current-hashtag").html(param);
 

@@ -43,7 +43,7 @@ function UpdateWallet($http, CampaignID, Width, Height){
           })
 
       },function(err){
-          console.log('error updating the wallet due to internet problem');
+          //console.log('error updating the wallet due to internet problem');
 
         var data = {
           CampaignID: CampaignID,

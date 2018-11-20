@@ -44,8 +44,6 @@ function temp10GetData($http, $scope){
 					})
 
 			}
-
-
 		}
 	})
 
@@ -153,15 +151,26 @@ function temp11GetData($http, $scope){
 
 function temp12GetData($http, $scope){
 
+
+	var city_parameter = 'Manila';
+
 	$scope.TemplateData.forEach(function(item){
+
+	if (item.tempSrc.hasOwnProperty('source')) {
+		city_parameter = item.tempSrc.source.split('/')[1];
+		item.source = city_parameter
+	}else{
+		item.source = city_parameter;
+	}
+
 		if(item.Template=='temp12'&&(!item.hasData||item.lastQuery < (Date.now()-5400000))){
-			$http.get('http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q=Manila&cnt=7')
+			$http.get('http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter+'&cnt=7')
 				.then(function(response1){
-					$http.get('http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67')
+					$http.get('http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter)
 						.then(function(response2){
 							console.log('TEMP 12: Weather | Fetching Data Success');
 							for(var i=0; i<$scope.TemplateData.length; i++){
-				        		if($scope.TemplateData[i].Template == 'temp12'){
+				        		if($scope.TemplateData[i].Template == 'temp12' && $scope.TemplateData[i].CampaignID == item.CampaignID){
 				        			var dummy = [];
 				        			dummy.push(response1);
 				        			dummy.push(response2);
@@ -275,9 +284,12 @@ function temp15GetData($http, $scope){
 			              		$scope.TemplateData.forEach(function(item){
 									if(item.Template == 'temp15'){
 										console.log('TEMP 15: Hugot | Fetching Data Success');
-										item.TempData = response.data;
-										item.hasData = true;
-			        					item.lastQuery = Date.now();
+										if (response.data.length > 0) {
+											item.TempData = response.data;
+											item.hasData = true;
+				        					item.lastQuery = Date.now();
+										}
+										
 									}
 								})
 		              		
@@ -1116,16 +1128,16 @@ function temp31GetData($http, $scope){
 						postList: {}
 					}
 
-					var url = 'http://stark-gorge-93872.herokuapp.com/graphql/query/?tag='+instagram_post.hashtag+'&count='+instagram_post.count;
+					var url = 'https://www.instagram.com/explore/tags/'+instagram_post.hashtag+'/?__a=1';
 
 
 					$http.get(url)
 						 .then(function(response){
-						 	console.log('TEMP 31: Instagram Hashtag | Fetching Data Success');
-						 	if (response.status == 200 && response.data.posts.length > 0) {
-						 		instagram_post.postList = response.data.posts;
 
-						 		console.log(instagram_post.postList);
+						 	console.log('TEMP 31: Instagram Hashtag | Fetching Data Success');
+						 	if (response.status == 200 && response.data.graphql.hashtag.edge_hashtag_to_media.edges.length > 0) {
+						 		instagram_post.postList = response.data.graphql.hashtag.edge_hashtag_to_media.edges;
+
 						 		saveData(instagram_post.postList);
 						 	}else {
 						 		console.log('Error getting instagram by hashtag');
@@ -1535,5 +1547,42 @@ function temp34GetData($http, $scope){
 
 			
 }
+
+function temp35GetData($http, $scope){
+
+	$scope.TemplateData.forEach(function(item){
+		if(item.Template=='temp35'&&(!item.hasData||item.lastQuery < (Date.now()-21600000))){
+			$http.get('http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php')
+		              .then(function(response) {
+			              		$scope.TemplateData.forEach(function(item){
+									if(item.Template == 'temp35'){
+
+										var dum = item.tempSrc.source.split('/');
+										console.log(dum)
+										dum.shift();
+										var c = dum.join('/')
+										var a = c.split('*')
+										item.site = a[0];
+										item.duration = a[1];
+										console.log('TEMP 35: URL CONTENT | Fetching Data Success');
+										item.TempData = response.data;
+										item.hasData = true;
+			        					item.lastQuery = Date.now();
+									}
+								})
+		              		
+		              },function(err){
+							console.warn('ERROR: TEMP 15 | Hugot');
+					})
+		}
+	})
+
+}
+
+
+
+
+
+
 
 
