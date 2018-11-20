@@ -42,7 +42,6 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 		//console.log(data);
 
-		console.log(data);
 
 		$scope.info = {
 			hashtag: '#'+param,
@@ -56,7 +55,6 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
 
 		}
 
-		console.log($scope.info);
 
 		if (param.length > 12) {
 			$(".instagram-logo h1").css({'font-size':'.9em','left':'5.3em','top':'3em'});
@@ -174,6 +172,11 @@ function temp31Controller($scope, $window, $timeout, $http, tempSrc, callback,$q
     		$("#instagram-hashtag-join").css('display','flex');
     		$("#instagram-hashtag-join").addClass('bounceInUp');
     		$(".instagram-hashtag").css('filter','blur(.2em)');
+
+    		setTimeout(function(){
+    			$("#instagram-hashtag-join").css('display','none');
+    			$(".instagram-hashtag").css('filter','blur(0)');
+    		},5000)
     	}
 
     	function removeInterval2(){

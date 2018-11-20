@@ -27,6 +27,7 @@
     font-size: 4vh;
     overflow: hidden;
     color: white;
+    display: none;
     background-image: linear-gradient(#2b5777, #7eb7d280 75%);
 }
 

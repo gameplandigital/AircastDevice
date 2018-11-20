@@ -152,18 +152,18 @@ function temp11GetData($http, $scope){
 function temp12GetData($http, $scope){
 
 
-	var city_parameter = 'Manila';
-
 	$scope.TemplateData.forEach(function(item){
 
-	if (item.tempSrc.hasOwnProperty('source')) {
-		city_parameter = item.tempSrc.source.split('/')[1];
-		item.source = city_parameter
-	}else{
-		item.source = city_parameter;
-	}
-
 		if(item.Template=='temp12'&&(!item.hasData||item.lastQuery < (Date.now()-5400000))){
+
+			var city_parameter = 'Manila';
+			if (item.tempSrc.hasOwnProperty('source')) {
+				city_parameter = item.tempSrc.source.split('/')[1];
+				item.source = city_parameter
+			}else{
+				item.source = city_parameter;
+			}
+
 			$http.get('http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter+'&cnt=7')
 				.then(function(response1){
 					$http.get('http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter)
