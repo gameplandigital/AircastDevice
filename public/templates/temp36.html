@@ -6,8 +6,8 @@
     <img id="aircast-values-line" src="assets/aircast-values-quote.png" />
   </div>
   <div id="aircast-content">
-    <p id="aircast-quots">{{ quotevar.quote }}</p>
-    <p id="aircast-credit">{{ quotevar.credit }}</p>
+    <p id="aircast-quots">{{ quotevar.data.Content | cut: true:200:" ..." }}</p>
+    <p id="aircast-credit">{{ quotevar.data.Author }}</p>
   </div>
   <div id="aircast-values-logo-div">
     <img id="aircast-values-logo" src="assets/aircast-values-bottom.png" />

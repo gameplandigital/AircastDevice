@@ -1645,28 +1645,24 @@ function temp36GetData($http, $scope) {
       item.Template == "temp36" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
     ) {
-      $http
-        .get(
-          "http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php"
-        )
-        .then(
-          function(response) {
-            $scope.TemplateData.forEach(function(item) {
-              if (item.Template == "temp36") {
-                console.log("TEMP 36: Aircast-Values | Fetching Data Success");
-
-                item.Content =
-                  "What's the point of your education, if you still throw garbage on streets to be ultimately picked up by an uneducated person!";
-                item.ContentBy = "Gangtok Municipal Government";
+      $http.get("http://13.250.103.104:3500/get-aircast-values").then(
+        function(response) {
+          $scope.TemplateData.forEach(function(item) {
+            if (item.Template == "temp36") {
+              console.log("TEMP 36: Aircast-Values | Fetching Data Success");
+              if (response.data.success && response.data.data.length > 0) {
+                item.Content = response.data.data;
+                item.position = 0;
                 item.hasData = true;
                 item.lastQuery = Date.now();
               }
-            });
-          },
-          function(err) {
-            console.warn("ERROR: TEMP 36 | Aircast-Values");
-          }
-        );
+            }
+          });
+        },
+        function(err) {
+          console.warn("ERROR: TEMP 36 | Aircast-Values");
+        }
+      );
     }
   });
 }
