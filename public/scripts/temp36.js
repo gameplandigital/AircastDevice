@@ -8,7 +8,7 @@ function temp36Controller(
   $q
 ) {
   var dataFromGetData = {};
-  var duration = 10000;
+  var duration = 15000;
   for (var i = 0; i < $scope.TemplateData.length; i++) {
     if (
       $scope.TemplateData[i].Template == "temp36" &&
