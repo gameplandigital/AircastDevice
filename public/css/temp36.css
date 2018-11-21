@@ -28,11 +28,13 @@
   font-size: 1.7em;
   padding-bottom: 0.8em;
   font-family: "Montserrat";
+  animation: fadeIn 2s;
 }
 
 #aircast-credit {
   font-size: 1em;
   font-family: "Montserratlight";
+  animation: fadeIn 5s;
 }
 
 #aircast-values-line-div {
@@ -42,6 +44,7 @@
   justify-content: center;
   top: 3em;
   padding-bottom: 0.5em;
+  animation: fadeIn 2s;
 }
 
 #aircast-values-line {
@@ -54,6 +57,7 @@
   width: 100%;
   justify-content: center;
   bottom: 1.5em;
+  animation: fadeInUp 2s;
 }
 
 #aircast-values-logo {
