@@ -1,140 +1,138 @@
-@font-face{
-	font-family: Antonio-lightimport;
-	src:url("fonts/Antonio-light.ttf");
+@font-face {
+  font-family: Antonio-lightimport;
+  src: url("fonts/Antonio-light.ttf");
 }
 
-@font-face{
-	font-family: stake-throughimport;
-	src:url("fonts/StakeThroughtheHeartBB_reg.ttf");
+@font-face {
+  font-family: stake-throughimport;
+  src: url("fonts/StakeThroughtheHeartBB_reg.ttf");
 }
 
-@font-face{
-	font-family: bebasimport;
-	src:url("fonts/BebasNeue Regular.otf");
+@font-face {
+  font-family: bebasimport;
+  src: url("fonts/BebasNeue Regular.otf");
 }
 
-#halloween-overlay{
-    width: 100vw;
-    height: 40vh;
-    position: absolute;
-    background: linear-gradient(rgba(66, 105, 156, 0.73),transparent);
+#halloween-overlay {
+  width: 100vw;
+  height: 40vh;
+  position: absolute;
+  background: linear-gradient(rgba(66, 105, 156, 0.73), transparent);
 }
-
 
 #holloweenmaindiv {
-	width: 100vw;
-    height: 100vh;
-    font-size: 4vh;
-    overflow: hidden;
-    color: white;
-    background-image: linear-gradient(#2b5777, #7eb7d280 75%);
+  width: 100vw;
+  height: 100vh;
+  font-size: 4vh;
+  overflow: hidden;
+  color: white;
+  display: none;
+  background-image: linear-gradient(#2b5777, #7eb7d280 75%);
 }
 
-#holloweenmaindiv #halloweenback{
-	width: 100vw;
-	height: 100vh;
-    position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+#holloweenmaindiv #halloweenback {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-#holloweenmaindiv #dateandtime{
-	display: flex;
-	position: absolute;
-	width: 100%;
-	justify-content: space-between;
-	bottom: 0.5em;
-    font-family: stake-throughimport;
+#holloweenmaindiv #dateandtime {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-between;
+  bottom: 0.5em;
+  font-family: stake-throughimport;
 }
 
-#holloweenmaindiv #time{
-	font-size: 1.5em;
-   padding-left: 2em;
+#holloweenmaindiv #time {
+  font-size: 1.5em;
+  padding-left: 2em;
 }
 
-#holloweenmaindiv #date{
-	font-size: 1.5em;
-   padding-right: 2em;
+#holloweenmaindiv #date {
+  font-size: 1.5em;
+  padding-right: 2em;
 }
 
-#holloweenmaindiv #contentdiv{
-	display: flex;
-	position: absolute;
-	width: 100%;
-	justify-content: space-between;
+#holloweenmaindiv #contentdiv {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-between;
 }
 
-#holloweenmaindiv #textdiv{
-	position: relative;
-	top:5em;
-	left: 7.5em;
-	height: 7.5em;
-	width: 18em;
+#holloweenmaindiv #textdiv {
+  position: relative;
+  top: 5em;
+  left: 7.5em;
+  height: 7.5em;
+  width: 18em;
 }
 
-
-#holloweenmaindiv #contentdiv #textdiv #itwillbea{
-	position: absolute;
-	top:0em;
-	font-size: 3em;
-	font-family: 'Antonio-lightimport';
+#holloweenmaindiv #contentdiv #textdiv #itwillbea {
+  position: absolute;
+  top: 0em;
+  font-size: 3em;
+  font-family: "Antonio-lightimport";
 }
 
-#holloweenmaindiv #contentdiv #textdiv #lovelyday{
-	position: absolute;
-	top:0.7em;
-	font-size: 5em;
-	font-family: 'Antonio-lightimport';
+#holloweenmaindiv #contentdiv #textdiv #lovelyday {
+  position: absolute;
+  top: 0.7em;
+  font-size: 5em;
+  font-family: "Antonio-lightimport";
 }
 
-
-#holloweenmaindiv #sundiv{
-	position: relative;
-	width: 8em;
-	height: 8em;
-	top:2.5em;
-	right: 3.6em;
+#holloweenmaindiv #sundiv {
+  position: relative;
+  width: 8em;
+  height: 8em;
+  top: 2.5em;
+  right: 3.6em;
 }
 
-#holloweenmaindiv #sundiv #sunface{
-	position: absolute;
-	width: 6.5em;
-	top: 1.3em;
-	left: 0.7em;
-	right: 0em;
-	bottom: 1em;
+#holloweenmaindiv #sundiv #sunface {
+  position: absolute;
+  width: 6.5em;
+  top: 1.3em;
+  left: 0.7em;
+  right: 0em;
+  bottom: 1em;
 }
 
-#holloweenmaindiv #sunray{
-	width: 8em;
+#holloweenmaindiv #sunray {
+  width: 8em;
 }
 
-#holloweenmaindiv #cloud{
-	position: absolute;
-	bottom: 0em;
-	left: -2em;
-	width: 5.3em;
+#holloweenmaindiv #cloud {
+  position: absolute;
+  bottom: 0em;
+  left: -2em;
+  width: 5.3em;
 }
 
-#holloweenmaindiv #sundiv p{
-	position: absolute;
-	bottom: -1em;
-	font-size: 4.5em;
-	font-family: bebasimport;
-	font-weight: bold;
+#holloweenmaindiv #sundiv p {
+  position: absolute;
+  bottom: -1em;
+  font-size: 4.5em;
+  font-family: bebasimport;
+  font-weight: bold;
 }
 
 @keyframes rotate {
-	from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-#sunray{
-	animation: rotate 8s infinite linear;
+#sunray {
+  animation: rotate 8s infinite linear;
 }
