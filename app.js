@@ -81,7 +81,7 @@ app.post('/logTimestamp', (req, res) => {
 
             let x = data.slice(0, -1);
             let y = data.split('*');
-
+            let sql = 'INSERT INTO AircastPlaying (RpiID, CampaignID, PlayingDate, isOffline) VALUES ?';
             for (let i = 0; i < y.length - 1; i++) {
               let a = y[i].split(',');
               let z = [parseInt(a[0]), parseInt(a[1]), a[2], 1]
@@ -92,26 +92,23 @@ app.post('/logTimestamp', (req, res) => {
             var options = {
               url: 'http://13.250.103.104:3500/api/postTimestamp',
               method: 'POST',
-              json: { data: results }
+              json: { data: results, sql }
             };
 
             request(options, function (error, response, body) {
 
               if (error) {
-                console.log(error)
+
               } else {
                 try {
-                  console.log("try")
                   if (response.body.success) {
                     fs.truncate(__dirname + "/scratch/logs.txt", 0, function () { console.log('emptied the logs') })
                     console.log('updated');
                     offline = false;
 
-                  } else {
-                    console.log("else")
                   }
                 } catch (e) {
-                  console.log("catch")
+
                   offline = false;
                 }
 
