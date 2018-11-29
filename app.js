@@ -98,17 +98,20 @@ app.post('/logTimestamp', (req, res) => {
             request(options, function (error, response, body) {
 
               if (error) {
-
+                console.log(error)
               } else {
                 try {
+                  console.log("try")
                   if (response.body.success) {
                     fs.truncate(__dirname + "/scratch/logs.txt", 0, function () { console.log('emptied the logs') })
                     console.log('updated');
                     offline = false;
 
+                  } else {
+                    console.log("else")
                   }
                 } catch (e) {
-
+                  console.log("catch")
                   offline = false;
                 }
 
