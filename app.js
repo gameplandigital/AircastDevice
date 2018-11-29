@@ -1,7 +1,7 @@
 var async = require('async')
 var needle = require('needle')
 var fs = require('fs')
-var bodyParser  = require('body-parser');
+var bodyParser = require('body-parser');
 var express = require('express')
 var path = require('path')
 var aircast = require('./aircastServer.js')
@@ -16,29 +16,29 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
 app.set('port', process.env.PORT || 3000);
-app.use('/css', express.static(path.join(__dirname+'/public/css')));
-app.use('/scripts', express.static(path.join(__dirname+'/public/scripts')));
-app.use('/templates', express.static(path.join(__dirname+'/public/templates')));
-app.use('/assets', express.static(path.join(__dirname+'/public/assets')));
-app.use('/Aircast', express.static(path.join(__dirname+'/../AircastContent')));
+app.use('/css', express.static(path.join(__dirname + '/public/css')));
+app.use('/scripts', express.static(path.join(__dirname + '/public/scripts')));
+app.use('/templates', express.static(path.join(__dirname + '/public/templates')));
+app.use('/assets', express.static(path.join(__dirname + '/public/assets')));
+app.use('/Aircast', express.static(path.join(__dirname + '/../AircastContent')));
 
 app.get('/', function (req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '/public')});
+  res.sendFile('index.html', { root: path.join(__dirname, '/public') });
 })
 
 app.get('/demo', function (req, res) {
-  res.sendFile('indexDemo.html', {root: path.join(__dirname, '/public')});
+  res.sendFile('indexDemo.html', { root: path.join(__dirname, '/public') });
 })
 
 app.get('/demoPortrait', function (req, res) {
-  res.sendFile('indexDemoPortrait.html', {root: path.join(__dirname, '/public')});
+  res.sendFile('indexDemoPortrait.html', { root: path.join(__dirname, '/public') });
 })
 
 app.get('/crash', function (req, res) {
   setTimeout(function () {
-        throw new Error('We crashed!!!!!');
+    throw new Error('We crashed!!!!!');
   }, 10);
-  res.sendFile('indexDemoPortrait.html', {root: path.join(__dirname, '/public')});
+  res.sendFile('indexDemoPortrait.html', { root: path.join(__dirname, '/public') });
 })
 
 if (typeof localStorage === "undefined" || localStorage === null) {
@@ -48,14 +48,14 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 app.get('/myID', function (req, res) {
   // console.log(aircast);
   var data = {
-              RpiID: aircast.config.RpiID,
-              RpiServer: aircast.config.RpiServer
-            }
+    RpiID: aircast.config.RpiID,
+    RpiServer: aircast.config.RpiServer
+  }
 
-  if(aircast.config.isLegit){
+  if (aircast.config.isLegit) {
     res.send(data);
   }
-  else{
+  else {
     res.send({
       error: 'config failed'
     });
@@ -64,79 +64,79 @@ app.get('/myID', function (req, res) {
 })
 
 
-app.post('/logTimestamp',(req,res) => {
+app.post('/logTimestamp', (req, res) => {
 
   let d = req.body;
 
   if (d.Status == 'online') {
 
-    if (offline){
-      
+    if (offline) {
+
       let results = [];
 
-      fs.exists(__dirname+"/scratch/logs.txt", function(exists) {
-          if (exists) {
-            fs.readFile(__dirname+"/scratch/logs.txt", 'utf8', function(err, data) {  
-                if (err) throw err;
+      fs.exists(__dirname + "/scratch/logs.txt", function (exists) {
+        if (exists) {
+          fs.readFile(__dirname + "/scratch/logs.txt", 'utf8', function (err, data) {
+            if (err) throw err;
 
-                let x = data.slice(0,-1);
-                let y = data.split('*');
+            let x = data.slice(0, -1);
+            let y = data.split('*');
 
-                for (let i = 0; i < y.length-1; i++) {
-                  let a = y[i].split(',');
-                  let z = [parseInt(a[0]),parseInt(a[1]),a[2]]
+            for (let i = 0; i < y.length - 1; i++) {
+              let a = y[i].split(',');
+              let z = [parseInt(a[0]), parseInt(a[1]), a[2], 1]
 
-                  results.push(z)
+              results.push(z)
+            }
+
+            var options = {
+              url: 'http://13.250.103.104:3500/api/postTimestamp',
+              method: 'POST',
+              json: { data: results }
+            };
+
+            request(options, function (error, response, body) {
+
+              if (error) {
+
+              } else {
+                try {
+                  if (response.body.success) {
+                    fs.truncate(__dirname + "/scratch/logs.txt", 0, function () { console.log('emptied the logs') })
+                    console.log('updated');
+                    offline = false;
+
+                  }
+                } catch (e) {
+
+                  offline = false;
                 }
 
-                var options = {
-                  url: 'http://13.250.103.104:3500/api/postTimestamp',
-                  method: 'POST',
-                  json: {data: results}
-                };
-
-                request(options, function (error, response, body) {
-
-                    if (error) {
-
-                    }else{
-                      try {
-                        if (response.body.success) {
-                          fs.truncate(__dirname+"/scratch/logs.txt", 0,function(){console.log('emptied the logs')})
-                          console.log('updated');
-                          offline = false;
-
-                        }
-                      }catch(e) {
-
-                        offline = false;
-                      }
-                      
-                    }
-
-
-          
-
-
-                })
+              }
 
 
 
-            });
-          }
+
+
+            })
+
+
+
+          });
+        }
       });
     }
 
-  }else{
+  } else {
 
     let d = req.body;
-    var stream = fs.createWriteStream(__dirname+"/scratch/logs.txt", {flags:'a'});
+    var stream = fs.createWriteStream(__dirname + "/scratch/logs.txt", { flags: 'a' });
 
     let t = moment().format('YYYY-MM-DD HH:mm:ss');
 
     let data = [aircast.config.RpiID, d.CampaignID, t];
 
-    stream.write(data.toString()+'*');
+    stream.write(data.toString() + '*');
 
     stream.end();
 
@@ -149,37 +149,37 @@ app.post('/logTimestamp',(req,res) => {
 
 
 
-app.post('/localContent',function (req,res) {
+app.post('/localContent', function (req, res) {
 
   let d = req.body;
   let results;
   try {
-      if (d.status) {
-        localStorage.setItem('data',JSON.stringify(d.content));
-        res.json({success: true});  
-      }else{
-        results = localStorage.getItem('data');
-        if (results == null) {
-            res.json({success: true, content: []});  
-        }else{
-            res.json({success: true, content: JSON.parse(results)});  
-          }
-        }
-  }catch(err){
+    if (d.status) {
+      localStorage.setItem('data', JSON.stringify(d.content));
+      res.json({ success: true });
+    } else {
+      results = localStorage.getItem('data');
+      if (results == null) {
+        res.json({ success: true, content: [] });
+      } else {
+        res.json({ success: true, content: JSON.parse(results) });
+      }
+    }
+  } catch (err) {
 
   }
-  
+
 
 })
 
 
 app.listen(app.get('port'), function () {
-  console.log('Example app listening on port: '+app.get('port'))
+  console.log('Example app listening on port: ' + app.get('port'))
 })
 
 
-function getRpiConfig(){
-  if(aircast.getConfig()){
+function getRpiConfig() {
+  if (aircast.getConfig()) {
     //console.log('success');
     // updateRpi();
     setInterval(aircast.getRpiFiles, 10000);
@@ -187,13 +187,13 @@ function getRpiConfig(){
     setInterval(aircast.nodeAlive, 30000);
     // setInterval(aircast.removeFile, 5000);
   }
-  else{
+  else {
     // console.log('fail');
     setTimeout(getRpiConfig, 1000);
   }
 }
 
-function updateRpi(){
+function updateRpi() {
   setInterval(aircast.getRpiFiles, 10000);
 }
 
