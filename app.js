@@ -7,6 +7,7 @@ var path = require('path')
 var aircast = require('./aircastServer.js')
 var moment = require('moment');
 var request = require('request');
+var ip = require('ip');
 var LocalStorage = require('node-localstorage').LocalStorage;
 
 var offline = true;
@@ -169,6 +170,103 @@ app.post('/localContent',function (req,res) {
 
   }
   
+
+})
+
+
+app.get('/get-programmatic-campaign',(req,res) => {
+
+      var data = {
+      "id": "C1286769-E735-5C93-8E41-970C74248B46",
+      "imp": [
+        {
+          "id": "1",
+          "banner": {
+            "id": "1",
+            "w": 1366,
+            "h": 768,
+            "ext": {
+              "rp": {
+                "size_id": 219
+              }
+            }
+          },
+          "ext": {
+            "rp": {
+              "zone_id": 1103416
+            }
+          }
+        }
+      ],
+      "site": {
+        "name": "Aircast Test",
+        "page": "http://palmsolutions.co",
+        "publisher": {
+          "ext": {
+            "rp": {
+              "account_id": 19514
+            }
+          }
+        },
+        "ext": {
+          "rp": {
+            "site_id": 224606
+          }
+        }
+      },
+      "device": {
+        "name": "GTM 0001",
+        "ip": ip.address(),
+        "ua": "Aircast 1.0",
+        "geo": {
+          "lat": 14.551684,
+          "lon": 121.024685,
+          "city": "Makati, PH"
+        }
+      }
+    };
+
+
+    const options = {
+      method: 'POST',
+      uri: 'http://staged-by.rubiconproject.com/a/api/exchange.json',
+      headers: {
+        'Content-Type':'application/json',
+        'User-Agent': 'Aircast 1.0',
+        'Authorization': 'Basic YWlyY2FzdDoyRzBQVjBJUE1D',
+      },
+      json: true,
+      body: data      
+    };
+
+    function callback(error, response, body) {
+
+      if (!error && response.statusCode)
+
+      // console.log(error,response,body)
+      // if (!error && response.statusCode == 200) {
+      //   const info = JSON.parse(body);
+      // }
+      res.json({
+        error,response,body
+      })
+    }
+
+    request(options, callback);
+
+
+    // var xhr = new XMLHttpRequest();
+    // xhr.withCredentials = true;
+
+    // xhr.addEventListener("readystatechange", function () {
+    //   if (this.readyState === 4) {
+    //     console.log(this.responseText);
+    //   }
+    // });
+
+
+    // xhr.send(data);
+
 
 })
 

@@ -28,7 +28,7 @@ function temp4Controller($scope, $window, $timeout, $http, tempSrc, callback){
 		$http.get('/myID').then(function(response){
 			$.ajax({
 				method: 'POST',
-				url: 'http://palmsolutions-tools.herokuapp.com/api/crash-item',
+				url: 'http://13.250.103.104:3500/api/crash-item',
 				data: {
 					src: tempSrc.tempSrc.gif,
 					id: response.data.RpiID

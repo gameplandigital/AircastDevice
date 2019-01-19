@@ -33,7 +33,7 @@ function temp2Controller($scope, $window, $timeout, $http, temp2Src, callback){
 		$http.get('/myID').then(function(response){
 			$.ajax({
 				method: 'POST',
-				url: 'http://palmsolutions-tools.herokuapp.com/api/crash-item',
+				url: 'http://13.250.103.104:3500/api/crash-item',
 				data: {
 					src: temp2Src.tempSrc.video,
 					id: response.data.RpiID
