@@ -1,0 +1,20 @@
+<html>
+<head>
+  <script src="scripts/jquery.min.js"></script>
+</head>
+<body id="body">
+</body> 
+<script>
+  $.ajax({
+    url: "/get-programmatic-campaign",
+    method: "GET",
+    success: function (res) {
+      console.log(res);
+      var markup = res.response.body.seatbid[0].bid[0].adm;
+      document.write(
+        "<scr" + "ipt type='text/javascript'>" + markup + "</scr" + "ipt>"
+      );
+    }
+  })
+</script>
+</html>
