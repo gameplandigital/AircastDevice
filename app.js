@@ -8,7 +8,6 @@ var aircast = require("./aircastServer.js");
 var programmatic = require("./programmatic.js");
 var moment = require("moment");
 var request = require("request");
-var ip = require("ip");
 var LocalStorage = require("node-localstorage").LocalStorage;
 
 var offline = true;
@@ -57,10 +56,6 @@ app.get("/crash", function(req, res) {
 if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage("./scratch");
 }
-
-app.get("/programmatic", function(req, res) {
-  res.render("programmatic");
-});
 
 app.get("/myID", function(req, res) {
   // console.log(aircast);
@@ -165,15 +160,25 @@ app.post("/localContent", function(req, res) {
   } catch (err) {}
 });
 
-app.get("/get-programmatic-campaign", (req, res) => {
-  programmatic.initialize("GET", result => {
+app.get("/programmatic/:CampaignID", function(req, res) {
+  // RENDER PROGRAMMATIC PAGE LOCATED AT VIEWS FOLDER
+  const CampaignID = req.params.CampaignID;
+  res.render("programmatic", { CampaignID });
+});
+
+app.get("/get-programmatic-campaign/:CampaignID", (req, res) => {
+  // GET PROGRAMMATIC CONFIGURATION (ADM) TO BE RENDER ON PROGRAMMATIC PAGE
+  const CampaignID = req.params.CampaignID;
+  programmatic.get(CampaignID, result => {
     res.status(200).json(result);
   });
 });
 
-app.get("/update_programmatic", (req, res) => {
-  programmatic.initialize("DISABLE", result => {
-    console.log("Programmatic campaign off.");
+app.get("/update_programmatic/:CampaignID", (req, res) => {
+  // DISABLE PROGRAMMATIC CAMPAIGN AFTER RENDERING
+  const CampaignID = req.params.CampaignID;
+  programmatic.disable(CampaignID, result => {
+    console.log(`Programmatic Campaign ID: ${CampaignID} off.`);
     res.status(200).json(result);
   });
 });
@@ -203,14 +208,43 @@ function updateRpi() {
 
 getRpiConfig();
 
-programmatic.initialize("ENABLE", result => {
-  console.log(result);
+programmatic.check(CampaignIDs => {
+  // ENABLE PROGRAMMATIC IN APPLICATION START
+  if (CampaignIDs.length > 0) {
+    for (var i = 0; i < CampaignIDs.length; i++) {
+      programmatic.initialize(
+        CampaignIDs[i].CampaignID,
+        localStorage,
+        result => {
+          if (result.has_data) {
+            console.log(result);
+          } else {
+            console.log(result.data);
+          }
+        }
+      );
+    }
+  } else {
+    console.log("No programmatic campaign.");
+  }
 });
 
-// var askForProgrammaticCampaign = setInterval(getProgrammaticCampaign, 300000);
-var askForProgrammaticCampaign = setInterval(function() {
-  programmatic.initialize("ENABLE", result => {
-    console.log(result);
+setInterval(function() {
+  // ENABLE PROGRAMMATIC EVERY 5 MINUTES
+  programmatic.check(CampaignIDs => {
+    if (CampaignIDs.length > 0) {
+      for (var i = 0; i < CampaignIDs.length; i++) {
+        programmatic.initialize(
+          CampaignIDs[i].CampaignID,
+          localStorage,
+          result => {
+            console.log(result);
+          }
+        );
+      }
+    } else {
+      console.log("No programmatic campaign.");
+    }
   });
-}, 300000);
-askForProgrammaticCampaign;
+}, 60000);
+// 300000

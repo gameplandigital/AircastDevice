@@ -89,6 +89,7 @@ app.controller("MainController", function(
     var playingTemplate = $scope.templates[0];
     $scope.templates.shift();
     $scope.templates.push(playingTemplate);
+    $scope.currentPlayingCampaignID = playingTemplate.CampaignID;
 
     UpdateWallet(
       $http,
