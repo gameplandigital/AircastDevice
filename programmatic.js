@@ -4,7 +4,7 @@ var ip = require("ip");
 var fs = require("fs");
 
 var readData = (CampaignID, cb) => {
-  const filePath = "./scratch/programmatic_" + CampaignID;
+  const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
   fs.readFile(filePath, { encoding: "utf8" }, function(err, data) {
     if (!err) {
       cb(JSON.parse(data));
@@ -13,7 +13,7 @@ var readData = (CampaignID, cb) => {
 };
 
 var saveData = (CampaignID, data) => {
-  const filePath = "./scratch/programmatic_" + CampaignID;
+  const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
   fs.exists(filePath, function(exists) {
     if (exists) {
       fs.writeFile(filePath, data, function(err) {
@@ -36,100 +36,6 @@ var get = (CampaignID, cb) => {
   readData(CampaignID, result => {
     cb(result);
   });
-  /*
-  request(
-    {
-      method: "GET",
-      url:
-        aircast.config.RpiServer + "/programmatic_campaign_config/" + CampaignID
-    },
-    (error, response, body) => {
-      if (error) throw error;
-      var data = JSON.parse(body);
-      configData = data[0];
-
-      var programmaticData = {
-        id: configData.ProgrammaticID,
-        imp: [
-          {
-            id: configData.ImpressionID,
-            banner: {
-              id: configData.BannerID,
-              w: configData.BannerWidth,
-              h: configData.BannerHeight,
-              ext: {
-                rp: {
-                  size_id: configData.SizeID,
-                  usenurl: 1,
-                  useimptrackers: 1
-                }
-              }
-            },
-            ext: {
-              rp: {
-                zone_id: configData.ZoneID
-              }
-            }
-          }
-        ],
-        site: {
-          name: "Aircast Test",
-          page: "http://palmsolutions.co",
-          publisher: {
-            ext: {
-              rp: {
-                account_id: configData.AccountID
-              }
-            }
-          },
-          ext: {
-            rp: {
-              site_id: configData.SiteID
-            }
-          }
-        },
-        device: {
-          name: "GTM 0001",
-          ip: ip.address(),
-          ua: "Aircast 1.0",
-          geo: {
-            lat: configData.DeviceGeoLat,
-            lon: configData.DeviceGeoLong,
-            city: configData.DeviceGeoCity
-          },
-          ext: {
-            dooh: {
-              impmultiply: configData.ImpressionMultiplier
-            }
-          }
-        }
-      };
-
-      var programmaticOptions = {
-        method: "POST",
-        uri: "http://staged-by.rubiconproject.com/a/api/exchange.json",
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": "Aircast 1.0",
-          Authorization: "Basic YWlyY2FzdDoyRzBQVjBJUE1D"
-        },
-        json: true,
-        body: programmaticData
-      };
-
-      function callback(error, response, body) {
-        if (!error && response.statusCode)
-          cb({
-            error,
-            response,
-            body
-          });
-      }
-
-      request(programmaticOptions, callback);
-    }
-  );
-  */
 };
 
 var enable = (CampaignID, programmaticOptions, cb) => {
@@ -141,23 +47,23 @@ var enable = (CampaignID, programmaticOptions, cb) => {
       if (body != undefined) {
         if (body.statuscode == 0) {
           saveData(CampaignID, JSON.stringify(programmaticResponse));
-          request(
-            {
-              method: "PUT",
-              url: aircast.config.RpiServer + "/update_programmatic",
-              json: true,
-              body: {
-                rpi_id: aircast.config.RpiID,
-                campaign_id: CampaignID,
-                value: 1
-              }
-            },
-            (error, response, body) => {
-              if (error) throw error;
-              cb(`Programmatic Campaign ID: ${CampaignID} on.`);
-            }
-          );
         }
+        request(
+          {
+            method: "PUT",
+            url: aircast.config.RpiServer + "/update_programmatic",
+            json: true,
+            body: {
+              rpi_id: aircast.config.RpiID,
+              campaign_id: CampaignID,
+              value: 1
+            }
+          },
+          (error, response, body) => {
+            if (error) throw error;
+            cb(`Programmatic Campaign ID: ${CampaignID} on.`);
+          }
+        );
       }
     }
   }
