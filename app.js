@@ -15,8 +15,6 @@ var offline = true;
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "/views"));
 
 app.set("port", process.env.PORT || 3000);
 app.use("/css", express.static(path.join(__dirname + "/public/css")));
@@ -159,12 +157,6 @@ app.post("/localContent", function(req, res) {
       }
     }
   } catch (err) {}
-});
-
-app.get("/programmatic/:CampaignID", function(req, res) {
-  // RENDER PROGRAMMATIC PAGE LOCATED AT VIEWS FOLDER
-  const CampaignID = req.params.CampaignID;
-  res.render("programmatic", { CampaignID });
 });
 
 app.get("/get-programmatic-campaign/:CampaignID", (req, res) => {

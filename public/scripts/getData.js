@@ -167,45 +167,57 @@ function temp11GetData($http, $scope) {
   });
 }
 
+function temp12GetData($http, $scope) {
+  $scope.TemplateData.forEach(function(item) {
+    if (
+      item.Template == "temp12" &&
+      (!item.hasData || item.lastQuery < Date.now() - 5400000)
+    ) {
+      var city_parameter = "Manila";
+      if (item.tempSrc.hasOwnProperty("source")) {
+        city_parameter = item.tempSrc.source.split("/")[1];
+        item.source = city_parameter;
+      } else {
+        item.source = city_parameter;
+      }
 
-function temp12GetData($http, $scope){
-
-
-	$scope.TemplateData.forEach(function(item){
-
-		if(item.Template=='temp12'&&(!item.hasData||item.lastQuery < (Date.now()-5400000))){
-
-			var city_parameter = 'Manila';
-			if (item.tempSrc.hasOwnProperty('source')) {
-				city_parameter = item.tempSrc.source.split('/')[1];
-				item.source = city_parameter
-			}else{
-				item.source = city_parameter;
-			}
-
-			$http.get('http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter+'&cnt=7')
-				.then(function(response1){
-					$http.get('http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q='+city_parameter)
-						.then(function(response2){
-							console.log('TEMP 12: Weather | Fetching Data Success');
-							for(var i=0; i<$scope.TemplateData.length; i++){
-				        		if($scope.TemplateData[i].Template == 'temp12' && $scope.TemplateData[i].CampaignID == item.CampaignID){
-				        			var dummy = [];
-				        			dummy.push(response1);
-				        			dummy.push(response2);
-				        			$scope.TemplateData[i].TempData = dummy;
-				        			$scope.TemplateData[i].hasData = true;
-		        					$scope.TemplateData[i].lastQuery = Date.now();
-				        			break;
-				        		}
-				        	}
-						},function(err){
-							console.warn('ERROR: TEMP 12 | Weather');
-						})
-				})
-		}
-	})
-
+      $http
+        .get(
+          "http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q=" +
+            city_parameter +
+            "&cnt=7"
+        )
+        .then(function(response1) {
+          $http
+            .get(
+              "http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q=" +
+                city_parameter
+            )
+            .then(
+              function(response2) {
+                console.log("TEMP 12: Weather | Fetching Data Success");
+                for (var i = 0; i < $scope.TemplateData.length; i++) {
+                  if (
+                    $scope.TemplateData[i].Template == "temp12" &&
+                    $scope.TemplateData[i].CampaignID == item.CampaignID
+                  ) {
+                    var dummy = [];
+                    dummy.push(response1);
+                    dummy.push(response2);
+                    $scope.TemplateData[i].TempData = dummy;
+                    $scope.TemplateData[i].hasData = true;
+                    $scope.TemplateData[i].lastQuery = Date.now();
+                    break;
+                  }
+                }
+              },
+              function(err) {
+                console.warn("ERROR: TEMP 12 | Weather");
+              }
+            );
+        });
+    }
+  });
 }
 
 function temp13GetData($http, $scope) {
