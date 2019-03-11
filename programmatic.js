@@ -47,23 +47,23 @@ var enable = (CampaignID, programmaticOptions, cb) => {
       if (body != undefined) {
         if (body.seatbid[0].bid.length > 0) {
           saveData(CampaignID, JSON.stringify(programmaticResponse));
-          request(
-            {
-              method: "PUT",
-              url: aircast.config.RpiServer + "/update_programmatic",
-              json: true,
-              body: {
-                rpi_id: aircast.config.RpiID,
-                campaign_id: CampaignID,
-                value: 1
-              }
-            },
-            (error, response, body) => {
-              if (error) throw error;
-              cb(`Programmatic Campaign ID: ${CampaignID} on.`);
-            }
-          );
         }
+        request(
+          {
+            method: "PUT",
+            url: aircast.config.RpiServer + "/update_programmatic",
+            json: true,
+            body: {
+              rpi_id: aircast.config.RpiID,
+              campaign_id: CampaignID,
+              value: 1
+            }
+          },
+          (error, response, body) => {
+            if (error) throw error;
+            cb(`Programmatic Campaign ID: ${CampaignID} on.`);
+          }
+        );
       }
     }
   }
