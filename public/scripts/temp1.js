@@ -3,6 +3,11 @@ function temp1Controller($scope, $window, $timeout, $http, temp1Src, callback) {
   var div = document.getElementById("programmatic_div");
   div.innerHTML = "";
 
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + "px";
+  }
+
   $.ajax({
     url: "/get-programmatic-campaign/" + CampaignID,
     method: "GET",
@@ -13,8 +18,11 @@ function temp1Controller($scope, $window, $timeout, $http, temp1Src, callback) {
       var div = document.getElementById("programmatic_div");
 
       var iframe = document.createElement("iframe");
-      iframe.style.width = "100vw";
-      iframe.style.height = "100vh";
+      iframe.setAttribute("frameborder", 0);
+      iframe.setAttribute("scrolling", "no");
+      iframe.onload = function() {
+        resizeIframe(this);
+      };
 
       var html =
         "<html><body></body>" +

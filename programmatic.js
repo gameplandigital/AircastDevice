@@ -45,8 +45,7 @@ var enable = (CampaignID, programmaticOptions, cb) => {
       const programmaticResponse = body;
       console.log(programmaticResponse);
       if (body != undefined) {
-        if (body.statuscode == 0) {
-          console.log(CampaignID);
+        if (body.seatbid[0].bid.length > 0) {
           saveData(CampaignID, JSON.stringify(programmaticResponse));
           request(
             {
