@@ -4,6 +4,7 @@ var ip = require("ip");
 var fs = require("fs");
 
 var readData = (CampaignID, cb) => {
+  // FUNCTION TO READ AD RESPONSE DATA FROM A FILE
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
   fs.readFile(filePath, { encoding: "utf8" }, function(err, data) {
     if (!err) {
@@ -13,6 +14,7 @@ var readData = (CampaignID, cb) => {
 };
 
 var saveData = (CampaignID, data) => {
+  // FUNCTION TO SAVE AD RESPONSE IN A FILE
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
   fs.exists(filePath, function(exists) {
     if (exists) {
@@ -43,7 +45,7 @@ var enable = (CampaignID, programmaticOptions, cb) => {
   function callback(error, response, body) {
     if (!error && response.statusCode) {
       const programmaticResponse = body;
-      console.log(programmaticResponse);
+      // console.log(programmaticResponse);
       if (body != undefined) {
         if (body.seatbid[0].bid.length > 0) {
           saveData(CampaignID, JSON.stringify(programmaticResponse));
@@ -164,7 +166,7 @@ var initialize = (CampaignID, localStorage) => {
 
         var programmaticOptions = {
           method: "POST",
-          uri: "http://staged-by.rubiconproject.com/a/api/exchange.json",
+          uri: "http://exapi-apac.rubiconproject.com/a/api/exchange.json",
           headers: {
             "Content-Type": "application/json",
             "User-Agent": "Aircast 1.0",
