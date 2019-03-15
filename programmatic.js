@@ -3,6 +3,31 @@ var request = require("request");
 var ip = require("ip");
 var fs = require("fs");
 
+var saveLog = (RpiID, CampaignID, log) => {
+  var data = {
+    RpiID: RpiID,
+    CampaignID: CampaignID,
+    log: JSON.stringify(log)
+  };
+
+  var option = {
+    method: "POST",
+    url: aircast.config.RpiServer + "/insert_programmatic_log",
+    json: true,
+    body: data
+  };
+
+  function callback(error, response, body) {
+    if (!error) {
+      null;
+    } else {
+      throw error;
+    }
+  }
+
+  request(option, callback);
+};
+
 var readData = (CampaignID, cb) => {
   // FUNCTION TO READ AD RESPONSE DATA FROM A FILE
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
@@ -67,6 +92,9 @@ var enable = (CampaignID, programmaticOptions, cb) => {
           );
         }
       }
+      saveLog(aircast.config.RpiID, CampaignID, programmaticResponse);
+    } else {
+      saveLog(aircast.config.RpiID, CampaignID, error);
     }
   }
 
