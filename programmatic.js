@@ -3,10 +3,12 @@ var request = require("request");
 var ip = require("ip");
 var fs = require("fs");
 
-var saveLog = (RpiID, CampaignID, log) => {
+var saveLog = (RpiID, CampaignID, statuscode, has_ad, log) => {
   var data = {
     RpiID: RpiID,
     CampaignID: CampaignID,
+    statuscode: statuscode,
+    has_ad: has_ad,
     log: JSON.stringify(log)
   };
 
@@ -66,6 +68,7 @@ var get = (CampaignID, cb) => {
 };
 
 var enable = (CampaignID, programmaticOptions, cb) => {
+  var has_ad = false;
   // GET IF THERES A PROGRAMMATIC CAMPAIGN ENABLE IT
   function callback(error, response, body) {
     if (!error && response.statusCode) {
@@ -73,6 +76,7 @@ var enable = (CampaignID, programmaticOptions, cb) => {
       // console.log(programmaticResponse);
       if (body != undefined) {
         if (body.seatbid[0].bid.length > 0) {
+          has_ad = true;
           saveData(CampaignID, JSON.stringify(programmaticResponse));
           request(
             {
@@ -92,9 +96,15 @@ var enable = (CampaignID, programmaticOptions, cb) => {
           );
         }
       }
-      saveLog(aircast.config.RpiID, CampaignID, programmaticResponse);
+      saveLog(
+        aircast.config.RpiID,
+        CampaignID,
+        programmaticResponse.statuscode,
+        has_ad,
+        programmaticResponse
+      );
     } else {
-      saveLog(aircast.config.RpiID, CampaignID, error);
+      saveLog(aircast.config.RpiID, CampaignID, null, has_ad, error);
     }
   }
 
