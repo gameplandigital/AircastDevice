@@ -239,5 +239,4 @@ setInterval(function() {
       console.log("No programmatic campaign.");
     }
   });
-}, 60000);
-// 300000
+}, 300000);
