@@ -190,8 +190,8 @@ var initialize = CampaignID => {
             ip: ip.address(),
             ua: "Aircast 1.0",
             geo: {
-              lat: configData.DeviceGeoLat,
-              lon: configData.DeviceGeoLong,
+              lat: parseFloat(configData.DeviceGeoLat),
+              lon: parseFloat(configData.DeviceGeoLong),
               city: configData.DeviceGeoCity
             },
             ext: {
