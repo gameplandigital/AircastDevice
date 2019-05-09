@@ -202,7 +202,7 @@ function updateRpi() {
 getRpiConfig();
 
 programmatic.check(CampaignIDs => {
-  // ENABLE PROGRAMMATIC IN APPLICATION START
+  // CALL PROGRAMMATIC IN APPLICATION START
   if (CampaignIDs.length > 0) {
     for (var i = 0; i < CampaignIDs.length; i++) {
       programmatic.initialize(
@@ -223,20 +223,16 @@ programmatic.check(CampaignIDs => {
 });
 
 setInterval(function() {
-  // ENABLE PROGRAMMATIC EVERY 5 MINUTES
+  // CALL PROGRAMMATIC EVERY 30 MINUTES
   programmatic.check(CampaignIDs => {
     if (CampaignIDs.length > 0) {
       for (var i = 0; i < CampaignIDs.length; i++) {
-        programmatic.initialize(
-          CampaignIDs[i].CampaignID,
-          localStorage,
-          result => {
-            console.log(result);
-          }
-        );
+        programmatic.initialize(CampaignIDs[i].CampaignID, result => {
+          console.log(result);
+        });
       }
     } else {
       console.log("No programmatic campaign.");
     }
   });
-}, 300000);
+}, 30000);

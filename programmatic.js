@@ -131,7 +131,7 @@ var disable = (CampaignID, cb) => {
   );
 };
 
-var initialize = (CampaignID, localStorage) => {
+var initialize = CampaignID => {
   // FUNCTION TO GET PROGRAMMATIC CONFIGURATION AND ENABLE WITH AD RESPONSE
   request(
     {
