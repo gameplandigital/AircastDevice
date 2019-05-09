@@ -223,7 +223,7 @@ programmatic.check(CampaignIDs => {
 });
 
 setInterval(function() {
-  // CALL PROGRAMMATIC EVERY 30 MINUTES
+  // CALL PROGRAMMATIC EVERY 30 SECONDS
   programmatic.check(CampaignIDs => {
     if (CampaignIDs.length > 0) {
       for (var i = 0; i < CampaignIDs.length; i++) {
