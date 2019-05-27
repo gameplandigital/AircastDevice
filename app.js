@@ -5,7 +5,8 @@ var bodyParser = require("body-parser");
 var express = require("express");
 var path = require("path");
 var aircast = require("./aircastServer.js");
-var programmatic = require("./programmatic.js");
+var programmaticImage = require("./programmatic-image.js");
+var programmaticVideo = require("./programmatic-video.js");
 var moment = require("moment");
 var request = require("request");
 var LocalStorage = require("node-localstorage").LocalStorage;
@@ -159,18 +160,35 @@ app.post("/localContent", function(req, res) {
   } catch (err) {}
 });
 
-app.get("/get-programmatic-campaign/:CampaignID", (req, res) => {
+app.get("/get-programmatic-campaign/image/:CampaignID", (req, res) => {
   // GET PROGRAMMATIC CONFIGURATION (ADM) TO BE RENDER ON PROGRAMMATIC PAGE
   const CampaignID = req.params.CampaignID;
-  programmatic.get(CampaignID, result => {
+  programmaticImage.get(CampaignID, result => {
     res.status(200).json(result);
   });
 });
 
-app.get("/update_programmatic/:CampaignID", (req, res) => {
+app.get("/update_programmatic/image/:CampaignID", (req, res) => {
   // DISABLE PROGRAMMATIC CAMPAIGN AFTER RENDERING
   const CampaignID = req.params.CampaignID;
-  programmatic.disable(CampaignID, result => {
+  programmaticImage.disable(CampaignID, result => {
+    console.log(`Programmatic Campaign ID: ${CampaignID} off.`);
+    res.status(200).json(result);
+  });
+});
+
+app.get("/get-programmatic-campaign/video/:CampaignID", (req, res) => {
+  // GET PROGRAMMATIC CONFIGURATION (ADM) TO BE RENDER ON PROGRAMMATIC PAGE
+  const CampaignID = req.params.CampaignID;
+  programmaticVideo.get(CampaignID, result => {
+    res.status(200).json(result);
+  });
+});
+
+app.get("/update_programmatic/video/:CampaignID", (req, res) => {
+  // DISABLE PROGRAMMATIC CAMPAIGN AFTER RENDERING
+  const CampaignID = req.params.CampaignID;
+  programmaticVideo.disable(CampaignID, result => {
     console.log(`Programmatic Campaign ID: ${CampaignID} off.`);
     res.status(200).json(result);
   });
@@ -201,11 +219,11 @@ function updateRpi() {
 
 getRpiConfig();
 
-programmatic.check(CampaignIDs => {
+programmaticImage.check(CampaignIDs => {
   // CALL PROGRAMMATIC IN APPLICATION START
   if (CampaignIDs.length > 0) {
     for (var i = 0; i < CampaignIDs.length; i++) {
-      programmatic.initialize(
+      programmaticImage.initialize(
         CampaignIDs[i].CampaignID,
         localStorage,
         result => {
@@ -218,21 +236,57 @@ programmatic.check(CampaignIDs => {
       );
     }
   } else {
-    console.log("No programmatic campaign.");
+    console.log("No programmatic image campaign.");
   }
 });
 
 setInterval(function() {
   // CALL PROGRAMMATIC EVERY 30 SECONDS
-  programmatic.check(CampaignIDs => {
+  programmaticImage.check(CampaignIDs => {
     if (CampaignIDs.length > 0) {
       for (var i = 0; i < CampaignIDs.length; i++) {
-        programmatic.initialize(CampaignIDs[i].CampaignID, result => {
+        programmaticImage.initialize(CampaignIDs[i].CampaignID, result => {
           console.log(result);
         });
       }
     } else {
-      console.log("No programmatic campaign.");
+      console.log("No programmatic image campaign.");
+    }
+  });
+}, 30000);
+
+programmaticVideo.check(CampaignIDs => {
+  // CALL PROGRAMMATIC IN APPLICATION START
+  if (CampaignIDs.length > 0) {
+    for (var i = 0; i < CampaignIDs.length; i++) {
+      programmaticVideo.initialize(
+        CampaignIDs[i].CampaignID,
+        localStorage,
+        result => {
+          if (result.has_data) {
+            console.log(result);
+          } else {
+            console.log(result.data);
+          }
+        }
+      );
+    }
+  } else {
+    console.log("No programmatic video campaign.");
+  }
+});
+
+setInterval(function() {
+  // CALL PROGRAMMATIC EVERY 30 SECONDS
+  programmaticVideo.check(CampaignIDs => {
+    if (CampaignIDs.length > 0) {
+      for (var i = 0; i < CampaignIDs.length; i++) {
+        programmaticVideo.initialize(CampaignIDs[i].CampaignID, result => {
+          console.log(result);
+        });
+      }
+    } else {
+      console.log("No programmatic video campaign.");
     }
   });
 }, 30000);

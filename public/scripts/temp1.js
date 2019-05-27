@@ -9,7 +9,7 @@ function temp1Controller($scope, $window, $timeout, $http, temp1Src, callback) {
   }
 
   $.ajax({
-    url: "/get-programmatic-campaign/" + CampaignID,
+    url: "/get-programmatic-campaign/image/" + CampaignID,
     method: "GET",
     success: function(res) {
       var markup = res.seatbid[0].bid[0].adm;
@@ -40,7 +40,7 @@ function temp1Controller($scope, $window, $timeout, $http, temp1Src, callback) {
 
       $.ajax({
         method: "GET",
-        url: "/update_programmatic/" + $scope.currentPlayingCampaignID,
+        url: "/update_programmatic/image/" + $scope.currentPlayingCampaignID,
         success: function(res) {
           console.log(res);
 
