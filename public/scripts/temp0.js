@@ -1,15 +1,6 @@
 function temp0Controller($scope, $window, $timeout, $http, temp1Src, callback) {
   var CampaignID = $scope.currentPlayingCampaignID;
 
-  // var mediaPlayer = jwplayer("mediaPlayer");
-
-  // mediaPlayer.setConfig({
-  //   repeat: false,
-  //   autostart: "viewable",
-  //   mute: false,
-  //   volume: 100
-  // });
-
   $.ajax({
     url: "/get-programmatic-campaign/video/" + CampaignID,
     method: "GET",
@@ -43,8 +34,6 @@ function temp0Controller($scope, $window, $timeout, $http, temp1Src, callback) {
           console.log(obj);
         })
         .on("complete adComplete", function() {
-          // mediaPlayer.remove();
-          console.log("meow");
           callback();
         })
         .play();
@@ -58,10 +47,4 @@ function temp0Controller($scope, $window, $timeout, $http, temp1Src, callback) {
       });
     }
   });
-
-  // mediaPlayer.on("complete adComplete adError", function() {
-  //   // mediaPlayer.remove();
-  //   console.log("meow");
-  //   callback();
-  // });
 }
