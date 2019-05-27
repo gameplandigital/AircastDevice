@@ -1,0 +1,61 @@
+{
+  "id": "C1286769-E735-5C93-8E41-970C74248B46",
+  "imp": [
+    {
+      "video": {
+        "mimes": ["video/mp4"],
+        "w": 1366,
+        "h": 768,
+        "minduration": 1,
+        "maxduration": 120,
+        "boxingallowed": 0,
+        "ext": {
+          "skip": 1,
+          "skipdelay": 5,
+          "rp": {
+            "size_id": 203
+          }
+        }
+      },
+      "ext": {
+        "rp": {
+          "zone_id": 1293182
+        }
+      }
+    }
+  ],
+  "site": {
+    "name": "Aircast Test",
+    "page": "http://aircast.ph/",
+    "publisher": {
+      "ext": {
+        "rp": {
+          "account_id": 19514
+        }
+      }
+    },
+    "ext": {
+      "rp": {
+        "site_id": 261704
+      }
+    },
+    "content": {
+      "language": "en"
+    }
+  },
+  "device": {
+    "name": "GTM 0001",
+    "ip": "120.28.163.206",
+    "ua": "Aircast 1.0",
+    "geo": {
+      "lat": 14.6298967,
+      "lon": 121.0256087,
+      "city": "Quezon City, PH"
+    },
+    "ext": {
+      "dooh": {
+        "impmultiply": 50
+      }
+    }
+  }
+}
