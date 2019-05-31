@@ -144,6 +144,8 @@ var initialize = CampaignID => {
       url:
         aircast.config.RpiServer +
         "/programmatic_campaign_config/image/" +
+        aircast.config.RpiID +
+        "/" +
         CampaignID
     },
     (error, response, body) => {
