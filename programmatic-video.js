@@ -200,7 +200,7 @@ var initialize = CampaignID => {
           },
           device: {
             name: "GTM 0001",
-            ip: myIP,
+            ip: "54.254.234.240",
             ua: "Aircast 1.0",
             geo: {
               lat: parseFloat(configData.DeviceGeoLat),
