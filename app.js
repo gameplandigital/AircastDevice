@@ -181,7 +181,8 @@ app.get("/get-programmatic-campaign/video/:CampaignID", (req, res) => {
   // GET PROGRAMMATIC CONFIGURATION (ADM) TO BE RENDER ON PROGRAMMATIC PAGE
   const CampaignID = req.params.CampaignID;
   programmaticVideo.get(CampaignID, result => {
-    res.status(200).json(result);
+    var data = JSON.parse(result);
+    res.status(200).send(data.seatbid[0].bid[0].adm);
   });
 });
 
@@ -223,17 +224,13 @@ programmaticImage.check(CampaignIDs => {
   // CALL PROGRAMMATIC IN APPLICATION START
   if (CampaignIDs.length > 0) {
     for (var i = 0; i < CampaignIDs.length; i++) {
-      programmaticImage.initialize(
-        CampaignIDs[i].CampaignID,
-        localStorage,
-        result => {
-          if (result.has_data) {
-            console.log(result);
-          } else {
-            console.log(result.data);
-          }
+      programmaticImage.initialize(CampaignIDs[i].CampaignID, result => {
+        if (result.has_data) {
+          console.log(result);
+        } else {
+          console.log(result.data);
         }
-      );
+      });
     }
   } else {
     console.log("No programmatic image campaign.");
@@ -259,17 +256,13 @@ programmaticVideo.check(CampaignIDs => {
   // CALL PROGRAMMATIC IN APPLICATION START
   if (CampaignIDs.length > 0) {
     for (var i = 0; i < CampaignIDs.length; i++) {
-      programmaticVideo.initialize(
-        CampaignIDs[i].CampaignID,
-        localStorage,
-        result => {
-          if (result.has_data) {
-            console.log(result);
-          } else {
-            console.log(result.data);
-          }
+      programmaticVideo.initialize(CampaignIDs[i].CampaignID, result => {
+        if (result.has_data) {
+          console.log(result);
+        } else {
+          console.log(result.data);
         }
-      );
+      });
     }
   } else {
     console.log("No programmatic video campaign.");

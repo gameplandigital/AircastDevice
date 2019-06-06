@@ -1,12 +1,6 @@
 var aircast = require("./aircastServer.js");
 var request = require("request");
 var fs = require("fs");
-var publicIP = require("public-ip");
-
-var myIP = "";
-(async () => {
-  myIP = await publicIP.v4();
-})();
 
 var saveLog = (RpiID, CampaignID, statuscode, has_ad, log) => {
   var data = {
@@ -180,7 +174,7 @@ var initialize = CampaignID => {
           ],
           site: {
             name: "Aircast Test",
-            page: "http://palmsolutions.co",
+            page: "http://aircast.ph/",
             publisher: {
               ext: {
                 rp: {

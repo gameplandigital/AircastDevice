@@ -1,12 +1,6 @@
 var aircast = require("./aircastServer.js");
 var request = require("request");
 var fs = require("fs");
-var publicIP = require("public-ip");
-
-var myIP = "";
-(async () => {
-  myIP = await publicIP.v4();
-})();
 
 var saveLog = (RpiID, CampaignID, statuscode, has_ad, log) => {
   var data = {
@@ -40,7 +34,7 @@ var readData = (CampaignID, cb) => {
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
   fs.readFile(filePath, { encoding: "utf8" }, function(err, data) {
     if (!err) {
-      cb(JSON.parse(data));
+      cb(data);
     }
   });
 };
