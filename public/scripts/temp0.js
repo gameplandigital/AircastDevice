@@ -26,6 +26,13 @@ function temp0Controller($scope, $window, $timeout, $http, temp1Src, callback) {
         tag: "/get-programmatic-campaign/video/" + CampaignID
       }
     })
+    .on("setupError", function(message) {
+      console.log(message);
+      callback();
+    })
+    .on("adError", function() {
+      callback();
+    })
     .on("adPlay", function() {
       this.setConfig({
         mute: false,
