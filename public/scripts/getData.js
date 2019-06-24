@@ -871,9 +871,9 @@ function temp27GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD",
+              "EAAGXpZCE7eaUBAGOKd6eDo16TGWdBj2KZB7JlzQHWoQZCMXZAubYphwWPDnEpSw250DZA58TZCbC5bkj8EgZBGyUyMstX2161ZAw3jrhncDUBbzaOOASD9pPR4UwUPvMzl5P2q7iyP4lSCGqg3HeyFBgMV0bE89DD69ZAJtkI9BaewFriLZB2HIew3UUHJ2ej94XoZD",
             page_id: $scope.new_source_fb[1],
-            api_version: "v2.8",
+            api_version: "v3.3",
             currentPosition: 0,
             postList: {},
             post_length: 0,
@@ -1256,9 +1256,9 @@ function temp32GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD",
+              "EAAGXpZCE7eaUBAGOKd6eDo16TGWdBj2KZB7JlzQHWoQZCMXZAubYphwWPDnEpSw250DZA58TZCbC5bkj8EgZBGyUyMstX2161ZAw3jrhncDUBbzaOOASD9pPR4UwUPvMzl5P2q7iyP4lSCGqg3HeyFBgMV0bE89DD69ZAJtkI9BaewFriLZB2HIew3UUHJ2ej94XoZD",
             page_id: $scope.new_source_fb[1],
-            api_version: "v2.8",
+            api_version: "v3.3",
             currentPosition: 0,
             postList: {},
             post_length: 0,
@@ -1397,9 +1397,9 @@ function temp33GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAADZBXIds1zwBADjMTCIwthGP7jEGguv3whJSI3TucMMBVFFkI7BC0ZBQKVH44F2oMuQtZB15NRdJxKBqbxTjii3SUhVjh7HXHJpR69NaOrnsvCkAzJ82ERdPMrs3uALWEjH9OkjESKzQdqZBx63OhaFzagZB4DUTCOEMShLouQZDZD",
+              "EAAGXpZCE7eaUBAGOKd6eDo16TGWdBj2KZB7JlzQHWoQZCMXZAubYphwWPDnEpSw250DZA58TZCbC5bkj8EgZBGyUyMstX2161ZAw3jrhncDUBbzaOOASD9pPR4UwUPvMzl5P2q7iyP4lSCGqg3HeyFBgMV0bE89DD69ZAJtkI9BaewFriLZB2HIew3UUHJ2ej94XoZD",
             page_id: $scope.new_source_fb[1],
-            api_version: "v2.8",
+            api_version: "v3.3",
             currentPosition: 0,
             postList: {},
             post_length: 0,
