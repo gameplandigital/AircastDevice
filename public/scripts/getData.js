@@ -871,7 +871,7 @@ function temp27GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAAGXpZCE7eaUBAJ09sv6BZCKUmXV1bOdUYuvRHBUZCdW4Wul4xMASF38dZAYrgSArjIRZCWeTHEX4TmbRyd3cujE60W6YvsPT3eqjmHERH8Ov1QEc3l5aeLWnfTGAywULPQ3qWJVf9QF3jYV61ZBT1HkYw0qM0U0mNgeYqogb0MRQRZBSK0OIJsxDKRJNQpNUXIze4o31UUNgZDZD",
+              "EAAGXpZCE7eaUBANQJQboSeNbRZBfTBzRwngYBzPaAJmxU5F6i5uRV4GyO97fWTEAprriZBuoUMwcEpJnkLmNe0yhmKJNXAsrBoMZCbwaR7JPgBgHpCNHbgwQQv8fMDQDxi7ZBwUD0XINDcUoK8QuKFkEkblSssMYYZBMNvHwSYlEFkfrzco9bCqaNufKwmTciOUA8cAwHHJVYuLaQgh2Gf",
             page_id: $scope.new_source_fb[1],
             api_version: "v3.3",
             currentPosition: 0,
@@ -1256,7 +1256,7 @@ function temp32GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAAGXpZCE7eaUBAJ09sv6BZCKUmXV1bOdUYuvRHBUZCdW4Wul4xMASF38dZAYrgSArjIRZCWeTHEX4TmbRyd3cujE60W6YvsPT3eqjmHERH8Ov1QEc3l5aeLWnfTGAywULPQ3qWJVf9QF3jYV61ZBT1HkYw0qM0U0mNgeYqogb0MRQRZBSK0OIJsxDKRJNQpNUXIze4o31UUNgZDZD",
+              "EAAGXpZCE7eaUBANQJQboSeNbRZBfTBzRwngYBzPaAJmxU5F6i5uRV4GyO97fWTEAprriZBuoUMwcEpJnkLmNe0yhmKJNXAsrBoMZCbwaR7JPgBgHpCNHbgwQQv8fMDQDxi7ZBwUD0XINDcUoK8QuKFkEkblSssMYYZBMNvHwSYlEFkfrzco9bCqaNufKwmTciOUA8cAwHHJVYuLaQgh2Gf",
             page_id: $scope.new_source_fb[1],
             api_version: "v3.3",
             currentPosition: 0,
@@ -1397,7 +1397,7 @@ function temp33GetData($http, $scope) {
         if (!item.hasData || item.lastQuery < Date.now() - 3600000) {
           var fb_post = {
             access_token:
-              "EAAGXpZCE7eaUBAJ09sv6BZCKUmXV1bOdUYuvRHBUZCdW4Wul4xMASF38dZAYrgSArjIRZCWeTHEX4TmbRyd3cujE60W6YvsPT3eqjmHERH8Ov1QEc3l5aeLWnfTGAywULPQ3qWJVf9QF3jYV61ZBT1HkYw0qM0U0mNgeYqogb0MRQRZBSK0OIJsxDKRJNQpNUXIze4o31UUNgZDZD",
+              "EAAGXpZCE7eaUBANQJQboSeNbRZBfTBzRwngYBzPaAJmxU5F6i5uRV4GyO97fWTEAprriZBuoUMwcEpJnkLmNe0yhmKJNXAsrBoMZCbwaR7JPgBgHpCNHbgwQQv8fMDQDxi7ZBwUD0XINDcUoK8QuKFkEkblSssMYYZBMNvHwSYlEFkfrzco9bCqaNufKwmTciOUA8cAwHHJVYuLaQgh2Gf",
             page_id: $scope.new_source_fb[1],
             api_version: "v3.3",
             currentPosition: 0,
@@ -1531,7 +1531,7 @@ function temp34GetData($http, $scope) {
     if (item.Template == "temp34") {
       var fb_post = {
         access_token:
-          "EAAGXpZCE7eaUBAJ09sv6BZCKUmXV1bOdUYuvRHBUZCdW4Wul4xMASF38dZAYrgSArjIRZCWeTHEX4TmbRyd3cujE60W6YvsPT3eqjmHERH8Ov1QEc3l5aeLWnfTGAywULPQ3qWJVf9QF3jYV61ZBT1HkYw0qM0U0mNgeYqogb0MRQRZBSK0OIJsxDKRJNQpNUXIze4o31UUNgZDZD"
+          "EAAGXpZCE7eaUBANQJQboSeNbRZBfTBzRwngYBzPaAJmxU5F6i5uRV4GyO97fWTEAprriZBuoUMwcEpJnkLmNe0yhmKJNXAsrBoMZCbwaR7JPgBgHpCNHbgwQQv8fMDQDxi7ZBwUD0XINDcUoK8QuKFkEkblSssMYYZBMNvHwSYlEFkfrzco9bCqaNufKwmTciOUA8cAwHHJVYuLaQgh2Gf"
       };
 
       console.log("facebook live query");
