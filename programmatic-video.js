@@ -32,7 +32,7 @@ var saveLog = (RpiID, CampaignID, statuscode, has_ad, log) => {
 var readData = (CampaignID, cb) => {
   // FUNCTION TO READ AD RESPONSE DATA FROM A FILE
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
-  fs.readFile(filePath, { encoding: "utf8" }, function(err, data) {
+  fs.readFile(filePath, { encoding: "utf8" }, function (err, data) {
     if (!err) {
       cb(data);
     }
@@ -42,15 +42,15 @@ var readData = (CampaignID, cb) => {
 var saveData = (CampaignID, data) => {
   // FUNCTION TO SAVE AD RESPONSE IN A FILE
   const filePath = __dirname + "/scratch/programmatic_" + CampaignID;
-  fs.exists(filePath, function(exists) {
+  fs.exists(filePath, function (exists) {
     if (exists) {
-      fs.writeFile(filePath, data, function(err) {
+      fs.writeFile(filePath, data, function (err) {
         if (!err) {
           console.log("Saved new programmatic response.");
         }
       });
     } else {
-      fs.writeFile(filePath, data, function(err) {
+      fs.writeFile(filePath, data, function (err) {
         if (!err) {
           console.log("Saved new programmatic response.");
         }
@@ -73,7 +73,7 @@ var enable = (CampaignID, programmaticOptions, cb) => {
     if (!error && response.statusCode) {
       const programmaticResponse = body;
       // console.log(programmaticResponse);
-      if (body != undefined) {
+      if (body != undefined && response.statusCode != 204) {
         if (body.seatbid[0].bid.length > 0) {
           has_ad = true;
           saveData(CampaignID, JSON.stringify(programmaticResponse));
