@@ -404,6 +404,8 @@ app.controller("MainController", function(
     window["temp34GetData"].apply(null, payl); //facebook live
     window["temp35GetData"].apply(null, payl); //Content URL
     window["temp36GetData"].apply(null, payl); //Value
+    window["temp38GetData"].apply(null, payl); // COVID-19 Tracker (Landscape)
+    window["temp39GetData"].apply(null, payl); // COVID-19 Tracker (Portrait)
 
     //portrait-content
     // window['temp17GetData'].apply(null, payl);

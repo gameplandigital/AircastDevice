@@ -1665,3 +1665,61 @@ function temp36GetData($http, $scope) {
     }
   });
 }
+
+function temp38GetData($http, $scope) {
+  $scope.TemplateData.forEach(function(item) {
+    if (
+      item.Template == "temp38" &&
+      (!item.hasData || item.lastQuery < Date.now() - 21600000)
+    ) {
+      $http.get("http://api.gp-nagata.ph/v0/covid19").then(
+        function(response) {
+          $scope.TemplateData.forEach(function(item) {
+            if (item.Template == "temp38") {
+              console.log(
+                "TEMP 38: COVID-19 Tracker (Landscape) | Fetching Data Success"
+              );
+              if (response.status == 200 && response.data) {
+                item.Data = response.data;
+                item.hasData = true;
+                item.lastQuery = Date.now();
+              }
+            }
+          });
+        },
+        function(err) {
+          console.warn("ERROR: TEMP 38 | COVID-19 Tracker (Landscape)");
+        }
+      );
+    }
+  });
+}
+
+function temp39GetData($http, $scope) {
+  $scope.TemplateData.forEach(function(item) {
+    if (
+      item.Template == "temp39" &&
+      (!item.hasData || item.lastQuery < Date.now() - 21600000)
+    ) {
+      $http.get("http://api.gp-nagata.ph/v0/covid19").then(
+        function(response) {
+          $scope.TemplateData.forEach(function(item) {
+            if (item.Template == "temp38") {
+              console.log(
+                "TEMP 39: COVID-19 Tracker (Portrait) | Fetching Data Success"
+              );
+              if (response.status == 200 && response.data) {
+                item.Data = response.data;
+                item.hasData = true;
+                item.lastQuery = Date.now();
+              }
+            }
+          });
+        },
+        function(err) {
+          console.warn("ERROR: TEMP 39 | COVID-19 Tracker (Landscape)");
+        }
+      );
+    }
+  });
+}
