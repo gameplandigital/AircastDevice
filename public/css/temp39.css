@@ -1,12 +1,155 @@
 .container {
-  background: url("/assets/covid.jpg") fixed no-repeat;
-  background-size: cover;
-  background-position-x: center;
-  background-position-y: center;
   width: 100vw;
   height: 100vh;
   padding: 15px;
   font-family: "Arial";
+}
+
+.default {
+  background: url("/assets/covid.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.city-of-manila {
+  background: url("/assets/CITIES/city-of-manila.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.mandaluyong-city {
+  background: url("/assets/CITIES/mandaluyong-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.marikina-city {
+  background: url("/assets/CITIES/marikina-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.pasig-city {
+  background: url("/assets/CITIES/pasig-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.quezon-city {
+  background: url("/assets/CITIES/quezon-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.san-juan-city {
+  background: url("/assets/CITIES/san-juan-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.caloocan-city {
+  background: url("/assets/CITIES/caloocan-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.malabon-city {
+  background: url("/assets/CITIES/malabon-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.navotas-city {
+  background: url("/assets/CITIES/navotas-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.valenzuela-city {
+  background: url("/assets/CITIES/valenzuela-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.las-pinas-city {
+  background: url("/assets/CITIES/las-pinas-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.makati-city {
+  background: url("/assets/CITIES/makati-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.muntinlupa-city {
+  background: url("/assets/CITIES/muntinlupa-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.paranaque-city {
+  background: url("/assets/CITIES/paranaque-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.pasay-city {
+  background: url("/assets/CITIES/pasay-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.taguig-city {
+  background: url("/assets/CITIES/taguig-city.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.rizal {
+  background: url("/assets/CITIES/rizal.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.cavite {
+  background: url("/assets/CITIES/cavite.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.laguna {
+  background: url("/assets/CITIES/laguna.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.bulacan {
+  background: url("/assets/CITIES/bulacan.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
 }
 
 .col-1 {

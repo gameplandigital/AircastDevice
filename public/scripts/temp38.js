@@ -30,7 +30,6 @@ function temp38Controller(
       covid.data = data;
       covid.asOf = $scope.TemplateData[i].Data.as_of;
       $scope.COVID19 = covid;
-      console.log($scope.COVID19);
     }
   }
 

@@ -1,4 +1,7 @@
-<div ng-show="currentTemp == 'templates/temp39.html'" class="container">
+<div
+  ng-show="currentTemp == 'templates/temp39.html'"
+  class="container {{ cityImage }}"
+>
   <div class="col-12 title">
     <h1>COVID-19 CASES UPDATE IN {{ COVID19.city.toUpperCase() }}</h1>
     <h4>AS OF {{ COVID19.asOf }}</h4>
