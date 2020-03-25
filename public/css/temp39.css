@@ -1,0 +1,145 @@
+.container {
+  background: url("/assets/covid.jpg") fixed no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 15px;
+  font-family: "Arial";
+}
+
+.col-1 {
+  width: 8.33%;
+}
+
+.col-2 {
+  width: 16.67%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
+.col-5 {
+  width: 41.67%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.33%;
+}
+
+.col-8 {
+  width: 66.67%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33%;
+}
+
+.col-11 {
+  width: 91.67%;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.title h1 {
+  text-align: center;
+  font-size: 49px;
+}
+
+.title h4 {
+  text-align: center;
+  font-size: 25px;
+  font-family: 100;
+}
+
+.body {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 25px;
+}
+
+.divider {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.cdr {
+  flex: 1;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.cdr-item {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+.cdr-confirmed-count {
+  color: #ffc400;
+  font-size: 270px;
+}
+
+.cdr-confirmed-title {
+  color: #ffc400;
+  width: 100%;
+  font-weight: 100;
+  font-size: 42px;
+  padding: 5px;
+}
+
+.cdr-item-count {
+  font-size: 200px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.cdr-item-title {
+  color: black;
+  font-size: 32px;
+  font-weight: 100;
+  background-color: white;
+  padding: 5px;
+}

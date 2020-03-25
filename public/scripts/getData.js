@@ -1701,12 +1701,13 @@ function temp39GetData($http, $scope) {
       item.Template == "temp39" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
     ) {
-      $http.get("http://gp-nagata.ph/v0/covid19").then(
+      var city = item.tempSrc.source.split("/")[1];
+      $http.get("http://gp-nagata.ph/v0/covid19?city=" + city).then(
         function(response) {
           $scope.TemplateData.forEach(function(item) {
-            if (item.Template == "temp38") {
+            if (item.Template == "temp39") {
               console.log(
-                "TEMP 39: COVID-19 Tracker (Portrait) | Fetching Data Success"
+                "TEMP 39: COVID-19 Per City Data Tracker | Fetching Data Success"
               );
               if (response.status == 200 && response.data) {
                 item.Data = response.data;
@@ -1717,7 +1718,7 @@ function temp39GetData($http, $scope) {
           });
         },
         function(err) {
-          console.warn("ERROR: TEMP 39 | COVID-19 Tracker (Landscape)");
+          console.warn("ERROR: TEMP 39 | COVID-19 Per City Data Tracker");
         }
       );
     }
