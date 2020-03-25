@@ -1670,7 +1670,7 @@ function temp38GetData($http, $scope) {
   $scope.TemplateData.forEach(function(item) {
     if (
       item.Template == "temp38" &&
-      (!item.hasData || item.lastQuery < Date.now() - 21600000)
+      (!item.hasData || item.lastQuery < Date.now() - 7200000)
     ) {
       $http.get("http://gp-nagata.ph/v0/covid19").then(
         function(response) {
@@ -1699,7 +1699,7 @@ function temp39GetData($http, $scope) {
   $scope.TemplateData.forEach(function(item) {
     if (
       item.Template == "temp39" &&
-      (!item.hasData || item.lastQuery < Date.now() - 21600000)
+      (!item.hasData || item.lastQuery < Date.now() - 7200000)
     ) {
       var city = item.tempSrc.source.split("/")[1];
       $http.get("http://gp-nagata.ph/v0/covid19?city=" + city).then(
