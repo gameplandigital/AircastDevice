@@ -220,6 +220,9 @@ function updateRpi() {
 
 getRpiConfig();
 
+// PROGRAMMATIC FEATURE IS TEMPORARILY DISABLED TO PREVENT CRASHING DUE TO
+// OUTDATED CODES AND RESPONSE HANDLER
+/*
 programmaticImage.check(CampaignIDs => {
   // CALL PROGRAMMATIC IN APPLICATION START
   if (CampaignIDs.length > 0) {
@@ -283,3 +286,4 @@ setInterval(function() {
     }
   });
 }, 30000);
+*/

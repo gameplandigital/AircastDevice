@@ -1672,12 +1672,12 @@ function temp38GetData($http, $scope) {
       item.Template == "temp38" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
     ) {
-      $http.get("http://api.gp-nagata.ph/v0/covid19").then(
+      $http.get("http://gp-nagata.ph/v0/covid19").then(
         function(response) {
           $scope.TemplateData.forEach(function(item) {
             if (item.Template == "temp38") {
               console.log(
-                "TEMP 38: COVID-19 Tracker (Landscape) | Fetching Data Success"
+                "TEMP 38: COVID-19 PH Data Tracker | Fetching Data Success"
               );
               if (response.status == 200 && response.data) {
                 item.Data = response.data;
@@ -1701,7 +1701,7 @@ function temp39GetData($http, $scope) {
       item.Template == "temp39" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
     ) {
-      $http.get("http://api.gp-nagata.ph/v0/covid19").then(
+      $http.get("http://gp-nagata.ph/v0/covid19").then(
         function(response) {
           $scope.TemplateData.forEach(function(item) {
             if (item.Template == "temp38") {
