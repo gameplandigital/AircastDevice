@@ -7,11 +7,13 @@ function temp38Controller(
   callback,
   $q
 ) {
-  var duration = 30000;
+  var duration = 15000;
   var covid = {
     data: {},
     asOf: ""
   };
+  var sponsor;
+  var sponsorContents = "";
 
   for (var i = 0; i < $scope.TemplateData.length; i++) {
     if ($scope.TemplateData[i].Template == "temp38") {
@@ -29,9 +31,31 @@ function temp38Controller(
       };
       covid.data = data;
       covid.asOf = $scope.TemplateData[i].Data.as_of;
+      sponsor = $scope.TemplateData[i].tempSrc.source.split("/")[1];
       $scope.COVID19 = covid;
+
+      if (sponsor) {
+        sponsorContents +=
+          '<div class="sponsor-image-item"><img class="sponsor-image" src="https://s3-ap-southeast-1.amazonaws.com/rpitv/Aircast/' +
+          sponsor +
+          '" /></div>';
+      }
+
+      sponsorContents +=
+        '<div class="sponsor-image-item"><img class="sponsor-image" src="/assets/aircast-logo-white.png" /></div>';
+
+      $("#sponsors").html(sponsorContents);
+
+      pageInterval = setInterval(function() {
+        $("#data").fadeOut(250, function() {
+          $("#sponsor").fadeIn(250);
+        });
+      }, 11500);
     }
   }
 
-  $timeout(callback, duration);
+  $timeout(function() {
+    clearInterval(pageInterval);
+    callback();
+  }, duration);
 }

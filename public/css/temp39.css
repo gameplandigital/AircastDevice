@@ -205,6 +205,16 @@
   [class*="col-"] {
     width: 100%;
   }
+
+  .sponsor-images {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .sponsor-image-item {
+    max-height: 20%;
+  }
 }
 
 .title {
@@ -285,4 +295,50 @@
   font-weight: 100;
   background-color: white;
   padding: 5px;
+}
+
+.sponsor {
+  width: 100vw;
+  height: 100vh;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 35px;
+}
+
+.sponsor-title {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sponsor-title h1 {
+  color: black;
+  font-size: 28px;
+  font-weight: 100;
+  background-color: white;
+  font-style: italic;
+  padding: 5px;
+}
+
+.sponsor-images {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sponsor-image-item {
+  height: 200px;
+  margin: 50px;
+}
+
+.sponsor-image {
+  height: 180px;
 }

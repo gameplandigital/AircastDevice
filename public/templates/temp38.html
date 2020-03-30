@@ -1,123 +1,133 @@
 <div ng-show="currentTemp == 'templates/temp38.html'" class="container">
-  <div class="col-12 title">
-    <h1>COVID-19 CASES UPDATE IN THE PHILIPPINES</h1>
-    <h4>AS OF {{ COVID19.asOf }}</h4>
-  </div>
-  <div class="col-12 body animated fadeInUp">
-    <div class="col-6 divider">
-      <div class="col-12 cdr">
-        <div class="col-4 cdr-item">
-          <h1 class="cdr-confirmed-count">
-            {{ COVID19.data.cdr.confirmed }}
-          </h1>
-          <h3 class="cdr-confirmed-title">
-            CONFIRMED CASES
-          </h3>
-        </div>
-        <div class="col-12 dr">
-          <div class="cdr-item">
-            <h1 class="cdr-item-count">{{ COVID19.data.cdr.deaths }}</h1>
-            <h3 class="cdr-item-title">DECEASED</h3>
-          </div>
-          <div class="cdr-item">
-            <h1 class="cdr-item-count">
-              {{ COVID19.data.cdr.recovered }}
+  <div id="data">
+    <div class="col-12 title">
+      <h1>COVID-19 CASES UPDATE IN THE PHILIPPINES</h1>
+      <h4>AS OF {{ COVID19.asOf }}</h4>
+    </div>
+    <div class="col-12 body animated fadeInUp">
+      <div class="col-6 divider">
+        <div class="col-12 cdr">
+          <div class="col-4 cdr-item">
+            <h1 class="cdr-confirmed-count">
+              {{ COVID19.data.cdr.confirmed }}
             </h1>
-            <h3 class="cdr-item-title">RECOVERED</h3>
+            <h3 class="cdr-confirmed-title">
+              CONFIRMED CASES
+            </h3>
+          </div>
+          <div class="col-12 dr">
+            <div class="cdr-item">
+              <h1 class="cdr-item-count">{{ COVID19.data.cdr.deaths }}</h1>
+              <h3 class="cdr-item-title">DECEASED</h3>
+            </div>
+            <div class="cdr-item">
+              <h1 class="cdr-item-count">
+                {{ COVID19.data.cdr.recovered }}
+              </h1>
+              <h3 class="cdr-item-title">RECOVERED</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 divider">
+        <div class="col-12 ageRange">
+          <div class="col-12 ageRange-header">
+            <h1>CASES AGE RANGE</h1>
+          </div>
+          <div class="col-12 ageRange-body">
+            <div class="col-12 ageRange-item">
+              <h2 class="ageRange-item-title">18 BELOW</h2>
+              <h2 class="ageRange-item-count">
+                {{ ((COVID19.data.ageRange["18 below"] /
+                COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
+              </h2>
+            </div>
+            <div class="col-12 ageRange-item">
+              <h2 class="ageRange-item-title">18 - 29</h2>
+              <h2 class="ageRange-item-count">
+                {{ ((COVID19.data.ageRange["18 - 29"] /
+                COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
+              </h2>
+            </div>
+            <div class="col-12 ageRange-item">
+              <h2 class="ageRange-item-title">30 - 49</h2>
+              <h2 class="ageRange-item-count">
+                {{ ((COVID19.data.ageRange["30 - 49"] /
+                COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
+              </h2>
+            </div>
+            <div class="col-12 ageRange-item">
+              <h2 class="ageRange-item-title">50 - 64</h2>
+              <h2 class="ageRange-item-count">
+                {{ ((COVID19.data.ageRange["50 - 64"] /
+                COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
+              </h2>
+            </div>
+            <div class="col-12 ageRange-item">
+              <h2 class="ageRange-item-title">65 AND ABOVE</h2>
+              <h2 class="ageRange-item-count">
+                {{ ((COVID19.data.ageRange["65 and above"] /
+                COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 locations">
+          <div class="col-12 locations-header">
+            <h1>LOCATIONS WITH HIGHEST NUMBER OF CASES</h1>
+          </div>
+          <div class="col-12 locations-body">
+            <div class="col-12 locations-item">
+              <h2 class="location-item-title">
+                1. {{ COVID19.data.locations[0].loc }}
+              </h2>
+              <h2 class="location-item-count">
+                {{ COVID19.data.locations[0].count }}
+              </h2>
+            </div>
+            <div class="col-12 locations-item">
+              <h2 class="location-item-title">
+                2. {{ COVID19.data.locations[1].loc }}
+              </h2>
+              <h2 class="location-item-count">
+                {{ COVID19.data.locations[1].count }}
+              </h2>
+            </div>
+            <div class="col-12 locations-item">
+              <h2 class="location-item-title">
+                3. {{ COVID19.data.locations[2].loc }}
+              </h2>
+              <h2 class="location-item-count">
+                {{ COVID19.data.locations[2].count }}
+              </h2>
+            </div>
+            <div class="col-12 locations-item">
+              <h2 class="location-item-title">
+                4. {{ COVID19.data.locations[3].loc }}
+              </h2>
+              <h2 class="location-item-count">
+                {{ COVID19.data.locations[3].count }}
+              </h2>
+            </div>
+            <div class="col-12 locations-item">
+              <h2 class="location-item-title">
+                5. {{ COVID19.data.locations[4].loc }}
+              </h2>
+              <h2 class="location-item-count">
+                {{ COVID19.data.locations[4].count }}
+              </h2>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-6 divider">
-      <div class="col-12 ageRange">
-        <div class="col-12 ageRange-header">
-          <h1>CASES AGE RANGE</h1>
-        </div>
-        <div class="col-12 ageRange-body">
-          <div class="col-12 ageRange-item">
-            <h2 class="ageRange-item-title">18 BELOW</h2>
-            <h2 class="ageRange-item-count">
-              {{ ((COVID19.data.ageRange["18 below"] /
-              COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
-            </h2>
-          </div>
-          <div class="col-12 ageRange-item">
-            <h2 class="ageRange-item-title">18 - 29</h2>
-            <h2 class="ageRange-item-count">
-              {{ ((COVID19.data.ageRange["18 - 29"] /
-              COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
-            </h2>
-          </div>
-          <div class="col-12 ageRange-item">
-            <h2 class="ageRange-item-title">30 - 49</h2>
-            <h2 class="ageRange-item-count">
-              {{ ((COVID19.data.ageRange["30 - 49"] /
-              COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
-            </h2>
-          </div>
-          <div class="col-12 ageRange-item">
-            <h2 class="ageRange-item-title">50 - 64</h2>
-            <h2 class="ageRange-item-count">
-              {{ ((COVID19.data.ageRange["50 - 64"] /
-              COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
-            </h2>
-          </div>
-          <div class="col-12 ageRange-item">
-            <h2 class="ageRange-item-title">65 AND ABOVE</h2>
-            <h2 class="ageRange-item-count">
-              {{ ((COVID19.data.ageRange["65 and above"] /
-              COVID19.data.cdr.confirmed) * 100).toFixed(2) }}%
-            </h2>
-          </div>
-        </div>
+  </div>
+  <div id="sponsor" style="display: none;">
+    <div class="col-12 sponsor">
+      <div class="col-12 sponsor-title">
+        <h1>COVID-19 UPDATE IS BROUGHT TO YOU BY:</h1>
       </div>
-      <div class="col-12 locations">
-        <div class="col-12 locations-header">
-          <h1>LOCATIONS WITH HIGHEST NUMBER OF CASES</h1>
-        </div>
-        <div class="col-12 locations-body">
-          <div class="col-12 locations-item">
-            <h2 class="location-item-title">
-              1. {{ COVID19.data.locations[0].loc }}
-            </h2>
-            <h2 class="location-item-count">
-              {{ COVID19.data.locations[0].count }}
-            </h2>
-          </div>
-          <div class="col-12 locations-item">
-            <h2 class="location-item-title">
-              2. {{ COVID19.data.locations[1].loc }}
-            </h2>
-            <h2 class="location-item-count">
-              {{ COVID19.data.locations[1].count }}
-            </h2>
-          </div>
-          <div class="col-12 locations-item">
-            <h2 class="location-item-title">
-              3. {{ COVID19.data.locations[2].loc }}
-            </h2>
-            <h2 class="location-item-count">
-              {{ COVID19.data.locations[2].count }}
-            </h2>
-          </div>
-          <div class="col-12 locations-item">
-            <h2 class="location-item-title">
-              4. {{ COVID19.data.locations[3].loc }}
-            </h2>
-            <h2 class="location-item-count">
-              {{ COVID19.data.locations[3].count }}
-            </h2>
-          </div>
-          <div class="col-12 locations-item">
-            <h2 class="location-item-title">
-              5. {{ COVID19.data.locations[4].loc }}
-            </h2>
-            <h2 class="location-item-count">
-              {{ COVID19.data.locations[4].count }}
-            </h2>
-          </div>
-        </div>
-      </div>
+      <div class="col-12 sponsor-images" id="sponsors"></div>
     </div>
   </div>
 </div>
