@@ -1,47 +1,114 @@
-<div
-  ng-show="currentTemp == 'templates/temp39.html'"
-  class="container {{ cityImage }}"
->
-  <div id="data">
-    <div class="col-12 title">
-      <h1>COVID-19 CASES UPDATE IN {{ COVID19.city.toUpperCase() }}</h1>
-      <h4>AS OF {{ COVID19.asOf }}</h4>
-    </div>
-    <div class="col-12 body animated fadeInUp">
-      <div class="col-6 divider">
-        <div class="col-12 cdr">
-          <div class="col-12 cdr-item">
-            <h1 class="cdr-confirmed-count">
-              {{ COVID19.data.cdr.confirmed }}
-            </h1>
-            <h3 class="cdr-confirmed-title">
-              CONFIRMED COVID-19 CASES IN YOUR CITY
-            </h3>
-          </div>
+<div ng-show="currentTemp == 'templates/temp39.html'" class="container">
+  <div id="global" class="main default">
+    <div class="head col-12">
+      <div class="title col-6">
+        <h1>COVID-19 CASES<br />GLOBAL UPDATE</h1>
+        <p>{{ date.substring(0, 3) + "," + date.substring(3) }}</p>
+      </div>
+      <div class="sponsor col-4">
+        <p>This update is brought to you by</p>
+        <div class="sponsor-container">
+          <img
+            id="sponsor-image-1"
+            class="sponsor-image"
+            src="../assets/aircast-logo.png"
+          />
+          <img
+            id="sponsor-image-2"
+            class="sponsor-image"
+            src="../assets/aircast-logo.png"
+            style="display: none;"
+          />
         </div>
       </div>
-      <div class="col-6 divider">
-        <div class="col-12 cdr">
-          <div class="col-12 cdr-item">
-            <h1 class="cdr-item-count">{{ COVID19.data.cdr.deaths }}</h1>
-            <h3 class="cdr-item-title">DECEASED</h3>
-          </div>
-          <div class="col-12 cdr-item">
-            <h1 class="cdr-item-count">
-              {{ COVID19.data.cdr.recovered }}
-            </h1>
-            <h3 class="cdr-item-title">RECOVERED</h3>
-          </div>
+    </div>
+    <div class="body col-12">
+      <div class="confirmed col-3">
+        <div class="total">
+          <label>TOTAL CASES</label>
+          <h1>{{ globalData.TotalConfirmed.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ globalData.NewConfirmed.toLocaleString() }}</h1>
+          <label>New Cases</label>
+        </div>
+      </div>
+      <div class="recovered col-3">
+        <div class="total">
+          <label>TOTAL RECOVERIES</label>
+          <h1>{{ globalData.TotalRecovered.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ globalData.NewRecovered.toLocaleString() }}</h1>
+          <label>New Recoveries</label>
+        </div>
+      </div>
+      <div class="deaths col-3">
+        <div class="total">
+          <label>TOTAL DEATHS</label>
+          <h1>{{ globalData.TotalDeaths.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ globalData.NewDeaths.toLocaleString() }}</h1>
+          <label>New Deaths</label>
         </div>
       </div>
     </div>
   </div>
-  <div id="sponsor" style="display: none;">
-    <div class="col-12 sponsor">
-      <div class="col-12 sponsor-title">
-        <h1>COVID-19 UPDATE IS BROUGHT TO YOU BY:</h1>
+  <div id="ph" class="main {{ cityImage }}" style="display: none;">
+    <div class="head col-12">
+      <div class="title col-6">
+        <h1>COVID-19 CASES<br />PHILIPPINES UPDATE</h1>
+        <p>{{ date.substring(0, 3) + "," + date.substring(3) }}</p>
       </div>
-      <div class="col-12 sponsor-images" id="sponsors"></div>
+      <div class="sponsor col-4">
+        <p>This update is brought to you by</p>
+        <div class="sponsor-container">
+          <img
+            id="sponsor-image-3"
+            class="sponsor-image"
+            src="../assets/aircast-logo.png"
+          />
+          <img
+            id="sponsor-image-4"
+            class="sponsor-image"
+            src="../assets/aircast-logo.png"
+            style="display: none;"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="body col-12">
+      <div class="confirmed col-3">
+        <div class="total">
+          <label>TOTAL CASES</label>
+          <h1>{{ phData.TotalConfirmed.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ phData.NewConfirmed.toLocaleString() }}</h1>
+          <label>New Cases</label>
+        </div>
+      </div>
+      <div class="recovered col-3">
+        <div class="total">
+          <label>TOTAL RECOVERIES</label>
+          <h1>{{ phData.TotalRecovered.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ phData.NewRecovered.toLocaleString() }}</h1>
+          <label>New Recoveries</label>
+        </div>
+      </div>
+      <div class="deaths col-3">
+        <div class="total">
+          <label>TOTAL DEATHS</label>
+          <h1>{{ phData.TotalDeaths.toLocaleString() }}</h1>
+        </div>
+        <div class="new">
+          <h1>{{ phData.NewDeaths.toLocaleString() }}</h1>
+          <label>New Deaths</label>
+        </div>
+      </div>
     </div>
   </div>
 </div>

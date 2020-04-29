@@ -1,12 +1,9 @@
 .container {
-  width: 100vw;
-  height: 100vh;
-  padding: 15px;
   font-family: "Arial";
 }
 
 .default {
-  background: url("/assets/covid.jpg") fixed no-repeat;
+  background: url("/assets/CITIES/global.png") fixed no-repeat;
   background-size: cover;
   background-position-x: center;
   background-position-y: center;
@@ -200,145 +197,184 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  [class*="col-"] {
-    width: 100%;
-  }
-
-  .sponsor-images {
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-
-  .sponsor-image-item {
-    max-height: 20%;
-  }
-}
-
-.title {
-  display: flex;
+.main {
+  width: 100vw;
+  height: 100vh;
+  padding: 35px;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.head {
+  display: inline-flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  padding: 15px;
-  margin-bottom: 5px;
-  color: white;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.title {
+  margin-bottom: 25px;
 }
 
 .title h1 {
-  text-align: center;
-  font-size: 49px;
+  color: white;
+  font-size: 3rem;
 }
 
-.title h4 {
-  text-align: center;
-  font-size: 25px;
-  font-family: 100;
+.title p {
+  color: white;
+  font-size: 2rem;
+  margin-top: 15px;
+  font-weight: 100;
+}
+
+.sponsor {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.sponsor-container {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsor p {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+}
+
+.sponsor-image {
+  max-height: 75px;
 }
 
 .body {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 25px;
-}
-
-.divider {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.cdr {
-  flex: 1;
-  display: inline-flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.confirmed {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.1)
+  );
   padding: 15px;
-}
-
-.cdr-item {
+  border-radius: 5px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 45px;
-  text-align: center;
+  order: 0;
+  margin-bottom: 15px;
+  color: white;
 }
 
-.cdr-confirmed-count {
-  color: #ffc400;
-  font-size: 270px;
+.recovered {
+  background-image: linear-gradient(
+    rgba(52, 136, 52, 0.1),
+    rgba(0, 255, 0, 0.4)
+  );
+  padding: 15px;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  order: 1;
+  margin-bottom: 15px;
+  color: white;
 }
 
-.cdr-confirmed-title {
-  color: #ffc400;
+.deaths {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.1)
+  );
+  padding: 15px;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  order: 2;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.total {
   width: 100%;
-  font-weight: 100;
-  font-size: 42px;
-  padding: 5px;
-}
-
-.cdr-item-count {
-  font-size: 200px;
-  margin-bottom: 5px;
-  color: white;
-}
-
-.cdr-item-title {
-  color: black;
-  font-size: 32px;
-  font-weight: 100;
-  background-color: white;
-  padding: 5px;
-}
-
-.sponsor {
-  width: 100vw;
-  height: 100vh;
+  padding: 50px 25px 50px 25px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 35px;
-}
-
-.sponsor-title {
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
   margin-bottom: 50px;
 }
 
-.sponsor-title h1 {
-  color: black;
-  font-size: 28px;
-  font-weight: 100;
-  background-color: white;
-  font-style: italic;
-  padding: 5px;
+.total label {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
 }
 
-.sponsor-images {
+.total h1 {
+  font-size: 3rem;
+}
+
+.new {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 25px;
   display: inline-flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
-.sponsor-image-item {
-  height: 200px;
-  margin: 50px;
+.new h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
-.sponsor-image {
-  height: 180px;
+.new label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  .confirmed {
+    order: 1;
+  }
+
+  .recovered {
+    order: 0;
+  }
+
+  .deaths {
+    order: 2;
+  }
+
+  h1,
+  p,
+  label {
+    text-align: center;
+  }
+
+  .total {
+    margin-bottom: 15px;
+  }
 }

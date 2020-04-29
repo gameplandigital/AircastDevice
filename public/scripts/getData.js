@@ -1,5 +1,5 @@
 function temp10GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp10" &&
       (!item.hasData || item.lastQuery < Date.now() - 14400000)
@@ -14,7 +14,7 @@ function temp10GetData($http, $scope) {
             "https://newsapi.org/v2/top-headlines?country=ph&apiKey=a3aa8dee6c814974b0cd33bd806ef301"
           )
           .then(
-            function(response) {
+            function (response) {
               console.log("TEMP 10: News | Fetching Data Success");
               for (var i = 0; i < $scope.TemplateData.length; i++) {
                 if (
@@ -29,7 +29,7 @@ function temp10GetData($http, $scope) {
                 }
               }
             },
-            function(error) {
+            function (error) {
               console.warn("ERROR: TEMP 10 | News (Local)");
             }
           );
@@ -41,7 +41,7 @@ function temp10GetData($http, $scope) {
               "&sortBy=top&apiKey=a3aa8dee6c814974b0cd33bd806ef301"
           )
           .then(
-            function(response) {
+            function (response) {
               console.log("TEMP 10: Fetching Data Success");
               for (var i = 0; i < $scope.TemplateData.length; i++) {
                 if (
@@ -56,7 +56,7 @@ function temp10GetData($http, $scope) {
                 }
               }
             },
-            function(error) {
+            function (error) {
               console.warn("ERROR: TEMP 10 | News (Foreign)");
             }
           );
@@ -66,7 +66,7 @@ function temp10GetData($http, $scope) {
 }
 
 function temp11GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp11" &&
       (!item.hasData || item.lastQuery < Date.now() - 86400000)
@@ -82,9 +82,9 @@ function temp11GetData($http, $scope) {
         zomatoConfig: {
           headers: {
             "user-key": "1e3481187e26de091dfdb5f7f768312a",
-            Accept: "application/json;odata=verbose"
-          }
-        }
+            Accept: "application/json;odata=verbose",
+          },
+        },
       };
 
       config.url =
@@ -98,7 +98,7 @@ function temp11GetData($http, $scope) {
       function fetchRestaurantData(url) {
         var currentTimeStamp = moment().unix() + 2592000;
         $http.get(url, config.zomatoConfig).then(
-          function(response) {
+          function (response) {
             if (response.data) {
               console.log("TEMP 11: Restaurant | Fetching Data Success");
               var restaurants = response.data.nearby_restaurants;
@@ -122,7 +122,7 @@ function temp11GetData($http, $scope) {
               console.log("nothing returned");
             }
           },
-          function(error) {
+          function (error) {
             console.warn("ERROR: TEMP 11 | Nearby Restaurants");
           }
         );
@@ -168,7 +168,7 @@ function temp11GetData($http, $scope) {
 }
 
 function temp12GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp12" &&
       (!item.hasData || item.lastQuery < Date.now() - 5400000)
@@ -187,14 +187,14 @@ function temp12GetData($http, $scope) {
             city_parameter +
             "&cnt=7"
         )
-        .then(function(response1) {
+        .then(function (response1) {
           $http
             .get(
               "http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q=" +
                 city_parameter
             )
             .then(
-              function(response2) {
+              function (response2) {
                 console.log("TEMP 12: Weather | Fetching Data Success");
                 for (var i = 0; i < $scope.TemplateData.length; i++) {
                   if (
@@ -211,7 +211,7 @@ function temp12GetData($http, $scope) {
                   }
                 }
               },
-              function(err) {
+              function (err) {
                 console.warn("ERROR: TEMP 12 | Weather");
               }
             );
@@ -233,12 +233,12 @@ function temp13GetData($http, $scope) {
     return [year, month, day].join("-");
   }
 
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp13" &&
       (!item.hasData || item.lastQuery < Date.now() - 10800000)
     ) {
-      $scope.TemplateData.forEach(function(item) {
+      $scope.TemplateData.forEach(function (item) {
         if (item.Template == "temp13") {
           item.TempData = [];
 
@@ -247,7 +247,7 @@ function temp13GetData($http, $scope) {
               "https://openexchangerates.org/api/latest.json?app_id=d076ca0158a348679fdaee487dff191e"
             )
             .then(
-              function(response1) {
+              function (response1) {
                 item.TempData.push(response1.data.rates);
 
                 var yesterday = new Date(Date.now() - 86400000);
@@ -261,18 +261,18 @@ function temp13GetData($http, $scope) {
                       ".json?app_id=d076ca0158a348679fdaee487dff191e"
                   )
                   .then(
-                    function(response2) {
+                    function (response2) {
                       console.log("TEMP 13: Currency | Fetching Data Success");
                       item.TempData.push(response2.data.rates);
                       item.hasData = true;
                       item.lastQuery = Date.now();
                     },
-                    function(err) {
+                    function (err) {
                       console.warn("ERROR: TEMP 13 | Currency Update");
                     }
                   );
               },
-              function(err) {
+              function (err) {
                 console.warn("ERROR: TEMP 13 | Currency Update");
               }
             );
@@ -283,7 +283,7 @@ function temp13GetData($http, $scope) {
 }
 
 function temp14GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp14" &&
       (!item.hasData || item.lastQuery < Date.now() - 5400000)
@@ -293,9 +293,9 @@ function temp14GetData($http, $scope) {
         "http://13.250.103.104:4600/" + search_keyword
       );
       $http.get(formatted_keyword).then(
-        function(response) {
+        function (response) {
           if (response.status == 200 && response.data[0].statuses.length != 0) {
-            $scope.TemplateData.forEach(function(item) {
+            $scope.TemplateData.forEach(function (item) {
               console.log("TEMP 124: Twitter | Fetching Data Success");
               if (item.Template == "temp14") {
                 item.TempData = response.data;
@@ -307,7 +307,7 @@ function temp14GetData($http, $scope) {
             });
           }
         },
-        function(err) {
+        function (err) {
           console.warn("ERROR: TEMP 14 | Twitter");
         }
       );
@@ -316,7 +316,7 @@ function temp14GetData($http, $scope) {
 }
 
 function temp15GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp15" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
@@ -326,8 +326,8 @@ function temp15GetData($http, $scope) {
           "http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php"
         )
         .then(
-          function(response) {
-            $scope.TemplateData.forEach(function(item) {
+          function (response) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp15") {
                 console.log("TEMP 15: Hugot | Fetching Data Success");
                 if (response.data.length > 0) {
@@ -338,7 +338,7 @@ function temp15GetData($http, $scope) {
               }
             });
           },
-          function(err) {
+          function (err) {
             console.warn("ERROR: TEMP 15 | Hugot");
           }
         );
@@ -347,7 +347,7 @@ function temp15GetData($http, $scope) {
 }
 
 function temp16GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp16" &&
       (!item.hasData || item.lastQuery < Date.now() - 86400000)
@@ -357,8 +357,8 @@ function temp16GetData($http, $scope) {
           "https://api.themoviedb.org/3/movie/upcoming?api_key=f2ebc8131c456f6ee2f134ac299aa40f&language=en&US"
         )
         .then(
-          function(response) {
-            $scope.TemplateData.forEach(function(item) {
+          function (response) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp16") {
                 console.log("TEMP 16: Upcoming Movies | Fetching Data Success");
                 item.TempData = response.data;
@@ -368,7 +368,7 @@ function temp16GetData($http, $scope) {
               }
             });
           },
-          function(err) {
+          function (err) {
             console.warn("ERROR: TEMP 16 | Upcoming Movies");
           }
         );
@@ -379,7 +379,7 @@ function temp16GetData($http, $scope) {
 function temp17GetData($http, $scope) {
   // console.log('temp10');
 
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp17" &&
       (!item.hasData || item.lastQuery < Date.now() - 14400000)
@@ -394,7 +394,7 @@ function temp17GetData($http, $scope) {
             "https://newsapi.org/v2/top-headlines?country=ph&apiKey=a3aa8dee6c814974b0cd33bd806ef301"
           )
           .then(
-            function(response) {
+            function (response) {
               console.log("TEMP 17: News Portrait | Fetching Data Success");
               for (var i = 0; i < $scope.TemplateData.length; i++) {
                 if (
@@ -409,7 +409,7 @@ function temp17GetData($http, $scope) {
                 }
               }
             },
-            function(error) {
+            function (error) {
               console.warn("ERROR: TEMP 17 | News Portrait (Local)");
             }
           );
@@ -421,7 +421,7 @@ function temp17GetData($http, $scope) {
               "&sortBy=top&apiKey=a3aa8dee6c814974b0cd33bd806ef301"
           )
           .then(
-            function(response) {
+            function (response) {
               console.log("TEMP 17: News Portrait | Fetching Data Success");
               for (var i = 0; i < $scope.TemplateData.length; i++) {
                 if (
@@ -436,7 +436,7 @@ function temp17GetData($http, $scope) {
                 }
               }
             },
-            function(error) {
+            function (error) {
               console.warn("ERROR: TEMP 17 | News Portrait (Foreign)");
             }
           );
@@ -446,7 +446,7 @@ function temp17GetData($http, $scope) {
 }
 
 function temp18GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp18" &&
       (!item.hasData || item.lastQuery < Date.now() - 10800000)
@@ -455,13 +455,13 @@ function temp18GetData($http, $scope) {
         .get(
           "http://api.openweathermap.org/data/2.5/forecast/daily?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67&q=Manila&cnt=7"
         )
-        .then(function(response1) {
+        .then(function (response1) {
           $http
             .get(
               "http://api.openweathermap.org/data/2.5/weather?id=1701668&APPID=9f534971ae41269da3bdca6da5ad3a67"
             )
             .then(
-              function(response2) {
+              function (response2) {
                 console.log(
                   "TEMP 18: Weather Portrait | Fetching Data Success"
                 );
@@ -477,7 +477,7 @@ function temp18GetData($http, $scope) {
                   }
                 }
               },
-              function(error) {
+              function (error) {
                 console.warn("ERROR: TEMP 18 | Currency Portrait");
               }
             );
@@ -499,12 +499,12 @@ function temp19GetData($http, $scope) {
     return [year, month, day].join("-");
   }
 
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp19" &&
       (!item.hasData || item.lastQuery < Date.now() - 3600000)
     ) {
-      $scope.TemplateData.forEach(function(item) {
+      $scope.TemplateData.forEach(function (item) {
         if (item.Template == "temp19") {
           item.TempData = [];
 
@@ -513,7 +513,7 @@ function temp19GetData($http, $scope) {
               "https://openexchangerates.org/api/latest.json?app_id=d076ca0158a348679fdaee487dff191e"
             )
             .then(
-              function(response1) {
+              function (response1) {
                 console.log(
                   "TEMP 19: Currency Portrait | Fetching Data Success"
                 );
@@ -530,19 +530,19 @@ function temp19GetData($http, $scope) {
                       ".json?app_id=d076ca0158a348679fdaee487dff191e"
                   )
                   .then(
-                    function(response2) {
+                    function (response2) {
                       item.TempData.push(response2.data.rates);
                       item.hasData = true;
                       item.lastQuery = Date.now();
                       console.log("Get Data Temp Data");
                       console.log(item);
                     },
-                    function(error) {
+                    function (error) {
                       console.warn("ERROR: TEMP 19 | Currency Portrait");
                     }
                   );
               },
-              function(error) {
+              function (error) {
                 console.warn("ERROR: TEMP 19 | Currency Portrait");
               }
             );
@@ -553,7 +553,7 @@ function temp19GetData($http, $scope) {
 }
 
 function temp20GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp20" &&
       (!item.hasData || item.lastQuery < Date.now() - 5400000)
@@ -563,10 +563,10 @@ function temp20GetData($http, $scope) {
         "http://13.250.103.104:4600/" + search_keyword
       );
       $http.get(formatted_keyword).then(
-        function(response) {
+        function (response) {
           console.log("TEMP 20: Twitter Portrait | Fetching Data Success");
           if (response.status == 200) {
-            $scope.TemplateData.forEach(function(item) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp14") {
                 item.TempData = response.data;
                 item.lastTweet = 0;
@@ -577,7 +577,7 @@ function temp20GetData($http, $scope) {
             });
           }
         },
-        function(error) {
+        function (error) {
           console.warn("ERROR: TEMP 20 | Twitter Portrait");
         }
       );
@@ -586,7 +586,7 @@ function temp20GetData($http, $scope) {
 }
 
 function temp22GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp22" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
@@ -596,9 +596,9 @@ function temp22GetData($http, $scope) {
           "http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php"
         )
         .then(
-          function(response) {
+          function (response) {
             console.log("TEMP 22: Hugot Portrait | Fetching Data Success");
-            $scope.TemplateData.forEach(function(item) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp22") {
                 item.TempData = response.data;
                 item.hasData = true;
@@ -606,7 +606,7 @@ function temp22GetData($http, $scope) {
               }
             });
           },
-          function(error) {
+          function (error) {
             console.warn("ERROR: TEMP 22 | Hugot Portrait");
           }
         );
@@ -615,7 +615,7 @@ function temp22GetData($http, $scope) {
 }
 
 function temp23GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp23" &&
       (!item.hasData || item.lastQuery < Date.now() - 86400000)
@@ -631,9 +631,9 @@ function temp23GetData($http, $scope) {
         zomatoConfig: {
           headers: {
             "user-key": "1e3481187e26de091dfdb5f7f768312a",
-            Accept: "application/json;odata=verbose"
-          }
-        }
+            Accept: "application/json;odata=verbose",
+          },
+        },
       };
 
       config.url =
@@ -647,7 +647,7 @@ function temp23GetData($http, $scope) {
       function fetchRestaurantData(url) {
         var currentTimeStamp = moment().unix() + 2592000;
         $http.get(url, config.zomatoConfig).then(
-          function(response) {
+          function (response) {
             console.log("TEMP 23: Restaurant Portrait| Fetching Data Success");
 
             if (response.data) {
@@ -672,7 +672,7 @@ function temp23GetData($http, $scope) {
               console.log("nothing returned");
             }
           },
-          function(error) {
+          function (error) {
             console.warn("ERROR: TEMP 21 | Restaurant Portrait");
           }
         );
@@ -719,7 +719,7 @@ function temp23GetData($http, $scope) {
 }
 
 function temp24GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp24" &&
       (!item.hasData || item.lastQuery < Date.now() - 86400000)
@@ -728,9 +728,9 @@ function temp24GetData($http, $scope) {
         .get(
           "https://api.themoviedb.org/3/movie/upcoming?api_key=f2ebc8131c456f6ee2f134ac299aa40f&language=en&US"
         )
-        .then(function(response) {
+        .then(function (response) {
           console.log("TEMP 24: Upcoming Movies | Fetching Data Success");
-          $scope.TemplateData.forEach(function(item) {
+          $scope.TemplateData.forEach(function (item) {
             if (item.Template == "temp24") {
               item.TempData = response.data;
               console.log(response.data);
@@ -745,7 +745,7 @@ function temp24GetData($http, $scope) {
 }
 
 function temp25GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp25" &&
       (!item.hasData || item.lastQuery < Date.now() - 3600000)
@@ -755,9 +755,9 @@ function temp25GetData($http, $scope) {
           "http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/ikomai_guest.php"
         )
         .then(
-          function(response) {
+          function (response) {
             console.log("TEMP : Ikomai | Fetching Data Success");
-            $scope.TemplateData.forEach(function(item) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp25") {
                 item.TempData = response.data;
                 console.log(response.data);
@@ -766,7 +766,7 @@ function temp25GetData($http, $scope) {
               }
             });
           },
-          function(err) {
+          function (err) {
             console.warn("ERROR: TEMP 25 | Ikomai Guest");
           }
         );
@@ -778,13 +778,13 @@ function temp26GetData($http, $scope) {
   $scope.new_source_ig = [];
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if (item.Template == "temp26") {
       $scope.new_source_ig = item.tempSrc.source.split("/");
     }
   });
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_ig.length != 0) {
       if (item.Template == "temp26") {
         if (
@@ -799,7 +799,7 @@ function temp26GetData($http, $scope) {
             post_length: 0,
             display_limit: "auto",
             loopInterval: 10000,
-            loop: true
+            loop: true,
           };
           var user_info = {};
 
@@ -809,7 +809,7 @@ function temp26GetData($http, $scope) {
             "/?__a=1";
 
           $http.get(url).then(
-            function(response) {
+            function (response) {
               console.log("TEMP 26: Instagram | Fetching Data Success");
               var arrOfData = [];
               var data = response.data;
@@ -835,7 +835,7 @@ function temp26GetData($http, $scope) {
               arrOfData.push(instagram_post);
               saveData(arrOfData);
             },
-            function(err) {
+            function (err) {
               console.warn("ERROR: TEMP 26 | Instagram");
             }
           );
@@ -863,7 +863,7 @@ function temp27GetData($http, $scope) {
 
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_fb.length != 0 || 1) {
       if (item.Template == "temp27") {
         $scope.new_source_fb = item.tempSrc.source.split("/");
@@ -881,7 +881,7 @@ function temp27GetData($http, $scope) {
             display_limit: 10,
             has_comment: false,
             loopInterval: 10000,
-            loop: true
+            loop: true,
           };
           var page_info = {};
           var interval35, interval36;
@@ -896,7 +896,7 @@ function temp27GetData($http, $scope) {
 
           $http
             .get(url)
-            .then(function(response) {
+            .then(function (response) {
               console.log("TEMP 27: Facebook Post | Fetching Data Success");
               if (response.data) {
                 var data = response.data;
@@ -919,7 +919,7 @@ function temp27GetData($http, $scope) {
 
                 $http
                   .get(url)
-                  .then(function(response) {
+                  .then(function (response) {
                     console.log(
                       "TEMP 27: Facebook Post | Fetching Data Success"
                     );
@@ -948,7 +948,7 @@ function temp27GetData($http, $scope) {
                     }
                   })
 
-                  .catch(function(err) {
+                  .catch(function (err) {
                     // handle error
                     console.log(
                       "error occured getting the facebook post 2",
@@ -959,7 +959,7 @@ function temp27GetData($http, $scope) {
                 console.log("failed to get facebook data");
               }
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // handle error
               console.log("error occured getting the facebook post 1", err);
             });
@@ -998,7 +998,7 @@ function temp27GetData($http, $scope) {
 } //end of the temp27GetData($http, $scope)
 
 function temp28GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp28" &&
       (!item.hasData || item.lastQuery < Date.now() - 3600000)
@@ -1015,13 +1015,13 @@ function temp28GetData($http, $scope) {
         loopInterval: 15000,
         loop: true,
         latitude: 12.8797,
-        longitude: 121.774
+        longitude: 121.774,
       };
 
       console.log("GETTING TEMP 28");
 
       function getEvents() {
-        $http.get(events.url).then(function(response) {
+        $http.get(events.url).then(function (response) {
           console.log("TEMP 28: Facebook Events | Fetching Data Success");
 
           if (response.data.data.length > 0) {
@@ -1052,7 +1052,7 @@ function temp28GetData($http, $scope) {
 }
 
 function temp29GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp29" &&
       (!item.hasData || item.lastQuery < Date.now() - 86400000)
@@ -1060,7 +1060,7 @@ function temp29GetData($http, $scope) {
       function get_access_token() {
         $http
           .get("http://aircast-tool.herokuapp.com/api/spotify-token")
-          .then(function(response) {
+          .then(function (response) {
             if (response.data) {
               console.log("TEMP 29: Spotify | Fetching Data Success");
               get_result(response.data);
@@ -1068,7 +1068,7 @@ function temp29GetData($http, $scope) {
               console.log("nothing returned on temp 29");
             }
           })
-          .catch(function() {
+          .catch(function () {
             // handle error
             console.log("error in temp 29 - spotify music template");
           });
@@ -1081,14 +1081,14 @@ function temp29GetData($http, $scope) {
 
         $http
           .get(url)
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.tracks.length > 0) {
               sortSpotifyData(response.data);
             } else {
               console.log("nothing returned on temp 29");
             }
           })
-          .catch(function() {
+          .catch(function () {
             // handle error
             console.log("error in temp 29 - spotify music template");
           });
@@ -1124,7 +1124,7 @@ function temp30GetData($http, $scope) {
 
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_fb.length != 0 || 1) {
       if (item.Template == "temp30") {
         if (!item.hasData || item.lastQuery < Date.now() - 900000) {
@@ -1132,7 +1132,7 @@ function temp30GetData($http, $scope) {
             "http://aircast-tool.herokuapp.com/api/read-fb-selected-post";
           $http
             .get(url)
-            .then(function(response) {
+            .then(function (response) {
               console.log(
                 "TEMP 30: Facebook Selected Post | Fetching Data Success"
               );
@@ -1143,7 +1143,7 @@ function temp30GetData($http, $scope) {
                 console.log("nothing returned on temp 30");
               }
             })
-            .catch(function() {
+            .catch(function () {
               // handle error
               console.log("error in temp 30 - facebook selected post");
             });
@@ -1174,13 +1174,13 @@ function temp31GetData($http, $scope) {
   $scope.new_source_ig = [];
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if (item.Template == "temp31") {
       $scope.new_source_ig = item.tempSrc.source.split("/");
     }
   });
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_ig.length != 0) {
       if (item.Template == "temp31") {
         if (
@@ -1196,7 +1196,7 @@ function temp31GetData($http, $scope) {
             hashtag: param.toLowerCase(),
             currentPosition: 0,
             count: 30,
-            postList: {}
+            postList: {},
           };
 
           var url =
@@ -1206,7 +1206,7 @@ function temp31GetData($http, $scope) {
 
           $http
             .get(url)
-            .then(function(response) {
+            .then(function (response) {
               console.log("TEMP 31: Instagram Hashtag | Fetching Data Success");
               if (
                 response.status == 200 &&
@@ -1221,7 +1221,7 @@ function temp31GetData($http, $scope) {
                 console.log("Error getting instagram by hashtag");
               }
             })
-            .catch(function() {
+            .catch(function () {
               console.log("Error getting instagram by hashtag. Internal error");
             });
 
@@ -1248,7 +1248,7 @@ function temp32GetData($http, $scope) {
 
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_fb.length != 0 || 1) {
       if (item.Template == "temp32") {
         $scope.new_source_fb = item.tempSrc.source.split("/");
@@ -1266,7 +1266,7 @@ function temp32GetData($http, $scope) {
             display_limit: 10,
             has_comment: false,
             loopInterval: 10000,
-            loop: true
+            loop: true,
           };
           var page_info = {};
           var interval35, interval36;
@@ -1280,7 +1280,7 @@ function temp32GetData($http, $scope) {
 
           $http
             .get(url)
-            .then(function(response) {
+            .then(function (response) {
               console.log(
                 "TEMP 32: Facebook Full Screen | Fetching Data Success"
               );
@@ -1305,7 +1305,7 @@ function temp32GetData($http, $scope) {
 
                 $http
                   .get(url)
-                  .then(function(response) {
+                  .then(function (response) {
                     console.log(
                       "TEMP 32: Facebook Full Screen | Fetching Data Success"
                     );
@@ -1334,7 +1334,7 @@ function temp32GetData($http, $scope) {
                     }
                   })
 
-                  .catch(function(err) {
+                  .catch(function (err) {
                     // handle error
                     console.log(
                       "error occured getting the facebook post 2",
@@ -1345,7 +1345,7 @@ function temp32GetData($http, $scope) {
                 console.log("failed to get facebook data");
               }
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // handle error
               console.log("error occured getting the facebook post 1", err);
             });
@@ -1388,7 +1388,7 @@ function temp33GetData($http, $scope) {
 
   var dummyTemp = $scope.TemplateData;
 
-  dummyTemp.forEach(function(item) {
+  dummyTemp.forEach(function (item) {
     if ($scope.new_source_fb.length != 0 || 1) {
       if (item.Template == "temp33") {
         $scope.new_source_fb = item.tempSrc.source.split("/");
@@ -1407,7 +1407,7 @@ function temp33GetData($http, $scope) {
             display_limit: 10,
             has_comment: false,
             loopInterval: 10000,
-            loop: true
+            loop: true,
           };
           var page_info = {};
           var interval35, interval36;
@@ -1421,7 +1421,7 @@ function temp33GetData($http, $scope) {
 
           $http
             .get(url)
-            .then(function(response) {
+            .then(function (response) {
               console.log(
                 "TEMP 33: Facebook Full Screen with Reaction | Fetching Data Success"
               );
@@ -1446,7 +1446,7 @@ function temp33GetData($http, $scope) {
 
                 $http
                   .get(url)
-                  .then(function(response) {
+                  .then(function (response) {
                     if (response.data) {
                       var data = response.data;
                       var temp = [];
@@ -1472,7 +1472,7 @@ function temp33GetData($http, $scope) {
                     }
                   })
 
-                  .catch(function(err) {
+                  .catch(function (err) {
                     // handle error
                     console.log(
                       "error occured getting the facebook post 2",
@@ -1483,7 +1483,7 @@ function temp33GetData($http, $scope) {
                 console.log("failed to get facebook data");
               }
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // handle error
               console.log("error occured getting the facebook post 1", err);
             });
@@ -1527,11 +1527,11 @@ function temp33GetData($http, $scope) {
 } //end of the temp27GetData($http, $scope)
 
 function temp34GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (item.Template == "temp34") {
       var fb_post = {
         access_token:
-          "EAAGXpZCE7eaUBAOgiHouservfFztglfZCf0vZCbZAjbuC7VUwuAIig3ZAKgn6Kkt4kZB4XXXDcYsjmwfzpgldAEfSYqYp9t7ZCbuvZB0FI2JpPuNMaqf60EDhY8GnvKbaWEyKmS0ZBRDch7Uv0nylVOdrAdkBy5rHCMIpQADtLBNzeIiK8BZBdunidCmOOZAH61HXkZD"
+          "EAAGXpZCE7eaUBAOgiHouservfFztglfZCf0vZCbZAjbuC7VUwuAIig3ZAKgn6Kkt4kZB4XXXDcYsjmwfzpgldAEfSYqYp9t7ZCbuvZB0FI2JpPuNMaqf60EDhY8GnvKbaWEyKmS0ZBRDch7Uv0nylVOdrAdkBy5rHCMIpQADtLBNzeIiK8BZBdunidCmOOZAH61HXkZD",
       };
 
       console.log("facebook live query");
@@ -1558,7 +1558,7 @@ function temp34GetData($http, $scope) {
 
         console.log("LIVE CURRENTLY PLAYING");
 
-        $http.get(url).then(function(response) {
+        $http.get(url).then(function (response) {
           console.log("TEMP 34: Facebook Live | Fetching Data Success");
           console.log("PAGE DETAILS");
           console.log(response.data);
@@ -1603,7 +1603,7 @@ function temp34GetData($http, $scope) {
 }
 
 function temp35GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp35" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
@@ -1613,8 +1613,8 @@ function temp35GetData($http, $scope) {
           "http://ec2-54-169-234-246.ap-southeast-1.compute.amazonaws.com/api/v0/hugot.php"
         )
         .then(
-          function(response) {
-            $scope.TemplateData.forEach(function(item) {
+          function (response) {
+            $scope.TemplateData.forEach(function (item) {
               if (item.Template == "temp35") {
                 var dum = item.tempSrc.source.split("/");
                 console.log(dum);
@@ -1630,7 +1630,7 @@ function temp35GetData($http, $scope) {
               }
             });
           },
-          function(err) {
+          function (err) {
             console.warn("ERROR: TEMP 35 | Hugot");
           }
         );
@@ -1639,14 +1639,14 @@ function temp35GetData($http, $scope) {
 }
 
 function temp36GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp36" &&
       (!item.hasData || item.lastQuery < Date.now() - 21600000)
     ) {
       $http.get("http://13.250.103.104:3500/get-aircast-values").then(
-        function(response) {
-          $scope.TemplateData.forEach(function(item) {
+        function (response) {
+          $scope.TemplateData.forEach(function (item) {
             if (item.Template == "temp36") {
               console.log("TEMP 36: Aircast-Values | Fetching Data Success");
               if (response.data.success && response.data.data.length > 0) {
@@ -1658,7 +1658,7 @@ function temp36GetData($http, $scope) {
             }
           });
         },
-        function(err) {
+        function (err) {
           console.warn("ERROR: TEMP 36 | Aircast-Values");
         }
       );
@@ -1667,14 +1667,14 @@ function temp36GetData($http, $scope) {
 }
 
 function temp38GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp38" &&
       (!item.hasData || item.lastQuery < Date.now() - 7200000)
     ) {
       $http.get("http://api.gp-nagata.ph/v0/covid19").then(
-        function(response) {
-          $scope.TemplateData.forEach(function(item) {
+        function (response) {
+          $scope.TemplateData.forEach(function (item) {
             if (item.Template == "temp38") {
               console.log(
                 "TEMP 38: COVID-19 PH Data Tracker | Fetching Data Success"
@@ -1687,7 +1687,7 @@ function temp38GetData($http, $scope) {
             }
           });
         },
-        function(err) {
+        function (err) {
           console.warn("ERROR: TEMP 38 | COVID-19 Tracker (Landscape)");
         }
       );
@@ -1696,15 +1696,14 @@ function temp38GetData($http, $scope) {
 }
 
 function temp39GetData($http, $scope) {
-  $scope.TemplateData.forEach(function(item) {
+  $scope.TemplateData.forEach(function (item) {
     if (
       item.Template == "temp39" &&
       (!item.hasData || item.lastQuery < Date.now() - 7200000)
     ) {
-      var city = item.tempSrc.source.split("/")[1];
-      $http.get("http://api.gp-nagata.ph/v0/covid19?city=" + city).then(
-        function(response) {
-          $scope.TemplateData.forEach(function(item) {
+      $http.get("https://api.covid19api.com/summary").then(
+        function (response) {
+          $scope.TemplateData.forEach(function (item) {
             if (item.Template == "temp39") {
               console.log(
                 "TEMP 39: COVID-19 Per City Data Tracker | Fetching Data Success"
@@ -1717,7 +1716,7 @@ function temp39GetData($http, $scope) {
             }
           });
         },
-        function(err) {
+        function (err) {
           console.warn("ERROR: TEMP 39 | COVID-19 Per City Data Tracker");
         }
       );
