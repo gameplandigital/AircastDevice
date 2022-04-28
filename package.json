@@ -9,7 +9,7 @@
   "author": "Randy Beros <rcberos@up.edu.ph>",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.5.0",
+    "async": "^2.6.4",
     "body-parser": "^1.18.3",
     "download-file": "^0.1.5",
     "express": "^4.15.4",
